@@ -1,5 +1,13 @@
 import React from "react";
+import { Header } from "../../layout/Header";
+import { Footer } from "../../layout/Footer";
 
 export const SignIn = () => {
-  return <div>SignInsss</div>;
+  return (
+    <div>
+      <Header />
+      <main className="main"> Signin Page</main>
+      <Footer />
+    </div>
+  );
 };
