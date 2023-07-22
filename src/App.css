@@ -29,3 +29,21 @@ svg {
 #radio {
   display: inline;
 }
+
+.toggleButton {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  bottom: 133px;
+  width: 50px;
+  left: 350px;
+}
+
+.toggleButton2 {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  left: 350px;
+  bottom: 70px;
+  width: 50px;
+}

@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 
-export const CustomToggleButton = () => {
+export const CustomToggleButton = ({ ToggleButton, setInputType }) => {
   const [toggle, setToggle] = useState("off");
   const handleShowPassword = (e) => {
     const { value } = e.target;
-    value === "off" ? setToggle("on") : setToggle("off");
+    if (value === "off") {
+      setToggle("on");
+      setInputType("text");
+    } else {
+      setToggle("off");
+      setInputType("password");
+    }
   };
-  console.log(toggle);
-
   return (
-    <div>
+    <div className={ToggleButton}>
       <Form.Check // prettier-ignore
         type="switch"
         id="custom-switch"
-        label="Show Password"
         onChange={handleShowPassword}
         value={toggle}
       />
