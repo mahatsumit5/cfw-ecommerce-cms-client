@@ -3,7 +3,11 @@ import { CustomeInput } from "../customeInput/CustomeInput";
 import { RiLoginCircleFill } from "react-icons/ri";
 import { useState } from "react";
 import { loginUserAction } from "../../Action/userAction";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 export const SignInFormComponent = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [form, setForm] = useState();
   const inputs = [
     {
@@ -27,9 +31,10 @@ export const SignInFormComponent = () => {
     setForm({ ...form, [name]: value });
   };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    loginUserAction(form);
+    const islogedIn = await dispatch(loginUserAction(form));
+    islogedIn && navigate("/dashboard");
   };
   return (
     <div className="d-flex justify-content-cente flex-wrap form m-5 ">

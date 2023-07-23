@@ -4,22 +4,23 @@ import {
   verifyAccount,
 } from "../axiosHelper/userAxios";
 import { toast } from "react-toastify";
+import { setUser } from "../redux/userSlice";
 
-export const createUserAction = async (userObj) => {
+export const createUserAction = (userObj) => async (dispatch) => {
   const pendingResp = postNewAdmin(userObj);
   toast.promise(pendingResp, { Pending: "Please Wait" });
   const { status, message } = await pendingResp;
   toast[status](message);
   //   rest of the dispatch funciton goes here
 };
-export const loginUserAction = async (userData) => {
-  const { status, message, error } = await loginUser(userData);
+export const loginUserAction = (userData) => async (dispatch) => {
+  const { status, message, user } = await loginUser(userData);
   toast[status](message);
-  console.log(status, error.message);
-  // ?setUser(user)//this is for redux
+  dispatch(setUser(user));
+  if (status === "success") return true;
 };
 
-export const verifyAccountAction = async (obj) => {
+export const verifyAccountAction = (obj) => async (dispatch) => {
   const pending = verifyAccount(obj);
   toast.promise(pending, { pending: "Please Wait" });
   const { status, message } = await pending;

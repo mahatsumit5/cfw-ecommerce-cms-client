@@ -39,3 +39,28 @@ svg {
   left: 350px;
 }
 
+.admin-layout {
+  display: flex;
+}
+
+.admin-layout .side-bar {
+  width: 230px;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+}
+
+.admin-layout .main {
+  margin-left: 230px;
+  width: 230px;
+  width: calc(100vw - 230px);
+}
+.page-content {
+  min-height: 83vh;
+}
+
+.side-nav li {
+  font-weight: 500;
+  margin-left: 1rem;
+  font-size: 1.2rem;
+}

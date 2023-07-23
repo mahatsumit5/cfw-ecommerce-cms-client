@@ -2,7 +2,7 @@ import axios from "axios";
 const rootApi = process.env.REACT_APP_ROOTAPI;
 const adminApi = rootApi + "/admin";
 
-const axiosProcessor = async ({ method, url, obj }) => {
+export const axiosProcessor = async ({ method, url, obj }) => {
   try {
     const { data } = await axios({
       method,
@@ -20,7 +20,7 @@ const axiosProcessor = async ({ method, url, obj }) => {
 };
 
 // create user
-export const postNewAdmin = async (data) => {
+export const postNewAdmin = (data) => {
   const obj = {
     method: "post",
     url: adminApi,
@@ -29,7 +29,7 @@ export const postNewAdmin = async (data) => {
   return axiosProcessor(obj);
 };
 
-export const loginUser = async (logInData) => {
+export const loginUser = (logInData) => {
   const obj = {
     method: "post",
     url: adminApi + "/login",
@@ -38,7 +38,7 @@ export const loginUser = async (logInData) => {
   return axiosProcessor(obj);
 };
 
-export const verifyAccount = async (object) => {
+export const verifyAccount = (object) => {
   const obj = {
     method: "put",
     url: adminApi + "/verify",

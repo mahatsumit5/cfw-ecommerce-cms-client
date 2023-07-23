@@ -1,6 +1,6 @@
 import React from "react";
 import { AdminLayout } from "../../components/layout/AdminLayout";
 
-export const Profile = () => {
-  return <AdminLayout title="Profile"> Profile</AdminLayout>;
+export const Orders = () => {
+  return <AdminLayout title="Orders">Orders</AdminLayout>;
 };
