@@ -39,11 +39,3 @@ svg {
   left: 350px;
 }
 
-.toggleButton2 {
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
-  left: 350px;
-  bottom: 70px;
-  width: 50px;
-}

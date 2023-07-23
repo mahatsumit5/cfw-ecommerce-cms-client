@@ -6,7 +6,9 @@ import {
 import { toast } from "react-toastify";
 
 export const createUserAction = async (userObj) => {
-  const { status, message } = await postNewAdmin(userObj);
+  const pendingResp = postNewAdmin(userObj);
+  toast.promise(pendingResp, { Pending: "Please Wait" });
+  const { status, message } = await pendingResp;
   toast[status](message);
   //   rest of the dispatch funciton goes here
 };
@@ -18,6 +20,11 @@ export const loginUserAction = async (userData) => {
 };
 
 export const verifyAccountAction = async (obj) => {
-  const { status, message } = await verifyAccount(obj);
+  const pending = verifyAccount(obj);
+  toast.promise(pending, { pending: "Please Wait" });
+  const { status, message } = await pending;
   toast[status](message);
+  if (status === "success") {
+    return true;
+  }
 };
