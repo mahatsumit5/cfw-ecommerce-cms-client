@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 // these will store data in webstorage
 import userReducer from "./redux/userSlice";
 import catagoryReducer from "./redux/catagorySlice";
+import systemReducer from "./systemSlice";
 const userpersistConfig = {
   key: "userInfo",
   storage,
@@ -13,7 +14,9 @@ export const store = configureStore({
   reducer: {
     userInfo: persistedUserReducer,
     tempuser: userReducer,
-    catagoryInfo: catagoryReducer, //this data is removed every time browser reloads
+    catagoryInfo: catagoryReducer,
+    //this data is removed every time browser reloads
+    system: systemReducer,
   },
 });
 export const persistor = persistStore(store);

@@ -5,9 +5,10 @@ import { useState } from "react";
 import { createUserAction } from "../../Action/userAction";
 import { CustomToggleButton } from "../Toggle/ToggleButton";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 export const SingUpForm = () => {
   const [inputType, setInputType] = useState("password");
-
+  const dispatch = useDispatch();
   const [form, setForm] = useState();
   const inputs = [
     {
@@ -64,7 +65,6 @@ export const SingUpForm = () => {
   ];
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setForm({ ...form, [name]: value });
   };
 
@@ -74,7 +74,7 @@ export const SingUpForm = () => {
     if (confirmPassword !== rest.password) {
       return toast.warning("Password do not match.");
     }
-    createUserAction(rest);
+    dispatch(createUserAction(rest));
   };
   return (
     <div className="d-flex justify-content-cente flex-wrap justify-content-center form">

@@ -4,11 +4,16 @@ import { RiLoginCircleFill } from "react-icons/ri";
 import { useState } from "react";
 import { loginUserAction } from "../../Action/userAction";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+const initialState = {
+  email: "",
+  password: "",
+};
 export const SignInFormComponent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [form, setForm] = useState();
+
+  const [form, setForm] = useState(initialState);
   const inputs = [
     {
       label: "Email",
@@ -34,6 +39,7 @@ export const SignInFormComponent = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const islogedIn = await dispatch(loginUserAction(form));
+    console.log(islogedIn);
     islogedIn && navigate("/dashboard");
   };
   return (
@@ -50,7 +56,15 @@ export const SignInFormComponent = () => {
           <CustomeInput key={index} {...item} onChange={handleOnChange} />
         ))}
         <div className="d-grid">
-          <Button type="submit">Log In</Button>
+          <Button type="submit" variant="dark">
+            {" "}
+            Log In
+          </Button>
+        </div>
+        <div className="p-3">
+          <p className="text-center">
+            Forgot your password? <Link to="/reset-password">Reset Now</Link>
+          </p>
         </div>
       </Form>
     </div>

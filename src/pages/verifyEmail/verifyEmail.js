@@ -4,8 +4,10 @@ import { Header } from "../../components/layout/Header";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button, Spinner } from "react-bootstrap";
 import { verifyAccountAction } from "../../Action/userAction";
+import { useDispatch } from "react-redux";
 
 export const VerifyEmail = () => {
+  const dispatch = useDispatch();
   const [queryParams] = useSearchParams();
   const [status, setStatus] = useState({});
   const code = queryParams.get("c");
@@ -14,16 +16,11 @@ export const VerifyEmail = () => {
   const userName = email?.slice(0, email?.indexOf("@"));
   const navigate = useNavigate();
 
-  useEffect(() => {}, [status]);
   const handleOnVerify = async () => {
-    const result = await verifyAccountAction({ code, email });
-    console.log(result);
-    if (result) {
-      setStatus("success");
-      navigate("/");
-      return;
-    }
+    const isVerified = await dispatch(verifyAccountAction({ code, email }));
+    isVerified && navigate("/");
   };
+
   return (
     <div>
       <Header />

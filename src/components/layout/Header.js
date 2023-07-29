@@ -24,7 +24,7 @@ export const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
   return (
     <div>
-      <Navbar expand="md" variant="dark" className="bg-dark">
+      <Navbar expand="xl" variant="dark" className="bg-dark">
         <Container>
           <Link top="/" className="navbar-brand">
             CFW

@@ -2,7 +2,6 @@ import React from "react";
 import { Header } from "../../components/layout/Header";
 import { Footer } from "../../components/layout/Footer";
 import { SignInFormComponent } from "../../components/signInForm/signIn";
-import { useSelector } from "react-redux";
 
 export const SignIn = () => {
   return (

@@ -14,10 +14,18 @@ export const createUserAction = (userObj) => async (dispatch) => {
   //   rest of the dispatch funciton goes here
 };
 export const loginUserAction = (userData) => async (dispatch) => {
-  const { status, message, user } = await loginUser(userData);
+  const pendingResp = loginUser(userData);
+  toast.promise(pendingResp, { Pending: "Please Wait" });
+
+  const { status, message, user, token } = await pendingResp;
   toast[status](message);
   dispatch(setUser(user));
-  if (status === "success") return true;
+  if (status === "success") {
+    sessionStorage.setItem("accesJWT", token.accessJWT);
+    localStorage.setItem("accesJWT", token.refreshJWT);
+
+    return true;
+  }
 };
 
 export const verifyAccountAction = (obj) => async (dispatch) => {
@@ -25,7 +33,7 @@ export const verifyAccountAction = (obj) => async (dispatch) => {
   toast.promise(pending, { pending: "Please Wait" });
   const { status, message } = await pending;
   toast[status](message);
-  if (status === "success") {
-    return true;
-  }
+  const isverified =
+    status === "success" || message === "Already verified" ? true : false;
+  return isverified;
 };

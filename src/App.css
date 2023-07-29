@@ -1,5 +1,16 @@
 .main {
-  min-height: 80vh;
+  min-height: 30vh;
+  background: #c3e2ef;
+}
+--root-var {
+  --primaryColor: ##0c120c;
+  --secondary-color: #c20114;
+  --color-gray: #6d7275;
+  --color-ash: #c7d6d5;
+  --color-white: #ecebf3;
+}
+.main > div {
+  background-color: var(--color-ash);
 }
 .imagebox {
   max-width: 100vw;

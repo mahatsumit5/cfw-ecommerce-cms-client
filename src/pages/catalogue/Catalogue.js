@@ -1,94 +1,29 @@
 import React, { useState } from "react";
 import { AdminLayout } from "../../components/layout/AdminLayout";
 import { CustomeInput } from "../../components/customeInput/CustomeInput";
-import { Button, Form, Table, ToggleButton } from "react-bootstrap";
-import {
-  deleteCatagoryAction,
-  postCatalogueAction,
-  updateCatagoryAction,
-} from "../../Action/catelogueAction";
-import { useDispatch, useSelector } from "react-redux";
-import { AiFillDelete } from "react-icons/ai";
+import { Button, Container, Form, Table, ToggleButton } from "react-bootstrap";
+
+import { FcSearch } from "react-icons/fc";
+import { NewCategoryForm } from "../../components/category/NewCategoryForm";
+import { CategoryTable } from "../../components/category/CategoryTable";
 export const Catalogue = () => {
   const [form, setForm] = useState({});
-  const dispatch = useDispatch();
-  const { catagories } = useSelector((store) => store.catagoryInfo);
-  const input = {
-    placeholder: "",
-    required: true,
-    variant: "outlined",
-    size: "small",
-    type: "text",
-    label: "Title",
-  };
-  const handleOnChange = (e) => {
-    const { name, value } = e.target;
-    setForm({
-      title: value,
-    });
-  };
-  const handleOnSubmit = (e) => {
-    e.preventDefault();
-    // console.log(form);
-    dispatch(postCatalogueAction(form));
-  };
-  const handleOnDelete = (_id) => {
-    dispatch(deleteCatagoryAction({ _id }));
-  };
-  const handleToggleChange = (e) => {
-    const { value, checked } = e.target;
-    dispatch(
-      updateCatagoryAction({ value, status: checked ? "active" : "inactive" })
-    );
-  };
+
   return (
     <AdminLayout title="Catalogue">
-      <div className="d-flex mt-5  justify-content-center">
-        <Form onSubmit={handleOnSubmit} className="d-flex gap-5">
-          <CustomeInput {...input} onChange={handleOnChange} />
+      <Container className="mt-3 p-3 w-75 d-flex justify-content-center">
+        <Form.FloatingLabel
+          label="Search"
+          className="w-100"
+          controlId="floatingInput"
+        >
+          <Form.Control type="text" />{" "}
+        </Form.FloatingLabel>
+      </Container>
+      <NewCategoryForm />
 
-          <div className="">
-            <Button type="submit" variant="success">
-              Add
-            </Button>
-          </div>
-        </Form>
-      </div>
-      <div>
-        <Table striped bordered hover variant="">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Status</th>
-              <th>Title</th>
-              <th>slug</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          {catagories?.map(({ _id, status, title, slug }, index) => (
-            <tbody>
-              <tr>
-                <td>{index + 1}</td>
-                <td>
-                  {status}
-                  <Form.Check
-                    type="switch"
-                    title="status"
-                    value={_id}
-                    onChange={handleToggleChange}
-                  />
-                </td>
-                <td>{title}</td>
-                <td>{slug}</td>
-                <td>
-                  <Button variant="danger" onClick={() => handleOnDelete(_id)}>
-                    <AiFillDelete />
-                  </Button>
-                </td>
-              </tr>
-            </tbody>
-          ))}
-        </Table>
+      <div className=" d-flex  p-2 justify-content-between mt-1 w-100 flex-column gap-3">
+        <CategoryTable />
       </div>
     </AdminLayout>
   );

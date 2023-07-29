@@ -6,7 +6,7 @@ import { FaUsers } from "react-icons/fa";
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import { BsFillBox2Fill } from "react-icons/bs";
 import { LiaCreditCardSolid, LiaTruckSolid } from "react-icons/lia";
-import { FaSalesforce, FaUserSecret } from "react-icons/fa";
+import { FaMoneyBillAlt, FaUserSecret } from "react-icons/fa";
 export const SideBar = () => {
   return (
     <div className="side-bar bg-dark text-light">
@@ -38,7 +38,7 @@ export const SideBar = () => {
           </li>
           <li className="mt-2">
             <Link to="/sales" className="nav-link">
-              <FaSalesforce /> Sales
+              <FaMoneyBillAlt /> Sales
             </Link>
           </li>
           <li className="mt-2">
