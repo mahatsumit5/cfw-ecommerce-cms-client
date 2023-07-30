@@ -1,4 +1,5 @@
 import {
+  getAdmin,
   loginUser,
   postNewAdmin,
   verifyAccount,
@@ -17,13 +18,12 @@ export const loginUserAction = (userData) => async (dispatch) => {
   const pendingResp = loginUser(userData);
   toast.promise(pendingResp, { Pending: "Please Wait" });
 
-  const { status, message, user, token } = await pendingResp;
+  const { status, message, token } = await pendingResp;
   toast[status](message);
-  dispatch(setUser(user));
   if (status === "success") {
-    sessionStorage.setItem("accesJWT", token.accessJWT);
-    localStorage.setItem("accesJWT", token.refreshJWT);
-
+    sessionStorage.setItem("acceesJWT", token.accessJWT);
+    localStorage.setItem("refreshJWT", token.refreshJWT);
+    dispatch(getAdminProfileAction());
     return true;
   }
 };
@@ -36,4 +36,21 @@ export const verifyAccountAction = (obj) => async (dispatch) => {
   const isverified =
     status === "success" || message === "Already verified" ? true : false;
   return isverified;
+};
+
+// getadmin aciton
+
+export const getAdminProfileAction = () => async (dispatch) => {
+  const { status, user } = await getAdmin();
+  console.log(user);
+  if (status === "success") {
+    dispatch(setUser(user));
+  }
+};
+
+export const autoLogin = () => async (dispatch) => {
+  // check if accessJWT exist
+
+  const accessJWT = sessionStorage.getItem("accesJWT");
+  accessJWT && dispatch(getAdminProfileAction());
 };

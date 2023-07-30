@@ -11,18 +11,18 @@ export const Catalogue = () => {
 
   return (
     <AdminLayout title="Catalogue">
-      <Container className="mt-3 p-3 w-75 d-flex justify-content-center">
-        <Form.FloatingLabel
+      <Container className="p-5 w-75 d-flex justify-content-center">
+        {/* <Form.FloatingLabel
           label="Search"
           className="w-100"
           controlId="floatingInput"
         >
           <Form.Control type="text" />{" "}
-        </Form.FloatingLabel>
+        </Form.FloatingLabel> */}
       </Container>
       <NewCategoryForm />
 
-      <div className=" d-flex  p-2 justify-content-between mt-1 w-100 flex-column gap-3">
+      <div className=" d-flex  p-5 justify-content-between mt-1 w-100 flex-column gap-3">
         <CategoryTable />
       </div>
     </AdminLayout>

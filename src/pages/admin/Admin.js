@@ -3,7 +3,7 @@ import { AdminLayout } from "../../components/layout/AdminLayout";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { SingUpForm } from "../../components/admin-signup/SingUpForm";
-import { SignInFormComponent } from "../../components/signInForm/signIn";
+import { SignInFormComponent } from "../../components/signInForm/signInForm";
 
 export const Admin = () => {
   return (

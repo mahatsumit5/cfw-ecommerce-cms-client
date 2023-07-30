@@ -1,19 +1,29 @@
 import React from "react";
-import { Header } from "../../components/layout/Header";
-import { Footer } from "../../components/layout/Footer";
 import { SingUpForm } from "../../components/admin-signup/SingUpForm";
-import { ReactComponent as YourSvg } from "../../assests/signup.svg";
+import { Container } from "react-bootstrap";
+import { IoIosArrowBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 export const SignUp = () => {
+  const navigate = useNavigate();
   return (
-    <div>
-      <Header />
-      <main className="main ">
-        <div className="imagebox d-flex justify-content-center">
-          <SingUpForm width="100%" height="auto" />
-          <YourSvg />
-        </div>
-      </main>
-      <Footer />
+    <div className="signup" style={{ position: "relative" }}>
+      <p
+        style={{
+          position: "absolute",
+          top: "10px",
+          left: "10px",
+        }}
+      >
+        {" "}
+        <IoIosArrowBack onClick={() => navigate("/")} /> Go Back
+      </p>
+
+      <Container
+        className="d-flex justify-content-start "
+        style={{ width: "600px", marginLeft: "15vw" }}
+      >
+        <SingUpForm />
+      </Container>
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import React from "react";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import { SideBar } from "../sideBar/SideBar";
 import { useSelector } from "react-redux";
+import { SideBar } from "../sideBar/SideBar";
 
-export const AdminLayout = ({ children, title }) => {
+export const AdminLayout = ({ children }) => {
   const { user } = useSelector((state) => state.userInfo);
 
   return (
@@ -12,14 +12,13 @@ export const AdminLayout = ({ children, title }) => {
       {user?._id && user?.status === "active" ? (
         <>
           {" "}
-          <SideBar />
+          <Header />
           <main className="main">
-            <Header />
-            <h1>{title}</h1>
-            <hr></hr>
+            <SideBar />
+
             <div className="page-content"> {children}</div>
-            <Footer />
           </main>
+          <Footer />
         </>
       ) : (
         <>

@@ -17,6 +17,7 @@ import { SingUpForm } from "./components/admin-signup/SingUpForm";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getCataloguesAction } from "./Action/catelogueAction";
+import { PrivateRoute } from "./components/private/PrivateRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,16 +31,88 @@ function App() {
         <Route path="/admin-verification" element={<VerifyEmail />} />
         <Route path="/new-admin" element={<SignUp />} />
         {/* privates routers */}
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="products" element={<Products />} />
-        <Route path="customers" element={<Customers />} />
-        <Route path="sales" element={<Sales />} />
-        <Route path="catalogue" element={<Catalogue />} />
-        <Route path="payment" element={<Payment />} />
-        <Route path="orders" element={<Orders />} />
-        <Route path="admin" element={<Admin />} />
-        <Route path="new-user" element={<SingUpForm />} />
+
+        <Route
+          path="dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="profile"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="products"
+          element={
+            <PrivateRoute>
+              <Products />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="customers"
+          element={
+            <PrivateRoute>
+              <Customers />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="sales"
+          element={
+            <PrivateRoute>
+              <Sales />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="catalogue"
+          element={
+            <PrivateRoute>
+              <Catalogue />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="payment"
+          element={
+            <PrivateRoute>
+              <Payment />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="orders"
+          element={
+            <PrivateRoute>
+              <Orders />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="admin"
+          element={
+            <PrivateRoute>
+              <Admin />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="new-user"
+          element={
+            <PrivateRoute>
+              <SingUpForm />
+            </PrivateRoute>
+          }
+        />
       </Routes>
       <ToastContainer />
     </div>

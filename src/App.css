@@ -1,7 +1,11 @@
 .main {
   min-height: 30vh;
-  background: #c3e2ef;
+  width: 100%;
 }
+.admin-layout > .main {
+  background: rgb(204, 221, 235);
+}
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensedwght@700&display=swap");
 --root-var {
   --primaryColor: ##0c120c;
   --secondary-color: #c20114;
@@ -9,28 +13,35 @@
   --color-ash: #c7d6d5;
   --color-white: #ecebf3;
 }
-.main > div {
-  background-color: var(--color-ash);
-}
-.imagebox {
-  max-width: 100vw;
-  height: 100%;
-  background-image: url(../src/assests/image3.jpg);
+
+.signin {
+  min-height: 100vh;
+  background-image: url(../src/assests/image.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
-form {
-  backdrop-filter: blur(10px);
-  width: 500px;
+.signup {
+  min-height: 100vh;
+  background-image: url(../src/assests/signup.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 form > h1 {
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Roboto Condensed", sans-serif;
+  letter-spacing: 2px;
+  font-size: 2rem;
+  color: #12025b;
+  font-weight: 600;
 }
 
 label {
   font-family: monospace;
-  font-weight: 600;
+  font-weight: 6500;
+}
+
+.form-label {
+  color: rgb(7, 7, 92);
 }
 
 svg {
@@ -50,22 +61,23 @@ svg {
   left: 350px;
 }
 
-.admin-layout {
-  display: flex;
+.offcanvas {
+  width: 230px !important;
 }
-
 .admin-layout .side-bar {
   width: 230px;
   position: fixed;
-  height: 100vh;
   left: 0;
+  height: calc(100vh - 200px);
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
 }
-
 .admin-layout .main {
   margin-left: 230px;
-  width: 230px;
   width: calc(100vw - 230px);
 }
+
 .page-content {
   min-height: 83vh;
 }
@@ -74,4 +86,74 @@ svg {
   font-weight: 500;
   margin-left: 1rem;
   font-size: 1.2rem;
+}
+.submitButton {
+  border: none !important;
+}
+.submitButton:hover {
+  background: rgb(179, 153, 144) !important;
+  border: none;
+}
+
+.whiteText {
+  color: white;
+  font-style: normal;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.fnb {
+  font-size: 20px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  color: #ebf8fc;
+}
+.fbIcon {
+  color: rgb(90, 90, 102);
+  font-size: 1.5rem;
+  margin-right: 5px;
+}
+.icon {
+  font-size: 1.5rem;
+  margin-right: 5px;
+}
+/* header */
+.header {
+  background-color: #ecf0f03d !important;
+  position: sticky;
+  top: 0;
+  height: 10vh;
+  backdrop-filter: blur(10px);
+}
+.footer {
+  background-color: #efede74e !important;
+  height: 10vh;
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  backdrop-filter: blur(10px);
+}
+.sign {
+  font-size: medium;
+  color: red;
+  font-weight: 800;
+  font-size: 1.2rem;
+  font-family: monospace;
+}
+.link {
+  color: red !important;
+}
+.btn > svg {
+  margin-right: 10px;
+  color: rgb(81, 131, 152);
+  font-size: 1.5rem;
+}
+
+@media (max-width: 991px) {
+  .admin-layout .main {
+    margin-left: 0 !important;
+    width: 100vw;
+  }
+
+  .admin-layout .side-bar {
+    display: none !important;
+  }
 }

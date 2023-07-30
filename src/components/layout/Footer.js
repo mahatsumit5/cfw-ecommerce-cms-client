@@ -2,7 +2,7 @@ import React from "react";
 
 export const Footer = () => {
   return (
-    <div className="bg-dark text-light p-5 text-center">
+    <div className="footer p-3 border text-center shadow">
       &copy;Copyright all reserved to CFW
     </div>
   );

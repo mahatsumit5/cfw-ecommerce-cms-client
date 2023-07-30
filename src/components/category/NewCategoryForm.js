@@ -14,7 +14,7 @@ export const NewCategoryForm = () => {
   return (
     <div className="d-flex justify-content-center w-100">
       <Form
-        className="border p-4 rounded shadow-lg w-80"
+        className="border p-4 rounded shadow-lg w-75"
         onSubmit={handleOnADDCat}
       >
         <Row>

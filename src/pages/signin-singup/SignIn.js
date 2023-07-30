@@ -1,19 +1,18 @@
 import React from "react";
 import { Header } from "../../components/layout/Header";
 import { Footer } from "../../components/layout/Footer";
-import { SignInFormComponent } from "../../components/signInForm/signIn";
+import { SignInFormComponent } from "../../components/signInForm/signInForm";
 
 export const SignIn = () => {
   return (
-    <div>
-      <Header />
-
+    <div className="signin">
       <main className="main">
-        <div className="imagebox d-flex justify-content-center p-5">
+        {/* <Header /> */}
+
+        <div className="d-flex justify-content-center pt-5">
           <SignInFormComponent />
         </div>
       </main>
-      <Footer />
     </div>
   );
 };

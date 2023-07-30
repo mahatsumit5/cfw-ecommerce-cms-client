@@ -1,13 +1,20 @@
 import axios from "axios";
 const rootApi = process.env.REACT_APP_ROOTAPI;
 const adminApi = rootApi + "/admin";
-
-export const axiosProcessor = async ({ method, url, obj }) => {
+const getAccessJWt = () => {
+  return sessionStorage.getItem("acceesJWT");
+};
+export const axiosProcessor = async ({ method, url, obj, isPrivate }) => {
+  const headers = {
+    Authorization: isPrivate ? getAccessJWt() : null,
+  };
+  console.log(headers);
   try {
     const { data } = await axios({
       method,
       url,
       data: obj,
+      headers,
     });
     return data;
   } catch (error) {
@@ -25,6 +32,14 @@ export const postNewAdmin = (data) => {
     method: "post",
     url: adminApi,
     obj: data,
+  };
+  return axiosProcessor(obj);
+};
+export const getAdmin = () => {
+  const obj = {
+    method: "get",
+    url: adminApi,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };

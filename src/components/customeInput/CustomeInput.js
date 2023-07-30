@@ -3,10 +3,7 @@ import { Form, FloatingLabel } from "react-bootstrap";
 export const CustomeInput = ({ label, ...rest }) => {
   return (
     <Form.Group className="mb-3">
-      <FloatingLabel label={label}>
-        {" "}
-        <Form.Control {...rest} />
-      </FloatingLabel>
+      <Form.Label>{label}</Form.Label> <Form.Control {...rest} />
     </Form.Group>
   );
 };

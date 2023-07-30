@@ -9,6 +9,7 @@ export const postCategory = (category) => {
     method: "post",
     url: categoryApi,
     obj: category,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };
@@ -16,6 +17,7 @@ export const getCategories = () => {
   const obj = {
     method: "get",
     url: `${rootApi}/category`,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };
@@ -24,6 +26,7 @@ export const deleteCatagory = (_id) => {
     method: "delete",
     url: categoryApi,
     obj: _id,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };
@@ -32,6 +35,7 @@ export const updateCatagory = (stat) => {
     method: "put",
     url: categoryApi,
     obj: stat,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };
