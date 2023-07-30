@@ -16,10 +16,8 @@ export const CategoryTable = () => {
 
   useEffect(() => {
     !catagories.length && dispatch(getCataloguesAction());
-  }, [dispatch]);
-
+  }, [dispatch, catagories]);
   const [selectedCat, setSelectedCat] = useState({});
-
   const handleOnDelete = (_id) => {
     window.alert("Are you sure want to delete?");
     dispatch(deleteCatagoryAction({ _id }));
@@ -39,7 +37,14 @@ export const CategoryTable = () => {
   return (
     <>
       <UpdateCatagoryForm selectedCategory={selectedCat} />
-      <Table responsive striped bordered hover variant="" className="">
+      <Table
+        responsive="sm"
+        striped
+        borderless
+        hover
+        size="sm"
+        className="w-100"
+      >
         <thead>
           <tr>
             <th>Id</th>
@@ -78,10 +83,10 @@ export const CategoryTable = () => {
                 <td>{title}</td>
                 <td>{slug}</td>
                 <td className="d-flex gap-2 ">
-                  <Button variant="danger" onClick={() => handleOnDelete(_id)}>
+                  <Button variant="" onClick={() => handleOnDelete(_id)}>
                     <AiFillDelete />
                   </Button>
-                  <Button variant="warning">
+                  <Button variant="">
                     <AiFillEdit
                       onClick={() => handleOnEdit({ _id, status, title, slug })}
                     />

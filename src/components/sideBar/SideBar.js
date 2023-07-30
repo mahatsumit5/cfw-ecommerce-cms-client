@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TbLayoutDashboard } from "react-icons/tb";
 import { CgProfile } from "react-icons/cg";
 import { FaUsers } from "react-icons/fa";
@@ -10,25 +10,27 @@ import { FaMoneyBillAlt, FaUserSecret } from "react-icons/fa";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useDispatch, useSelector } from "react-redux";
 import { setCanvasShow } from "../../systemSlice";
-import { persistor } from "../../store";
 import { setUser } from "../../redux/userSlice";
-import { setCatagory } from "../../redux/catagorySlice";
-import { toast } from "react-toastify";
 import { Button, Row } from "react-bootstrap";
+import { logoutUser } from "../../axiosHelper/userAxios";
 
 export const SideBar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { canvasShow } = useSelector((state) => state.system);
   const { user } = useSelector((state) => state.userInfo);
 
   const handleClose = () => dispatch(setCanvasShow(false));
 
   const handleOnSignOut = () => {
-    persistor.purge().then(() => {
-      dispatch(setUser({}));
-      dispatch(setCatagory({}));
-      toast.success("You have been Logged Out.");
-    });
+    logoutUser(user._id);
+
+    //clear storages
+    localStorage.removeItem("refreshJWT");
+    sessionStorage.removeItem("accessJWT");
+    console.log("inside handle of click");
+    dispatch(setUser({}));
+    navigate("/");
   };
 
   return (
@@ -44,7 +46,7 @@ export const SideBar = () => {
         <Offcanvas.Body className="d-flex flex-column justify-content-between">
           <nav>
             <ul className="list-unstyled side-nav">
-              <li className="mt-2">
+              <li className="mt-2 sidebar-link">
                 <Link to="/dashboard" className="nav-link">
                   <Button variant="" onClick={handleClose}>
                     {" "}
@@ -53,7 +55,7 @@ export const SideBar = () => {
                 </Link>
               </li>
 
-              <li className="mt-2">
+              <li className="mt-2 sidebar-link">
                 <Link to="/products" className="nav-link">
                   <Button variant="" onClick={handleClose}>
                     {" "}
@@ -62,7 +64,7 @@ export const SideBar = () => {
                   </Button>
                 </Link>
               </li>
-              <li className="mt-2">
+              <li className="mt-2 sidebar-link">
                 <Link to="/customers" className="nav-link">
                   <Button variant="" onClick={handleClose}>
                     <FaUsers />
@@ -70,7 +72,7 @@ export const SideBar = () => {
                   </Button>
                 </Link>
               </li>
-              <li className="mt-2">
+              <li className="mt-2 sidebar-link">
                 <Link to="/sales" className="nav-link">
                   <Button variant="" onClick={handleClose}>
                     {" "}
@@ -78,7 +80,7 @@ export const SideBar = () => {
                   </Button>
                 </Link>
               </li>
-              <li className="mt-2">
+              <li className="mt-2 sidebar-link">
                 <Link to="/catalogue" className="nav-link">
                   <Button variant="" onClick={handleClose}>
                     {" "}
@@ -88,7 +90,7 @@ export const SideBar = () => {
                 </Link>
               </li>
 
-              <li className="mt-2">
+              <li className="mt-2 sidebar-link">
                 <Link to="/payment" className="nav-link">
                   <Button variant="" onClick={handleClose}>
                     {" "}
@@ -97,7 +99,7 @@ export const SideBar = () => {
                 </Link>
               </li>
 
-              <li className="mt-2">
+              <li className="mt-2 sidebar-link">
                 <Link to="/orders" className="nav-link">
                   <Button variant="" onClick={handleClose}>
                     <LiaTruckSolid />
@@ -106,7 +108,7 @@ export const SideBar = () => {
                 </Link>
               </li>
               <hr></hr>
-              <li className="mt-2">
+              <li className="mt-2 sidebar-link">
                 <Link to="/admin" className="nav-link">
                   <Button variant="" onClick={handleClose}>
                     {" "}
@@ -130,7 +132,7 @@ export const SideBar = () => {
       <div className="p-3  side-bar d-none d-lg-block ">
         <nav>
           <ul className="list-unstyled side-nav">
-            <li className="mt-2">
+            <li className="mt-2 sidebar-link">
               <Link to="/dashboard" className="nav-link">
                 <Button variant="" onClick={handleClose}>
                   {" "}
@@ -139,7 +141,7 @@ export const SideBar = () => {
               </Link>
             </li>
 
-            <li className="mt-2">
+            <li className="mt-2 sidebar-link">
               <Link to="/products" className="nav-link">
                 <Button variant="" onClick={handleClose}>
                   {" "}
@@ -148,7 +150,7 @@ export const SideBar = () => {
                 </Button>
               </Link>
             </li>
-            <li className="mt-2">
+            <li className="mt-2 sidebar-link">
               <Link to="/customers" className="nav-link">
                 <Button variant="" onClick={handleClose}>
                   <FaUsers />
@@ -156,7 +158,7 @@ export const SideBar = () => {
                 </Button>
               </Link>
             </li>
-            <li className="mt-2">
+            <li className="mt-2 sidebar-link">
               <Link to="/sales" className="nav-link">
                 <Button variant="" onClick={handleClose}>
                   {" "}
@@ -164,7 +166,7 @@ export const SideBar = () => {
                 </Button>
               </Link>
             </li>
-            <li className="mt-2">
+            <li className="mt-2 sidebar-link">
               <Link to="/catalogue" className="nav-link">
                 <Button variant="" onClick={handleClose}>
                   {" "}
@@ -174,7 +176,7 @@ export const SideBar = () => {
               </Link>
             </li>
 
-            <li className="mt-2">
+            <li className="mt-2 sidebar-link">
               <Link to="/payment" className="nav-link">
                 <Button variant="" onClick={handleClose}>
                   {" "}
@@ -183,7 +185,7 @@ export const SideBar = () => {
               </Link>
             </li>
 
-            <li className="mt-2">
+            <li className="mt-2 sidebar-link">
               <Link to="/orders" className="nav-link">
                 <Button variant="" onClick={handleClose}>
                   <LiaTruckSolid />
@@ -192,7 +194,7 @@ export const SideBar = () => {
               </Link>
             </li>
             <hr></hr>
-            <li className="mt-2">
+            <li className="mt-2 sidebar-link">
               <Link to="/admin" className="nav-link">
                 <Button variant="" onClick={handleClose}>
                   {" "}

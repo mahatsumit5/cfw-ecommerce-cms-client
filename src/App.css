@@ -146,7 +146,16 @@ svg {
   color: rgb(81, 131, 152);
   font-size: 1.5rem;
 }
-
+.sidebar-link {
+  border: solid rgba(246, 229, 229, 0);
+  transition: border-bottom 2s;
+}
+.sidebar-link:hover {
+  border-bottom: #6d7275 solid;
+  animation: hover 3s linear 1;
+}
+@keyframes hover {
+}
 @media (max-width: 991px) {
   .admin-layout .main {
     margin-left: 0 !important;

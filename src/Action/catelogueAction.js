@@ -16,7 +16,10 @@ export const postCatalogueAction = (obj) => async (dispatch) => {
 };
 export const getCataloguesAction = () => async (dispatch) => {
   const { status, message, result } = await getCategories();
-  status === "success" && dispatch(setCatagory(result));
+  if (status === "success") {
+    dispatch(setCatagory(result));
+    return true;
+  } else return false;
 };
 export const deleteCatagoryAction = (_id) => async (dispatch) => {
   const { status, message } = await deleteCatagory(_id);

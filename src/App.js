@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { SignIn } from "./pages/signin-singup/SignIn";
 import { SignUp } from "./pages/signin-singup/SignUp";
@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getCataloguesAction } from "./Action/catelogueAction";
 import { PrivateRoute } from "./components/private/PrivateRoute";
+import { ResetPassPage } from "./pages/reset-password/resetPass";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,10 +28,13 @@ function App() {
   return (
     <div className="">
       <Routes>
+        {/* public routers */}
         <Route path="/" element={<SignIn />} />
         <Route path="/admin-verification" element={<VerifyEmail />} />
-        <Route path="/new-admin" element={<SignUp />} />
+        <Route path="/reset-password" element={<ResetPassPage />} />
         {/* privates routers */}
+
+        <Route path="/new-admin" element={<SignUp />} />
 
         <Route
           path="dashboard"

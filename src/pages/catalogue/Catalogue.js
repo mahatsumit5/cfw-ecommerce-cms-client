@@ -1,14 +1,8 @@
-import React, { useState } from "react";
 import { AdminLayout } from "../../components/layout/AdminLayout";
-import { CustomeInput } from "../../components/customeInput/CustomeInput";
-import { Button, Container, Form, Table, ToggleButton } from "react-bootstrap";
-
-import { FcSearch } from "react-icons/fc";
+import { Container } from "react-bootstrap";
 import { NewCategoryForm } from "../../components/category/NewCategoryForm";
 import { CategoryTable } from "../../components/category/CategoryTable";
 export const Catalogue = () => {
-  const [form, setForm] = useState({});
-
   return (
     <AdminLayout title="Catalogue">
       <Container className="p-5 w-75 d-flex justify-content-center">
@@ -22,7 +16,7 @@ export const Catalogue = () => {
       </Container>
       <NewCategoryForm />
 
-      <div className=" d-flex  p-5 justify-content-between mt-1 w-100 flex-column gap-3">
+      <div className=" d-flex justify-content-between mt-1 w-100 flex-column gap-3">
         <CategoryTable />
       </div>
     </AdminLayout>

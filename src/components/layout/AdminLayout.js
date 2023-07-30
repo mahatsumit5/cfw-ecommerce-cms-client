@@ -16,7 +16,7 @@ export const AdminLayout = ({ children }) => {
           <main className="main">
             <SideBar />
 
-            <div className="page-content"> {children}</div>
+            <div className="page-content p-5"> {children}</div>
           </main>
           <Footer />
         </>

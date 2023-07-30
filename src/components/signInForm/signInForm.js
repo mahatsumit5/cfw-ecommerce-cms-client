@@ -4,23 +4,27 @@ import { autoLogin, loginUserAction } from "../../Action/userAction";
 import { useDispatch, useSelector } from "react-redux";
 import { BsFacebook } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
-import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 const initialState = {
   password: localStorage.getItem("password"),
   email: localStorage.getItem("email"),
 };
 export const SignInFormComponent = () => {
-  const { user } = useSelector((state) => state.userInfo);
+  const location = useLocation();
+  // console.log(location);
+  const pathTo = location?.state?.from?.location?.pathname || "/dashboard";
+  // console.log(pathTo);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [form, setForm] = React.useState(initialState);
+  const { user } = useSelector((state) => state.userInfo);
+  const [form, setForm] = useState(initialState);
 
   useEffect(() => {
-    user?._id && navigate("/dashboard");
+    user?._id && navigate(pathTo);
     dispatch(autoLogin());
-  }, [user, dispatch]);
+  }, [user, dispatch, navigate, pathTo]);
+
   const inputs = [
     {
       label: "Email",
@@ -40,6 +44,7 @@ export const SignInFormComponent = () => {
       value: form.password,
     },
   ];
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });

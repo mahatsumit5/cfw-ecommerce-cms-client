@@ -1,5 +1,6 @@
 import {
   getAdmin,
+  getNewAccessJWT,
   loginUser,
   postNewAdmin,
   verifyAccount,
@@ -12,7 +13,6 @@ export const createUserAction = (userObj) => async (dispatch) => {
   toast.promise(pendingResp, { Pending: "Please Wait" });
   const { status, message } = await pendingResp;
   toast[status](message);
-  //   rest of the dispatch funciton goes here
 };
 export const loginUserAction = (userData) => async (dispatch) => {
   const pendingResp = loginUser(userData);
@@ -21,8 +21,8 @@ export const loginUserAction = (userData) => async (dispatch) => {
   const { status, message, token } = await pendingResp;
   toast[status](message);
   if (status === "success") {
-    sessionStorage.setItem("acceesJWT", token.accessJWT);
-    localStorage.setItem("refreshJWT", token.refreshJWT);
+    sessionStorage.setItem("accessJWT", token.accessJWT); ///active for 5mins
+    localStorage.setItem("refreshJWT", token.refreshJWT); //active for 30days
     dispatch(getAdminProfileAction());
     return true;
   }
@@ -41,8 +41,9 @@ export const verifyAccountAction = (obj) => async (dispatch) => {
 // getadmin aciton
 
 export const getAdminProfileAction = () => async (dispatch) => {
+  //call the api to get user info
   const { status, user } = await getAdmin();
-  console.log(user);
+  //mount the state with the user data
   if (status === "success") {
     dispatch(setUser(user));
   }
@@ -50,7 +51,17 @@ export const getAdminProfileAction = () => async (dispatch) => {
 
 export const autoLogin = () => async (dispatch) => {
   // check if accessJWT exist
-
-  const accessJWT = sessionStorage.getItem("accesJWT");
-  accessJWT && dispatch(getAdminProfileAction());
+  const accessJWT = sessionStorage.getItem("accessJWT");
+  if (accessJWT) {
+    return dispatch(getAdminProfileAction());
+  }
+  const refreshJWT = localStorage.getItem("refreshJWT");
+  if (refreshJWT) {
+    // request new session token form the server
+    const { accessJWT } = await getNewAccessJWT();
+    if (accessJWT) {
+      sessionStorage.setItem("accessJWT", accessJWT);
+    }
+    dispatch(getAdminProfileAction());
+  }
 };

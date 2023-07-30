@@ -1,14 +1,24 @@
 import axios from "axios";
 const rootApi = process.env.REACT_APP_ROOTAPI;
 const adminApi = rootApi + "/admin";
+
 const getAccessJWt = () => {
-  return sessionStorage.getItem("acceesJWT");
+  return sessionStorage.getItem("accessJWT");
 };
-export const axiosProcessor = async ({ method, url, obj, isPrivate }) => {
+const getRefreshJWT = () => {
+  return localStorage.getItem("refreshJWT");
+};
+export const axiosProcessor = async ({
+  method,
+  url,
+  obj,
+  isPrivate,
+  refreshToken,
+}) => {
+  const token = refreshToken ? getRefreshJWT() : getAccessJWt();
   const headers = {
-    Authorization: isPrivate ? getAccessJWt() : null,
+    Authorization: isPrivate ? token : null,
   };
-  console.log(headers);
   try {
     const { data } = await axios({
       method,
@@ -32,6 +42,7 @@ export const postNewAdmin = (data) => {
     method: "post",
     url: adminApi,
     obj: data,
+    isPrivate: true,
   };
   return axiosProcessor(obj);
 };
@@ -58,6 +69,30 @@ export const verifyAccount = (object) => {
     method: "put",
     url: adminApi + "/verify",
     obj: object,
+  };
+  return axiosProcessor(obj);
+};
+
+export const getNewAccessJWT = () => {
+  //refreshtoken is sent to get access token
+  const obj = {
+    method: "get",
+    url: adminApi + "/get-accessjwt",
+    isPrivate: true,
+    refreshToken: true,
+  };
+  return axiosProcessor(obj);
+};
+
+export const logoutUser = (_id) => {
+  const obj = {
+    method: "post",
+    url: adminApi + "/logout",
+    obj: {
+      _id,
+      accessJWT: getAccessJWt(),
+      refreshJWT: getRefreshJWT(),
+    },
   };
   return axiosProcessor(obj);
 };

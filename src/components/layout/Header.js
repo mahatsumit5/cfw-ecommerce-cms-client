@@ -11,7 +11,7 @@ export const Header = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userInfo);
   return (
-    <Row className="header shadow ">
+    <Row className="header shadow mx-auto ">
       <Navbar variant="" className="">
         <Link top="/" className="navbar-brand">
           <Button
