@@ -19,7 +19,9 @@ export const getCataloguesAction = () => async (dispatch) => {
   if (status === "success") {
     dispatch(setCatagory(result));
     return true;
-  } else return false;
+  } else toast[status](message);
+
+  return false;
 };
 export const deleteCatagoryAction = (_id) => async (dispatch) => {
   const { status, message } = await deleteCatagory(_id);

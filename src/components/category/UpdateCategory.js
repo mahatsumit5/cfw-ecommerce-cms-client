@@ -33,7 +33,7 @@ export const UpdateCatagoryForm = ({ selectedCategory }) => {
   };
 
   return (
-    <CustomModal title={"Update Catalogue "}>
+    <CustomModal title={<h1>Edit</h1>}>
       <div className="d-flex justify-content-center w-100">
         <Form
           className="border p-4 rounded shadow-lg w-80"

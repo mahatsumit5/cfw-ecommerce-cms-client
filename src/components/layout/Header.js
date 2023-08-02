@@ -26,11 +26,16 @@ export const Header = () => {
           <Row className="search  w-75 m-auto mt-3">
             <Form.Control size="md" type="text" placeholder="Search" />
           </Row>
-          <Row className="m-auto mt-3 " style={{ width: "60px" }}>
-            <Link to="/profile" className="nav-link">
-              <CgProfile /> {user?.fName}
-            </Link>
-          </Row>
+          {user?._id && (
+            <Row
+              className="m-auto mt-3 d-flex flex-column"
+              style={{ width: "60px" }}
+            >
+              <Link to="/profile" className="nav-link">
+                <CgProfile /> <p>{user?.fName}</p>
+              </Link>
+            </Row>
+          )}
         </Row>
       </Navbar>
     </Row>
