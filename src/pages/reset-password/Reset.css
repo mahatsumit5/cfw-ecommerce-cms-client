@@ -1,4 +1,6 @@
 .form-container {
+  display: flex;
+  justify-content: center;
   max-width: 400px;
   background-color: #fff;
   padding: 32px 24px;

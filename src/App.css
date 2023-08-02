@@ -154,6 +154,9 @@ svg {
   border-bottom: #6d7275 solid;
   animation: hover 3s linear 1;
 }
+.light-text {
+  color: #c20114 !important;
+}
 @keyframes hover {
 }
 @media (max-width: 991px) {

@@ -37,41 +37,31 @@ export const CategoryTable = () => {
   return (
     <>
       <UpdateCatagoryForm selectedCategory={selectedCat} />
-      <Table
-        responsive="sm"
-        striped
-        borderless
-        hover
-        size="sm"
-        className="w-100"
-      >
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Status</th>
-            <th>Title</th>
-            <th>slug</th>
-            <th>Action</th>
+      <Table hover w-100 responsive="lg" className="" variant="light">
+        <thead className="light-text">
+          <tr className="font-monospace text-body-secondary ">
+            <th className="text-body-secondary ">STATUS</th>
+            <th className="text-body-secondary">TITLE</th>
+            <th className="text-body-secondary">SLUG</th>
+            <th className="text-body-secondary ">ACTION</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="mt-2">
           {catagories &&
             catagories?.map(({ _id, status, title, slug }, index) => (
-              <tr key={_id}>
-                <td>{index + 1}</td>
-                <td className="d-flex gap-3">
+              <tr key={_id} className="mt-2">
+                <td className=" d-flex  " style={{ width: "" }}>
                   <span
                     className={
                       status === "active"
-                        ? " p-2 rounded"
-                        : " text-body-secondary p-2 rounded"
+                        ? " p-2 rounded  "
+                        : " text-body-secondary p-2 rounded "
                     }
+                    style={{ width: "100px" }}
                   >
-                    {" "}
                     {status}
                   </span>
                   <span className=" p-2">
-                    {" "}
                     <Form.Check
                       type="switch"
                       title="status"
@@ -82,11 +72,11 @@ export const CategoryTable = () => {
                 </td>
                 <td>{title}</td>
                 <td>{slug}</td>
-                <td className="d-flex gap-2 ">
-                  <Button variant="" onClick={() => handleOnDelete(_id)}>
+                <td className="d-flex gap-1 ">
+                  <Button variant="danger" onClick={() => handleOnDelete(_id)}>
                     <AiFillDelete />
                   </Button>
-                  <Button variant="">
+                  <Button variant="primary">
                     <AiFillEdit
                       onClick={() => handleOnEdit({ _id, status, title, slug })}
                     />

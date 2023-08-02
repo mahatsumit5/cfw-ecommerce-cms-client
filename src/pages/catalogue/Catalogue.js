@@ -13,14 +13,14 @@ export const Catalogue = () => {
     <AdminLayout title="Catalogue">
       <NewCategoryForm />
 
-      <Container className="w-100 d-flex justify-content-between border gap-5">
+      <div className="w-100 mt-5 p-3 d-flex rounded justify-content-between shadow ">
         <h3>List of Catalogue </h3>
         <Button variant="dark" onClick={handleOnClick}>
           Add new catalogue{" "}
         </Button>
-      </Container>
+      </div>
 
-      <div className=" d-flex justify-content-between mt-5 w-100 flex-column gap-3">
+      <div className=" d-flex justify-content-between  shadow rounded p-3 mt-3 w-100 flex-column">
         <CategoryTable />
       </div>
     </AdminLayout>

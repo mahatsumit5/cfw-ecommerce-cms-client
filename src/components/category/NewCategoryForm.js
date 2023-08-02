@@ -14,24 +14,24 @@ export const NewCategoryForm = () => {
   };
 
   return (
-    <CustomModal title={"Add New Catalogue"}>
-      <div className="d-flex justify-content-center w-100">
-        <Form
-          className="border p-4 rounded shadow-lg w-75"
-          onSubmit={handleOnADDCat}
-        >
-          <Row>
-            <Col>
-              <Form.Control type="text" placeholder="Title" ref={nameRef} />
-            </Col>
-            <Col className="d-grid">
-              <Button variant="dark" type="submit">
-                Add
-              </Button>
-            </Col>
-          </Row>
-        </Form>
-      </div>
-    </CustomModal>
+    // <CustomModal title={"Add New Catalogue"}>
+    <div className="d-flex justify-content-center w-100">
+      <Form
+        className="border p-4 rounded shadow-lg w-75"
+        onSubmit={handleOnADDCat}
+      >
+        <Row>
+          <Col>
+            <Form.Control type="text" placeholder="Title" ref={nameRef} />
+          </Col>
+          <Col className="d-grid">
+            <Button variant="dark" type="submit">
+              Add
+            </Button>
+          </Col>
+        </Row>
+      </Form>
+    </div>
+    // </CustomModal>
   );
 };
