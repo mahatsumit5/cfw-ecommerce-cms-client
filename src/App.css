@@ -55,10 +55,9 @@ svg {
 .toggleButton {
   display: flex;
   justify-content: flex-end;
-  position: relative;
-  bottom: 133px;
+  position: absolute;
+  top: 0;
   width: 50px;
-  left: 350px;
 }
 
 .offcanvas {
@@ -159,6 +158,11 @@ svg {
 }
 @keyframes hover {
 }
+
+.password-input {
+  position: relative;
+}
+
 @media (max-width: 991px) {
   .admin-layout .main {
     margin-left: 0 !important;

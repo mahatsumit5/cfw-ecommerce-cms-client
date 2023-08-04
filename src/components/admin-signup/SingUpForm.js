@@ -29,6 +29,7 @@ export const SingUpForm = () => {
       placeholder: " min 8 char",
       type: inputType,
       minLength: "8",
+      className: "password-input",
     },
   ];
   const emailAndPhone = [
@@ -123,11 +124,11 @@ export const SingUpForm = () => {
         className="mt-2"
       />
 
-      {/* <CustomToggleButton
+      <CustomToggleButton
         ToggleButton={"toggleButton"}
         inputType={inputType}
         setInputType={setInputType}
-      /> */}
+      />
 
       <div className="d-grid mt-5">
         <Button type="submit">Create Account</Button>
