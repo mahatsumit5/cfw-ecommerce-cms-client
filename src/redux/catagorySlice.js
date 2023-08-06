@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-  catagories: [],
+  catalogue: [],
 };
 
 const catagorySlice = createSlice({
@@ -8,10 +8,10 @@ const catagorySlice = createSlice({
   initialState,
   reducers: {
     setCatagory: (state, { payload }) => {
-      if (state.catagories.length === 0 && payload.length === 0) {
+      if (state.catalogue.length === 0 && payload.length === 0) {
         return;
       }
-      state.catagories = payload;
+      state.catalogue = payload;
     },
   },
 });

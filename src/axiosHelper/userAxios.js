@@ -30,14 +30,19 @@ export const axiosProcessor = async ({
   } catch (error) {
     if (
       error?.response?.status === 403 &&
-      error?.response?.data?.message === "jwt expired"
+      error?.response?.data?.message ===
+        "Your token has expired. Please login Again"
     ) {
       // 1. get new access Jwt
       const { status, accessJWT } = await getNewAccessJWT();
       if (status === "success") {
         sessionStorage.setItem("accessJWT", accessJWT);
-        return axiosProcessor(method, url, obj, isPrivate, refreshToken);
+        return axiosProcessor({ method, url, obj, isPrivate, refreshToken });
       }
+    }
+    if (error?.response?.data?.message === "jwt expired") {
+      console.log("refresh token expired");
+      // logoutUser();
     }
     return {
       status: "error",

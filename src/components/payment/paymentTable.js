@@ -27,6 +27,8 @@ export const PaymentTable = ({ displayTable }) => {
   };
 
   const handleOndelete = (_id) => {
+    window.confirm("Are your sure?");
+
     dispatch(deletePaymentAction({ _id }));
   };
   return (

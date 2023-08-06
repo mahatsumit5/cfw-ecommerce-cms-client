@@ -9,15 +9,20 @@ import {
 } from "../../Action/catelogueAction";
 import { UpdateCatagoryForm } from "./UpdateCategory";
 import { setModalShow } from "../../systemSlice";
+import { setDisplayTable } from "../../redux/displaySlice";
 
 export const CategoryTable = ({ editDisplay, setEditDisplay }) => {
-  const { catagories } = useSelector((store) => store.catagoryInfo);
+  const { displayTable } = useSelector((store) => store.displayTableData);
+  const { catalogue } = useSelector((store) => store.catagoryInfo);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    !catagories.length && dispatch(getCataloguesAction());
-  }, [dispatch, catagories]);
+    !catalogue.length && dispatch(getCataloguesAction());
+    dispatch(setDisplayTable(catalogue));
+  }, [dispatch, catalogue]);
+
   const [selectedCat, setSelectedCat] = useState({});
+
   const handleOnDelete = (_id) => {
     window.alert("Are you sure want to delete?");
     dispatch(deleteCatagoryAction({ _id }));
@@ -52,8 +57,8 @@ export const CategoryTable = ({ editDisplay, setEditDisplay }) => {
           </tr>
         </thead>
         <tbody className="mt-2">
-          {catagories &&
-            catagories?.map(({ _id, status, title, slug }, index) => (
+          {displayTable &&
+            displayTable?.map(({ _id, status, title, slug }, index) => (
               <tr key={_id} className="mt-2">
                 <td className=" d-flex  " style={{ width: "" }}>
                   <span
@@ -72,6 +77,7 @@ export const CategoryTable = ({ editDisplay, setEditDisplay }) => {
                       title="status"
                       value={_id}
                       onChange={handleToggleChange}
+                      checked={status === "active" ? true : false}
                     />
                   </span>
                 </td>

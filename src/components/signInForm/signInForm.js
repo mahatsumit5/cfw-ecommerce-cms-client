@@ -65,7 +65,7 @@ export const SignInFormComponent = () => {
   };
   return (
     <div
-      className="d-flex justify-content-center flex-wrap form m-5 "
+      className="d-flex justify-content-center flex-wrap form "
       style={{ backdropFilter: "blur(10px)" }}
     >
       <Form

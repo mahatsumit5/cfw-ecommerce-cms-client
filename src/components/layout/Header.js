@@ -1,18 +1,20 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Row } from "react-bootstrap";
 import { FiMenu } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
+import { BiSolidLogIn } from "react-icons/bi";
 import { setCanvasShow } from "../../systemSlice";
+import { SearchBar } from "../searchBar/SearchBar";
 export const Header = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userInfo);
   return (
-    <Row className="header shadow mx-auto ">
-      <Navbar variant="" className="">
+    <Row className="header shadow m-auto ">
+      <Navbar variant="" className="w-100">
         <Link top="/" className="navbar-brand">
           <Button
             variant=""
@@ -22,19 +24,22 @@ export const Header = () => {
             <FiMenu />
           </Button>
         </Link>
-        <Row className="justify-content-center w-75 flex-row   m-auto">
-          <Row className="search  w-75 m-auto mt-3">
-            <Form.Control size="md" type="text" placeholder="Search" />
+        <Row className="w-100 flex-row   mx-auto">
+          <Row className="search  w-50 m-auto ">
+            <SearchBar />
           </Row>
           {user?._id && (
-            <Row
-              className="m-auto mt-3 d-flex flex-column"
+            <div
+              className="mx-auto mt-3 d-flex flex-row gap-3"
               style={{ width: "60px" }}
             >
               <Link to="/profile" className="nav-link">
-                <CgProfile /> <p>{user?.fName}</p>
+                <CgProfile className="text-2xl" />
               </Link>
-            </Row>
+              <Link to="/" className="nav-link">
+                <BiSolidLogIn />
+              </Link>
+            </div>
           )}
         </Row>
       </Navbar>

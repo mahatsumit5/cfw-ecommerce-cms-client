@@ -6,14 +6,15 @@ import { PaymentForm } from "../../components/payment/paymentForm";
 import { PaymentTable } from "../../components/payment/paymentTable";
 import { useDispatch, useSelector } from "react-redux";
 import { setModalShow } from "../../systemSlice";
+import { setDisplayTable } from "../../redux/displaySlice";
 
 export const Payment = () => {
+  const { displayTable } = useSelector((store) => store.displayTableData);
   const { paymentOptions } = useSelector((store) => store.payments);
-  const [displayTable, setDisplayTable] = useState(paymentOptions);
   const dispatch = useDispatch();
-
+  //
   useEffect(() => {
-    setDisplayTable(paymentOptions);
+    dispatch(setDisplayTable(paymentOptions));
   }, [paymentOptions, dispatch]);
 
   const handleShowModal = () => {
