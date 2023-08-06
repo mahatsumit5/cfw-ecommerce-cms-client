@@ -1,39 +1,39 @@
 import { axiosProcessor } from "./userAxios";
 
 const rootApi = process.env.REACT_APP_ROOTAPI;
-const categoryApi = rootApi + "/category";
+const paymentApi = rootApi + "/payment";
 
-export const postCategory = (category) => {
+export const postPayment = (paymentObj) => {
   const obj = {
     method: "post",
-    url: categoryApi,
-    obj: category,
+    url: paymentApi,
+    obj: paymentObj,
     isPrivate: true,
   };
   return axiosProcessor(obj);
 };
-export const getCategories = () => {
+export const getPayments = () => {
   const obj = {
     method: "get",
-    url: `${rootApi}/category`,
+    url: paymentApi,
     isPrivate: true,
   };
   return axiosProcessor(obj);
 };
-export const deleteCatagory = (_id) => {
+export const deletePayment = (_id) => {
   const obj = {
     method: "delete",
-    url: categoryApi,
+    url: paymentApi,
     obj: _id,
     isPrivate: true,
   };
   return axiosProcessor(obj);
 };
-export const updateCatagory = (stat) => {
+export const updatePayment = (status) => {
   const obj = {
     method: "put",
-    url: categoryApi,
-    obj: stat,
+    url: paymentApi,
+    obj: status,
     isPrivate: true,
   };
   return axiosProcessor(obj);

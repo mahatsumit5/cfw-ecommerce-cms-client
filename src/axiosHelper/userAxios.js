@@ -28,6 +28,17 @@ export const axiosProcessor = async ({
     });
     return data;
   } catch (error) {
+    if (
+      error?.response?.status === 403 &&
+      error?.response?.data?.message === "jwt expired"
+    ) {
+      // 1. get new access Jwt
+      const { status, accessJWT } = await getNewAccessJWT();
+      if (status === "success") {
+        sessionStorage.setItem("accessJWT", accessJWT);
+        return axiosProcessor(method, url, obj, isPrivate, refreshToken);
+      }
+    }
     return {
       status: "error",
       message: error.response ? error?.response?.data?.message : error.message,

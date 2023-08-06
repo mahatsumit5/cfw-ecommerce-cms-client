@@ -19,11 +19,13 @@ import { useDispatch } from "react-redux";
 import { getCataloguesAction } from "./Action/catelogueAction";
 import { PrivateRoute } from "./components/private/PrivateRoute";
 import { ResetPassPage } from "./pages/reset-password/resetPass";
+import { getPaymentsAction } from "./Action/paymentAction";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCataloguesAction());
+    dispatch(getPaymentsAction());
   }, [dispatch]);
   return (
     <div className="">

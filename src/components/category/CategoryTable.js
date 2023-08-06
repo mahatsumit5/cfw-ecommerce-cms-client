@@ -10,7 +10,7 @@ import {
 import { UpdateCatagoryForm } from "./UpdateCategory";
 import { setModalShow } from "../../systemSlice";
 
-export const CategoryTable = () => {
+export const CategoryTable = ({ editDisplay, setEditDisplay }) => {
   const { catagories } = useSelector((store) => store.catagoryInfo);
   const dispatch = useDispatch();
 
@@ -32,11 +32,16 @@ export const CategoryTable = () => {
   const handleOnEdit = (item) => {
     setSelectedCat(item);
     dispatch(setModalShow(true));
+    setEditDisplay(true);
   };
 
   return (
     <>
-      <UpdateCatagoryForm selectedCategory={selectedCat} />
+      {editDisplay ? (
+        <UpdateCatagoryForm selectedCategory={selectedCat} />
+      ) : (
+        <></>
+      )}
       <Table hover w-100 responsive="lg" className="" variant="light">
         <thead className="light-text">
           <tr className="font-monospace text-body-secondary ">
