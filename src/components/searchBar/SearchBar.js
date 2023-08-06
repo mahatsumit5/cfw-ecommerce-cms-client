@@ -18,7 +18,6 @@ export const SearchBar = () => {
     }
   };
   const data = dataForSearchBar();
-  console.log(data);
   const dispatch = useDispatch();
   const handleOnChange = (e) => {
     const { value } = e.target;

@@ -3,30 +3,43 @@ import { AdminLayout } from "../../components/layout/AdminLayout";
 import { Button, Form } from "react-bootstrap";
 import { CustomModal } from "../../components/customModal/customModal";
 import { PaymentForm } from "../../components/payment/paymentForm";
-import { PaymentTable } from "../../components/payment/paymentTable";
 import { useDispatch, useSelector } from "react-redux";
 import { setModalShow } from "../../systemSlice";
 import { setDisplayTable } from "../../redux/displaySlice";
+import {
+  deletePaymentAction,
+  getPaymentsAction,
+  updatePaymentAction,
+} from "../../Action/paymentAction";
+import { CustomeTable } from "../../components/table/CustomeTable";
 
 export const Payment = () => {
-  const { displayTable } = useSelector((store) => store.displayTableData);
   const { paymentOptions } = useSelector((store) => store.payments);
   const dispatch = useDispatch();
   //
   useEffect(() => {
     dispatch(setDisplayTable(paymentOptions));
+    !paymentOptions.length && dispatch(getPaymentsAction());
   }, [paymentOptions, dispatch]);
 
+  const handleToggleChange = (e) => {
+    const { value, checked } = e.target;
+    dispatch(
+      updatePaymentAction({
+        _id: value,
+        status: checked ? "active" : "inactive",
+      })
+    );
+  };
+
+  const handleOndelete = (_id) => {
+    window.confirm("Are your sure?");
+    dispatch(deletePaymentAction({ _id }));
+  };
   const handleShowModal = () => {
     dispatch(setModalShow(true));
   };
-  const handleOnChange = (e) => {
-    const { value } = e.target;
-    const filteredItems = paymentOptions.filter((item) => {
-      return item.title.toLowerCase().includes(value.toLowerCase());
-    });
-    setDisplayTable(filteredItems);
-  };
+
   return (
     <AdminLayout title="Payment">
       <CustomModal title="Add New Payment Methods">
@@ -35,20 +48,18 @@ export const Payment = () => {
 
       <div className="w-100 mt-5 p-3 d-flex rounded justify-content-between shadow gap-4 ">
         <h3>List of Payment options </h3>
-        <div className="">
-          <Form.Control
-            size="lg"
-            placeholder="search"
-            onChange={handleOnChange}
-          />
-        </div>
+
         <Button variant="dark" onClick={handleShowModal}>
           Add new Payment
         </Button>
       </div>
 
       <div>
-        <PaymentTable displayTable={displayTable} />
+        <CustomeTable
+          handleOndelete={handleOndelete}
+          handleToggleChange={handleToggleChange}
+          name="description"
+        />
       </div>
     </AdminLayout>
   );
