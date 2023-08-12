@@ -5,6 +5,7 @@ import catagoryReducer from "./redux/catagorySlice";
 import systemReducer from "./systemSlice";
 import paymentReducer from "./redux/paymentSlice";
 import displayTableReducer from "./redux/displaySlice";
+import productReducer from "./redux/productSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,5 +14,6 @@ export const store = configureStore({
     system: systemReducer,
     payments: paymentReducer,
     displayTableData: displayTableReducer,
+    productsData: productReducer,
   },
 });

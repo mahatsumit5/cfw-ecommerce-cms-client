@@ -1,29 +1,30 @@
 import { axiosProcessor } from "./userAxios";
 
 const rootApi = process.env.REACT_APP_ROOTAPI;
-const paymentApi = rootApi + "/payment";
+const productApi = rootApi + "/product";
 
-export const postPayment = (paymentObj) => {
+export const postProduct = (productObj) => {
   const obj = {
     method: "post",
-    url: paymentApi,
-    obj: paymentObj,
+    url: productApi,
+    obj: productObj,
     isPrivate: true,
   };
   return axiosProcessor(obj);
 };
-export const getPayments = () => {
+export const getProducts = () => {
   const obj = {
     method: "get",
-    url: paymentApi,
+    url: productApi,
     isPrivate: true,
   };
   return axiosProcessor(obj);
 };
-export const deletePayment = (_id) => {
+export const deleteProduct = (_id) => {
+  console.log(_id);
   const obj = {
     method: "delete",
-    url: paymentApi + "/_id",
+    url: productApi + "/" + _id,
     isPrivate: true,
   };
   return axiosProcessor(obj);
@@ -31,7 +32,7 @@ export const deletePayment = (_id) => {
 export const updatePayment = (status) => {
   const obj = {
     method: "put",
-    url: paymentApi,
+    url: productApi,
     obj: status,
     isPrivate: true,
   };

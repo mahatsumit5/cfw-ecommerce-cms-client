@@ -18,7 +18,7 @@ export const AdminLayout = ({ children }) => {
 
             <div className="page-content p-4"> {children}</div>
           </main>
-          <Footer />
+          {/* <Footer /> */}
         </>
       ) : (
         <>

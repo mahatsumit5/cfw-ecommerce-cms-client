@@ -9,12 +9,17 @@ export const SearchBar = () => {
   const name = pathname.slice(1);
   const { catalogue } = useSelector((store) => store.catagoryInfo);
   const { paymentOptions } = useSelector((store) => store.payments);
+  const { product } = useSelector((state) => state.productsData);
+
   const dataForSearchBar = () => {
     if (pathname === "/catalogue") {
       return catalogue;
     }
     if (pathname === "/payment") {
       return paymentOptions;
+    }
+    if (pathname === "/products") {
+      return product;
     }
   };
   const data = dataForSearchBar();

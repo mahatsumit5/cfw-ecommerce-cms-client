@@ -20,12 +20,15 @@ import { getCataloguesAction } from "./Action/catelogueAction";
 import { PrivateRoute } from "./components/private/PrivateRoute";
 import { ResetPassPage } from "./pages/reset-password/resetPass";
 import { getPaymentsAction } from "./Action/paymentAction";
+import { NewProduct } from "./components/products/NewProduct";
+import { getproductAction } from "./Action/productAction";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCataloguesAction());
     dispatch(getPaymentsAction());
+    dispatch(getproductAction());
   }, [dispatch]);
   return (
     <div className="">
@@ -60,6 +63,15 @@ function App() {
           element={
             <PrivateRoute>
               <Products />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="new-product"
+          element={
+            <PrivateRoute>
+              <NewProduct />
             </PrivateRoute>
           }
         />

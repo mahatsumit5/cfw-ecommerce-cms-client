@@ -1,6 +1,9 @@
 import React from "react";
 import { AdminLayout } from "../../components/layout/AdminLayout";
 import { Button, Container, Dropdown, Form, Row } from "react-bootstrap";
+import { CustomeTable } from "../../components/table/CustomeTable";
+import { Link } from "react-router-dom";
+import { ProductTable } from "../../components/products/productTable";
 
 export const Products = () => {
   return (
@@ -8,7 +11,10 @@ export const Products = () => {
       <div className="w-100 mt-2 p-3  rounded  shadow ">
         <div className=" d-flex justify-content-between">
           <h3 className="font-monospace">List of Products </h3>
-          <Button variant="primary">Add new catalogue </Button>
+          <Link to="/new-product">
+            {" "}
+            <Button variant="primary">Add new catalogue </Button>
+          </Link>
         </div>
         <div className="mt-2 text-body-secondary d-flex gap-5">
           <a>Pants</a>
@@ -57,6 +63,7 @@ export const Products = () => {
         </div>
         <hr></hr>
       </div>
+      <ProductTable />
     </AdminLayout>
   );
 };
