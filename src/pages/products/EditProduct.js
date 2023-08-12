@@ -1,26 +1,39 @@
-import React, { useState } from "react";
-import { AdminLayout } from "../layout/AdminLayout";
-import { Button, ButtonGroup, Form } from "react-bootstrap";
-import { CustomeInput } from "../customeInput/CustomeInput";
-import { postProductAction } from "../../Action/productAction";
+import { AdminLayout } from "../../components/layout/AdminLayout";
+import { Button, Form } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { SelectedCategory } from "../../components/category/SelecteCategory";
+import { CustomeInput } from "../../components/customeInput/CustomeInput";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { SelectedCategory } from "../category/SelecteCategory";
+import { getProducts } from "../../axiosHelper/productAxios";
+import { updateProductAction } from "../../Action/productAction";
 const initialState = {
   status: "inactive",
 };
-export const NewProduct = () => {
+export const EditProducts = () => {
   const navigate = useNavigate();
+  const { _id } = useParams();
   const dispatch = useDispatch();
   const [form, setForm] = useState(initialState);
   const [img, setImg] = useState([]);
+
+  const getSelectedproduct = async () => {
+    const { result } = await getProducts({ _id });
+    result?._id && setForm(result);
+  };
+
+  useEffect(() => {
+    getSelectedproduct();
+  }, [dispatch, _id]);
+
   const inputs = [
     {
-      name: "title",
+      name: "name",
       label: "Name",
       type: "text",
       placeholder: "Denim Pants",
       required: true,
+      value: form.title,
     },
     {
       name: "sku",
@@ -28,6 +41,7 @@ export const NewProduct = () => {
       type: "text",
       placeholder: "DENIM-TV-30",
       required: true,
+      value: form.sku,
     },
     {
       name: "qty",
@@ -35,6 +49,7 @@ export const NewProduct = () => {
       type: "number",
       placeholder: "50",
       required: true,
+      value: form.qty,
     },
     {
       name: "price",
@@ -42,22 +57,26 @@ export const NewProduct = () => {
       type: "number",
       placeholder: "$ 3000",
       required: true,
+      value: form.price,
     },
     {
       name: "salesPrice",
       label: "Sales Price",
       type: "number",
       placeholder: "$ 3000",
+      value: form.salesPrice,
     },
     {
       name: "salesStartDate",
       label: "Sales Start Date",
       type: "Date",
+      value: form.salesStartDate?.slice(0, 10),
     },
     {
       name: "salesEndDate",
       label: "Sales End Date",
       type: "Date",
+      value: form.salesEndDate?.slice(0, 10),
     },
     {
       name: "description",
@@ -66,6 +85,7 @@ export const NewProduct = () => {
       as: "textarea",
       placeholder: "Product Description",
       required: true,
+      value: form.description,
     },
   ];
   const handleOnChange = (e) => {
@@ -89,16 +109,16 @@ export const NewProduct = () => {
       });
     }
     //append all the form data and the image together
-
-    const isPosted = await dispatch(postProductAction(formDt));
-    // isPosted && navigate("/products");
+    const isPosted = await dispatch(updateProductAction(formDt));
+    isPosted && navigate("/products");
   };
   const handleOnImageAttach = (e) => {
     const { files } = e.target;
     setImg(files);
   };
+
   return (
-    <AdminLayout>
+    <AdminLayout title="Products">
       <Link to="/products" className="nav-link">
         <p>Go Back</p>
       </Link>
@@ -113,14 +133,16 @@ export const NewProduct = () => {
             <Form.Check
               name="status"
               type="switch"
-              label="Status"
+              label={form.status}
               onChange={handleOnChange}
+              checked={form.status === "active"}
             ></Form.Check>
           </Form.Group>
           <SelectedCategory
             onChange={handleOnChange}
             name="parentCat"
-            required
+            required={true}
+            _id={form.parentCat}
           />
 
           {inputs.map((item, index) => (
@@ -132,13 +154,12 @@ export const NewProduct = () => {
               name="img"
               multiple="multiple"
               onChange={handleOnImageAttach}
-              required={true}
             />
           </Form.Group>
           <div className="d-grid newProduct">
             <Button variant="primary" type="submit">
               Submit
-            </Button>{" "}
+            </Button>
           </div>
         </Form>
       </div>

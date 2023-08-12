@@ -12,7 +12,7 @@ export const SelectedCategory = (props) => {
           <option value="">...Select...</option>
 
           {catalogue.map(({ _id, title }) => (
-            <option key={_id} value={_id}>
+            <option key={_id} value={_id} selected={_id === props._id}>
               {title}
             </option>
           ))}

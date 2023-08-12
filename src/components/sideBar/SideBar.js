@@ -13,14 +13,73 @@ import { setCanvasShow } from "../../systemSlice";
 import { setUser } from "../../redux/userSlice";
 import { Button, Row } from "react-bootstrap";
 import { logoutUser } from "../../axiosHelper/userAxios";
+import { useState } from "react";
 
 export const SideBar = () => {
+  let btnName = "";
+  const [button, setButton] = useState({
+    btnName,
+    isActive: false,
+  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { canvasShow } = useSelector((state) => state.system);
   const { user } = useSelector((state) => state.userInfo);
+  const buttons = [
+    {
+      name: "Dashboard",
+      icon: <BsFillBox2Fill />,
+      link: "dashboard",
+    },
+    {
+      name: "Products",
+      icon: <BsFillBox2Fill />,
+      link: "products",
+    },
+    {
+      name: "Customers",
+      icon: <FaUsers />,
+      link: "customers",
+    },
+    {
+      name: "Sales",
+      icon: <FaMoneyBillAlt />,
+      link: "sales",
+    },
 
-  const handleClose = () => dispatch(setCanvasShow(false));
+    {
+      name: "Catalogue",
+      icon: <BiSolidCategoryAlt />,
+      link: "catalogue",
+    },
+    {
+      name: "Payment",
+      icon: <LiaCreditCardSolid />,
+      link: "payment",
+    },
+    {
+      name: "Orders",
+      icon: <LiaTruckSolid />,
+      link: "orders",
+    },
+    {
+      name: "Admin",
+      icon: <FaUserSecret />,
+      link: "admin",
+    },
+  ];
+  const handleClose = (e) => {
+    dispatch(setCanvasShow(false));
+  };
+  const handleOnClick = (e) => {
+    const { value } = e.target;
+    console.log(value);
+    setButton({
+      btnName: value,
+      isActive: true,
+    });
+    handleClose();
+  };
 
   const handleOnSignOut = () => {
     logoutUser(user._id);
@@ -46,77 +105,20 @@ export const SideBar = () => {
         <Offcanvas.Body className="d-flex flex-column justify-content-between">
           <nav>
             <ul className="list-unstyled side-nav">
-              <li className="mt-2 sidebar-link">
-                <Link to="/dashboard" className="nav-link">
-                  <Button variant="" onClick={handleClose}>
-                    {" "}
-                    <TbLayoutDashboard /> Dashboard
-                  </Button>
-                </Link>
-              </li>
-
-              <li className="mt-2 sidebar-link">
-                <Link to="/products" className="nav-link">
-                  <Button variant="" onClick={handleClose}>
-                    {" "}
-                    <BsFillBox2Fill />
-                    Products
-                  </Button>
-                </Link>
-              </li>
-              <li className="mt-2 sidebar-link">
-                <Link to="/customers" className="nav-link">
-                  <Button variant="" onClick={handleClose}>
-                    <FaUsers />
-                    Customers
-                  </Button>
-                </Link>
-              </li>
-              <li className="mt-2 sidebar-link">
-                <Link to="/sales" className="nav-link">
-                  <Button variant="" onClick={handleClose}>
-                    {" "}
-                    <FaMoneyBillAlt /> Sales
-                  </Button>
-                </Link>
-              </li>
-              <li className="mt-2 sidebar-link">
-                <Link to="/catalogue" className="nav-link">
-                  <Button variant="" onClick={handleClose}>
-                    {" "}
-                    <BiSolidCategoryAlt />
-                    Catalogue
-                  </Button>
-                </Link>
-              </li>
-
-              <li className="mt-2 sidebar-link">
-                <Link to="/payment" className="nav-link">
-                  <Button variant="" onClick={handleClose}>
-                    {" "}
-                    <LiaCreditCardSolid /> Payment
-                  </Button>
-                </Link>
-              </li>
-
-              <li className="mt-2 sidebar-link">
-                <Link to="/orders" className="nav-link">
-                  <Button variant="" onClick={handleClose}>
-                    <LiaTruckSolid />
-                    Orders
-                  </Button>
-                </Link>
-              </li>
-              <hr></hr>
-              <li className="mt-2 sidebar-link">
-                <Link to="/admin" className="nav-link">
-                  <Button variant="" onClick={handleClose}>
-                    {" "}
-                    <FaUserSecret />
-                    Admin Users
-                  </Button>
-                </Link>
-              </li>
+              {buttons.map((btn, i) => (
+                <li className="mt-2 sidebar-link " key={i}>
+                  <Link to={`/` + btn.link} className="nav-link">
+                    <Button
+                      variant=""
+                      onClick={handleClose}
+                      value={btn.name}
+                      active={button.isActive ? true : false}
+                    >
+                      {btn.icon} {btn.name}
+                    </Button>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </nav>
           <Row className="logOut p-3  shadow">
@@ -132,77 +134,24 @@ export const SideBar = () => {
       <div className="p-3  side-bar d-none d-lg-block ">
         <nav>
           <ul className="list-unstyled side-nav">
-            <li className="mt-2 sidebar-link">
-              <Link to="/dashboard" className="nav-link">
-                <Button variant="" onClick={handleClose}>
-                  {" "}
-                  <TbLayoutDashboard /> Dashboard
-                </Button>
-              </Link>
-            </li>
-
-            <li className="mt-2 sidebar-link">
-              <Link to="/products" className="nav-link">
-                <Button variant="" onClick={handleClose}>
-                  {" "}
-                  <BsFillBox2Fill />
-                  Products
-                </Button>
-              </Link>
-            </li>
-            <li className="mt-2 sidebar-link">
-              <Link to="/customers" className="nav-link">
-                <Button variant="" onClick={handleClose}>
-                  <FaUsers />
-                  Customers
-                </Button>
-              </Link>
-            </li>
-            <li className="mt-2 sidebar-link">
-              <Link to="/sales" className="nav-link">
-                <Button variant="" onClick={handleClose}>
-                  {" "}
-                  <FaMoneyBillAlt /> Sales
-                </Button>
-              </Link>
-            </li>
-            <li className="mt-2 sidebar-link">
-              <Link to="/catalogue" className="nav-link">
-                <Button variant="" onClick={handleClose}>
-                  {" "}
-                  <BiSolidCategoryAlt />
-                  Catalogue
-                </Button>
-              </Link>
-            </li>
-
-            <li className="mt-2 sidebar-link">
-              <Link to="/payment" className="nav-link">
-                <Button variant="" onClick={handleClose}>
-                  {" "}
-                  <LiaCreditCardSolid /> Payment
-                </Button>
-              </Link>
-            </li>
-
-            <li className="mt-2 sidebar-link">
-              <Link to="/orders" className="nav-link">
-                <Button variant="" onClick={handleClose}>
-                  <LiaTruckSolid />
-                  Orders
-                </Button>
-              </Link>
-            </li>
-            <hr></hr>
-            <li className="mt-2 sidebar-link">
-              <Link to="/admin" className="nav-link">
-                <Button variant="" onClick={handleClose}>
-                  {" "}
-                  <FaUserSecret />
-                  Admin Users
-                </Button>
-              </Link>
-            </li>
+            {buttons.map((btn, i) => (
+              <li className="mt-2 sidebar-link " key={i}>
+                <Link to={`/` + btn.link} className="nav-link">
+                  <Button
+                    variant=""
+                    onClick={handleOnClick}
+                    value={btn.name}
+                    active={
+                      button.btnName === btn.name && button.isActive
+                        ? true
+                        : false
+                    }
+                  >
+                    {btn.icon} {btn.name}
+                  </Button>
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
         <Row className="logOut  ">

@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { NewCategoryForm } from "../../components/category/NewCategoryForm";
 import { CustomModal } from "../../components/customModal/customModal";
 import { useEffect, useState } from "react";
+import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+
 import {
   deleteCatagoryAction,
   getCataloguesAction,
@@ -24,10 +26,9 @@ export const Catalogue = () => {
     dispatch(setDisplayTable(catalogue));
   }, [dispatch, catalogue]);
 
-  const [selectedCat, setSelectedCat] = useState({});
+  const [selectedCat, setSelectedCat] = useState();
 
   const handleOnDelete = (_id) => {
-    window.alert("Are you sure want to delete?");
     dispatch(deleteCatagoryAction({ _id }));
   };
   const handleToggleChange = (e) => {
@@ -37,8 +38,8 @@ export const Catalogue = () => {
     );
   };
 
-  const handleOnEdit = (item) => {
-    setSelectedCat(item);
+  const handleOnEdit = (id) => {
+    setSelectedCat(id);
     dispatch(setModalShow(true));
     setEditDisplay(true);
   };
@@ -47,6 +48,13 @@ export const Catalogue = () => {
     setEditDisplay(false);
     dispatch(setModalShow(true));
   };
+
+  const column = [
+    // { heading: "ID", value: "_id" },
+    { heading: "STATUS", value: "status" },
+    { heading: "TITLE", value: "title" },
+    { heading: "slug", value: "slug" },
+  ];
   return (
     <AdminLayout title="Catalogue">
       <CustomModal title={"add new catalogue"}>
@@ -61,12 +69,12 @@ export const Catalogue = () => {
       </div>
 
       <div className=" d-flex justify-content-between  shadow rounded p-3 mt-3 w-100 flex-column">
-        {editDisplay && <UpdateCatagoryForm selectedCategory={selectedCat} />}
+        {editDisplay && <UpdateCatagoryForm _id={selectedCat} />}
         <CustomeTable
-          handleOndelete={handleOnDelete}
+          handleOnDelete={handleOnDelete}
           handleToggleChange={handleToggleChange}
           handleOnEdit={handleOnEdit}
-          name="slug"
+          column={column}
         />
       </div>
     </AdminLayout>

@@ -3,6 +3,7 @@ import {
   deleteProduct,
   getProducts,
   postProduct,
+  updateProduct,
 } from "../axiosHelper/productAxios";
 import { setProducts } from "../redux/productSlice";
 
@@ -29,7 +30,8 @@ export const deleteProductAction = (_id) => async (dispatch) => {
   const { status, message } = await pendingResp;
   dispatch(getproductAction());
 };
-// export const updateCatagoryAction = (stat) => async (dispatch) => {
-//   const { status, message } = await updateCatagory(stat);
-//   dispatch(getCataloguesAction());
-// };
+export const updateProductAction = (obj) => async (dispatch) => {
+  const { status, message } = await updateProduct(obj);
+  dispatch(getproductAction());
+  if (status === "success") return true;
+};

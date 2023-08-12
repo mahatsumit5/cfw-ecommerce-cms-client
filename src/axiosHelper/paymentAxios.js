@@ -23,8 +23,9 @@ export const getPayments = () => {
 export const deletePayment = (_id) => {
   const obj = {
     method: "delete",
-    url: paymentApi + "/_id",
+    url: paymentApi,
     isPrivate: true,
+    obj: _id,
   };
   return axiosProcessor(obj);
 };

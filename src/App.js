@@ -22,6 +22,7 @@ import { ResetPassPage } from "./pages/reset-password/resetPass";
 import { getPaymentsAction } from "./Action/paymentAction";
 import { NewProduct } from "./components/products/NewProduct";
 import { getproductAction } from "./Action/productAction";
+import { EditProducts } from "./pages/products/EditProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -72,6 +73,14 @@ function App() {
           element={
             <PrivateRoute>
               <NewProduct />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="products/edit/:_id"
+          element={
+            <PrivateRoute>
+              <EditProducts />
             </PrivateRoute>
           }
         />

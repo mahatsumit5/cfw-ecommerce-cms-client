@@ -12,10 +12,10 @@ export const postCategory = (category) => {
   };
   return axiosProcessor(obj);
 };
-export const getCategories = () => {
+export const getCategories = (_id) => {
   const obj = {
     method: "get",
-    url: `${rootApi}/category`,
+    url: _id ? categoryApi + "/" + _id : categoryApi,
     isPrivate: true,
   };
   return axiosProcessor(obj);

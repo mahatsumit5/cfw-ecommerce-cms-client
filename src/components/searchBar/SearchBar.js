@@ -6,7 +6,6 @@ import { useLocation } from "react-router-dom";
 
 export const SearchBar = () => {
   const { pathname } = useLocation();
-  const name = pathname.slice(1);
   const { catalogue } = useSelector((store) => store.catagoryInfo);
   const { paymentOptions } = useSelector((store) => store.payments);
   const { product } = useSelector((state) => state.productsData);
@@ -27,7 +26,7 @@ export const SearchBar = () => {
   const handleOnChange = (e) => {
     const { value } = e.target;
     const filteredItems = data?.filter((item) => {
-      return item.title.toLowerCase().includes(value.toLowerCase());
+      return item.title.toLowerCase().includes(value?.toLowerCase());
     });
     dispatch(setDisplayTable(filteredItems));
   };

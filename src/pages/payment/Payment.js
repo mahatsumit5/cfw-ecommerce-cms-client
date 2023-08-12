@@ -16,7 +16,13 @@ import { CustomeTable } from "../../components/table/CustomeTable";
 export const Payment = () => {
   const { paymentOptions } = useSelector((store) => store.payments);
   const dispatch = useDispatch();
-  //
+
+  const column = [
+    // { heading: "ID", value: "_id" },
+    { heading: "STATUS", value: "status" },
+    { heading: "TITLE", value: "title" },
+    { heading: "DESCRIPTION", value: "description" },
+  ];
   useEffect(() => {
     dispatch(setDisplayTable(paymentOptions));
     !paymentOptions.length && dispatch(getPaymentsAction());
@@ -33,7 +39,6 @@ export const Payment = () => {
   };
 
   const handleOndelete = (_id) => {
-    window.confirm("Are your sure?");
     dispatch(deletePaymentAction({ _id }));
   };
   const handleShowModal = () => {
@@ -56,9 +61,9 @@ export const Payment = () => {
 
       <div>
         <CustomeTable
-          handleOndelete={handleOndelete}
+          handleOnDelete={handleOndelete}
           handleToggleChange={handleToggleChange}
-          name="description"
+          column={column}
         />
       </div>
     </AdminLayout>

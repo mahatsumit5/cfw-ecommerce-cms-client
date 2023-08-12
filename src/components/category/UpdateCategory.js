@@ -4,18 +4,22 @@ import { useDispatch } from "react-redux";
 import { updateCatagoryAction } from "../../Action/catelogueAction";
 import { CustomModal } from "../customModal/customModal";
 import { setModalShow } from "../../systemSlice";
+import { getCategories } from "../../axiosHelper/categoryAxios";
 
-export const UpdateCatagoryForm = ({ selectedCategory }) => {
+export const UpdateCatagoryForm = ({ _id }) => {
   const initialState = {
-    title: "title",
-    status: "active",
+    tiltle: "",
   };
   const dispatch = useDispatch();
   const [form, setForm] = useState(initialState);
-
+  const getCat = async () => {
+    const { result } = await dispatch(getCategories(_id));
+    console.log(result);
+    result?._id && setForm(result);
+  };
   useEffect(() => {
-    selectedCategory && setForm(selectedCategory);
-  }, [dispatch, selectedCategory]);
+    getCat();
+  }, [dispatch, _id]);
 
   const handleOnUpdate = (e) => {
     e.preventDefault();

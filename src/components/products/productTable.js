@@ -5,6 +5,7 @@ import {
   deleteProductAction,
   getproductAction,
 } from "../../Action/productAction";
+import { Link } from "react-router-dom";
 
 export const ProductTable = () => {
   const dispatch = useDispatch();
@@ -30,11 +31,21 @@ export const ProductTable = () => {
           {product.map((item, i) => (
             <tr key={item._id}>
               <td>{i + 1}</td>
-              <td>no img</td>
+              <td>
+                <img
+                  src={
+                    process.env.REACT_APP_ROOTSERVER + item.thumbnail?.slice(6)
+                  }
+                  alt="img"
+                  width="150px"
+                />
+              </td>
               <td>{item.name}</td>
               <td>{item.qty}</td>
               <td>
-                <Button variant="warning">Edit</Button>
+                <Link to={`/products/edit/${item._id}`}>
+                  <Button variant="warning">Edit</Button>
+                </Link>
                 <Button
                   variant="danger"
                   onClick={() => dispatch(deleteProductAction(item._id))}

@@ -12,10 +12,10 @@ export const postProduct = (productObj) => {
   };
   return axiosProcessor(obj);
 };
-export const getProducts = () => {
+export const getProducts = (_id) => {
   const obj = {
     method: "get",
-    url: productApi,
+    url: _id ? productApi + "/" + _id : productApi,
     isPrivate: true,
   };
   return axiosProcessor(obj);
@@ -29,11 +29,12 @@ export const deleteProduct = (_id) => {
   };
   return axiosProcessor(obj);
 };
-export const updatePayment = (status) => {
+export const updateProduct = (data) => {
+  console.log(data);
   const obj = {
     method: "put",
     url: productApi,
-    obj: status,
+    obj: data,
     isPrivate: true,
   };
   return axiosProcessor(obj);
