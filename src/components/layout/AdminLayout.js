@@ -8,23 +8,17 @@ export const AdminLayout = ({ children }) => {
   const { user } = useSelector((state) => state.userInfo);
 
   return (
-    <div className="admin-layout">
-      {user?._id && user?.status === "active" ? (
-        <>
-          {" "}
-          <Header />
-          <main className="main">
-            <SideBar />
+    <>
+      <Header />
 
-            <div className="page-content p-4"> {children}</div>
-          </main>
-          {/* <Footer /> */}
-        </>
-      ) : (
-        <>
-          <h1>Access denied for unverified users</h1>
-        </>
-      )}
-    </div>
+      <div className="admin-layout">
+        <SideBar />
+
+        <main className="main">
+          <div className="page-content p-2"> {children}</div>
+        </main>
+      </div>
+      <Footer />
+    </>
   );
 };

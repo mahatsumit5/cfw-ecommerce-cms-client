@@ -24,6 +24,7 @@ export const Header = () => {
             <FiMenu />
           </Button>
         </Link>
+        <h2> CFW</h2>
         <Row className="w-100 flex-row   mx-auto">
           <Row className="search  w-50 m-auto ">
             <SearchBar />

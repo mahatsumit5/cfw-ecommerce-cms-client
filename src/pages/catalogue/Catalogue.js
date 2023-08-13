@@ -26,7 +26,7 @@ export const Catalogue = () => {
     dispatch(setDisplayTable(catalogue));
   }, [dispatch, catalogue]);
 
-  const [selectedCat, setSelectedCat] = useState();
+  const [selectedCat, setSelectedCat] = useState({});
 
   const handleOnDelete = (_id) => {
     dispatch(deleteCatagoryAction({ _id }));
@@ -50,7 +50,7 @@ export const Catalogue = () => {
   };
 
   const column = [
-    // { heading: "ID", value: "_id" },
+    { heading: "ID", value: "_id" },
     { heading: "STATUS", value: "status" },
     { heading: "TITLE", value: "title" },
     { heading: "slug", value: "slug" },
@@ -62,7 +62,12 @@ export const Catalogue = () => {
       </CustomModal>
 
       <div className="w-100 mt-5 p-3 d-flex rounded justify-content-between shadow ">
-        <h3>List of Catalogue </h3>
+        <span>
+          {" "}
+          <h3> Catalogue </h3>
+          <p>{catalogue?.length} catalogue found</p>
+        </span>
+
         <Button variant="dark" onClick={handleOnClick}>
           Add new catalogue
         </Button>

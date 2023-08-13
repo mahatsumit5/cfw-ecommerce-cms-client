@@ -16,7 +16,6 @@ export const postCatalogueAction = (obj) => async (dispatch) => {
 };
 export const getCataloguesAction = () => async (dispatch) => {
   const { status, message, result } = await getCategories();
-  console.log(status);
   if (status === "success") {
     dispatch(setCatagory(result));
     return true;

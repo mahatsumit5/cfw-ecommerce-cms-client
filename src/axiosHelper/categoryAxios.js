@@ -13,6 +13,7 @@ export const postCategory = (category) => {
   return axiosProcessor(obj);
 };
 export const getCategories = (_id) => {
+  console.log(_id);
   const obj = {
     method: "get",
     url: _id ? categoryApi + "/" + _id : categoryApi,

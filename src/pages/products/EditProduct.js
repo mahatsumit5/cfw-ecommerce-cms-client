@@ -7,25 +7,20 @@ import { CustomeInput } from "../../components/customeInput/CustomeInput";
 import { useDispatch } from "react-redux";
 import { getProducts } from "../../axiosHelper/productAxios";
 import { updateProductAction } from "../../Action/productAction";
-const initialState = {
-  status: "inactive",
-};
 export const EditProducts = () => {
   const navigate = useNavigate();
   const { _id } = useParams();
   const dispatch = useDispatch();
-  const [form, setForm] = useState(initialState);
+  const [form, setForm] = useState({});
   const [img, setImg] = useState([]);
-
-  const getSelectedproduct = async () => {
-    const { result } = await getProducts({ _id });
-    result?._id && setForm(result);
-  };
-
   useEffect(() => {
     getSelectedproduct();
-  }, [dispatch, _id]);
+  }, []);
 
+  const getSelectedproduct = async () => {
+    const { result } = await getProducts(_id);
+    result?._id && setForm(result);
+  };
   const inputs = [
     {
       name: "name",
@@ -36,12 +31,20 @@ export const EditProducts = () => {
       value: form.title,
     },
     {
+      name: "slug",
+      label: "Slug",
+      type: "text",
+      value: form.slug,
+      disabled: true,
+    },
+    {
       name: "sku",
       label: "SKU",
       type: "text",
       placeholder: "DENIM-TV-30",
       required: true,
       value: form.sku,
+      disabled: true,
     },
     {
       name: "qty",
@@ -95,12 +98,21 @@ export const EditProducts = () => {
     }
     setForm({ ...form, [name]: value });
   };
+  const handleOnImageAttach = (e) => {
+    const { files } = e.target;
+    setImg(files);
+    console.log(files);
+  };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    //set all data in form Data
+    if (!window.confirm("Are your sure you want to update this product")) {
+      return;
+    }
+
     const formDt = new FormData();
-    for (const key in form) {
-      formDt.append(key, form[key]);
+    const { sku, slug, __v, createdAt, updatedAt, ...rest } = form;
+    for (let key in rest) {
+      formDt.append(key, rest[key]);
     }
     //check if there is any image
     if (img.length) {
@@ -108,13 +120,12 @@ export const EditProducts = () => {
         formDt.append("images", image);
       });
     }
+    //remove sku,skug,--v,creatdAt,updatedAt
+
     //append all the form data and the image together
     const isPosted = await dispatch(updateProductAction(formDt));
-    isPosted && navigate("/products");
-  };
-  const handleOnImageAttach = (e) => {
-    const { files } = e.target;
-    setImg(files);
+    console.log(formDt);
+    isPosted && getSelectedproduct();
   };
 
   return (
@@ -122,14 +133,14 @@ export const EditProducts = () => {
       <Link to="/products" className="nav-link">
         <p>Go Back</p>
       </Link>
-      <div>
+      <div className="p-3">
         <Form
           action="/"
           method="post"
           encType="multipart/form-data"
           onSubmit={handleOnSubmit}
         >
-          <Form.Group className="mb-3">
+          <Form.Group className="mb-3 ">
             <Form.Check
               name="status"
               type="switch"
@@ -148,11 +159,22 @@ export const EditProducts = () => {
           {inputs.map((item, index) => (
             <CustomeInput key={index} {...item} onChange={handleOnChange} />
           ))}
+          <div className="py-5 ">
+            {form.images?.map((url) => (
+              <img
+                className="img-thumbnail"
+                key={url}
+                src={process.env.REACT_APP_ROOTSERVER + url?.slice(6)}
+                alt=""
+                width="150px"
+              />
+            ))}
+          </div>
           <Form.Group className="mb-3">
             <Form.Control
               type="file"
               name="img"
-              multiple="multiple"
+              multiple
               onChange={handleOnImageAttach}
             />
           </Form.Group>

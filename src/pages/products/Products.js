@@ -51,11 +51,15 @@ export const Products = () => {
   const handleToggleChange = (e) => {
     const { value, checked } = e.target;
     dispatch(
-      updateProductAction({ value, status: checked ? "active" : "inactive" })
+      updateProductAction({
+        _id: value,
+        status: checked ? "active" : "inactive",
+      })
     );
   };
   const column = [
     { heading: "STATUS", value: "status" },
+    { heading: "SKU", value: "sku" },
     { heading: "THUMBNAIL", value: "thumbnail" },
     { heading: "NAME", value: "title" },
     { heading: "Price", value: "price" },
@@ -66,7 +70,11 @@ export const Products = () => {
     <AdminLayout title="Products">
       <div className="w-100 mt-2 p-3  rounded  shadow ">
         <div className=" d-flex justify-content-between flex-wrap">
-          <h3 className="font-monospace">List of Products </h3>
+          <span>
+            {" "}
+            <h3 className="font-monospace">List of Products </h3>
+            <p className="text-secondary">{product?.length} products found</p>
+          </span>
           <Link to="/new-product">
             <Button variant="primary">Add Products</Button>
           </Link>

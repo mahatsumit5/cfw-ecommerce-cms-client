@@ -78,10 +78,7 @@ svg {
 .admin-layout .main {
   margin-left: 230px;
   width: calc(100vw - 230px);
-}
-
-.page-content {
-  min-height: 83vh;
+  min-height: 90vh;
 }
 
 .side-nav li {
@@ -126,12 +123,12 @@ svg {
   backdrop-filter: blur(10px);
 }
 .footer {
-  background-color: #efede74e !important;
+  background-color: #c0beb8b5 !important;
   height: 10vh;
-  position: fixed;
+
   width: 100vw;
-  bottom: 0;
-  backdrop-filter: blur(10px);
+
+  backdrop-filter: blur(20px);
 }
 .sign {
   font-size: medium;

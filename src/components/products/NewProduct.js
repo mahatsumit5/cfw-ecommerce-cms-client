@@ -91,7 +91,7 @@ export const NewProduct = () => {
     //append all the form data and the image together
 
     const isPosted = await dispatch(postProductAction(formDt));
-    // isPosted && navigate("/products");
+    isPosted && navigate("/products");
   };
   const handleOnImageAttach = (e) => {
     const { files } = e.target;

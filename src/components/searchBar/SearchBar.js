@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { setDisplayTable } from "../../redux/displaySlice";
 import { useLocation } from "react-router-dom";
+import { Form } from "react-bootstrap";
 
 export const SearchBar = () => {
   const { pathname } = useLocation();
@@ -21,21 +20,25 @@ export const SearchBar = () => {
       return product;
     }
   };
+  // if (pathname === "/products") {
+  //   return product;
+  // }
+
   const data = dataForSearchBar();
   const dispatch = useDispatch();
   const handleOnChange = (e) => {
     const { value } = e.target;
     const filteredItems = data?.filter((item) => {
-      return item.title.toLowerCase().includes(value?.toLowerCase());
+      return item && item?.title?.toLowerCase().includes(value?.toLowerCase());
     });
-    dispatch(setDisplayTable(filteredItems));
+    filteredItems && dispatch(setDisplayTable(filteredItems));
   };
   return (
     <div>
       <Form.Control
         size="md"
         type="text"
-        placeholder="Search"
+        placeholder="Search your title"
         onChange={handleOnChange}
       />
     </div>

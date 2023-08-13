@@ -31,7 +31,10 @@ export const deleteProductAction = (_id) => async (dispatch) => {
   dispatch(getproductAction());
 };
 export const updateProductAction = (obj) => async (dispatch) => {
-  const { status, message } = await updateProduct(obj);
+  const pendingResp = updateProduct(obj);
+  toast.promise(pendingResp, { pending: "Please wait" });
+
+  const { status, message } = await pendingResp;
   dispatch(getproductAction());
   if (status === "success") return true;
 };

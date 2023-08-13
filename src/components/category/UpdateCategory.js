@@ -13,13 +13,16 @@ export const UpdateCatagoryForm = ({ _id }) => {
   const dispatch = useDispatch();
   const [form, setForm] = useState(initialState);
   const getCat = async () => {
-    const { result } = await dispatch(getCategories(_id));
+    const { result } = await dispatch(getCategories({ _id }));
     console.log(result);
     result?._id && setForm(result);
   };
   useEffect(() => {
-    getCat();
-  }, [dispatch, _id]);
+    console.log("first");
+    async () => {
+      await getCat();
+    };
+  }, [_id]);
 
   const handleOnUpdate = (e) => {
     e.preventDefault();

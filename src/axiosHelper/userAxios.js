@@ -112,3 +112,21 @@ export const logoutUser = (_id) => {
   };
   return axiosProcessor(obj);
 };
+
+export const reqOTP = (email) => {
+  const obj = {
+    method: "post",
+    url: adminApi + "/request-otp",
+    obj: { email },
+  };
+  return axiosProcessor(obj);
+};
+export const changePassword = (formObj) => {
+  console.log(formObj);
+  const obj = {
+    method: "post",
+    url: adminApi + "/change-password",
+    obj: formObj,
+  };
+  return axiosProcessor(obj);
+};

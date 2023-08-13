@@ -1,41 +1,37 @@
 import React from "react";
-import { Button, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import "./Reset.css";
-import { AdminLayout } from "../../components/layout/AdminLayout";
+import { RequestOTP } from "../../components/admin-signup/RequestOTP";
+import { ResetPass } from "../../components/admin-signup/ResetPassword";
+import { changePassword, reqOTP } from "../../axiosHelper/userAxios";
+import { toast } from "react-toastify";
 export const ResetPassPage = () => {
+  const [email, setEmail] = useState("");
+  const [formToShow, setFormToShow] = useState("otp");
+  const handleOnOTPRequest = async (email) => {
+    setEmail(email);
+    const pendingResp = reqOTP(email);
+    toast.promise(pendingResp, { Pending: "Please Wait" });
+    const { status, message } = await pendingResp;
+    if (status === "success") {
+      setFormToShow("reset");
+    }
+  };
+  const handleOnResetPassword = async (obj) => {
+    const pending = changePassword(obj);
+    toast.promise(pending, { Pending: "Please Wait" });
+    const { status, message } = await pending;
+    toast[status](message);
+  };
+  const forms = {
+    otp: <RequestOTP handleOnOTPRequest={handleOnOTPRequest} />,
+    reset: (
+      <ResetPass email={email} handleOnResetPassword={handleOnResetPassword} />
+    ),
+  };
   return (
     <div className=" signin  ">
-      <main className="main">
-        <div className="form-container">
-          <div className="logo-container">Forgot Password</div>
-
-          <Form className="form">
-            <div className="form-group">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="text"
-                id="email"
-                name="email"
-                placeholder="Enter your email"
-                required
-              />
-            </div>
-
-            <Button variant="dark" className="form-submit-btn" type="submit">
-              Send Email
-            </Button>
-          </Form>
-
-          <p className="signup-link">
-            Don't have an account?
-            <Link to="/new-admin" className="signup-link link">
-              {" "}
-              Sign up now
-            </Link>
-          </p>
-        </div>
-      </main>
+      <main className="main p-5">{forms[formToShow]}</main>
     </div>
   );
 };
