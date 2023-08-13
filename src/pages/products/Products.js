@@ -58,11 +58,11 @@ export const Products = () => {
     );
   };
   const column = [
-    { heading: "STATUS", value: "status" },
-    { heading: "SKU", value: "sku" },
-    { heading: "THUMBNAIL", value: "thumbnail" },
     { heading: "NAME", value: "title" },
-    { heading: "Price", value: "price" },
+    { heading: "STATUS", value: "status" },
+    { heading: "CODE", value: "sku" },
+    { heading: "THUMBNAIL", value: "thumbnail" },
+    { heading: " $ PRICE", value: "price" },
     { heading: "STOCK", value: "qty" },
   ];
 

@@ -14,7 +14,7 @@ export const AdminLayout = ({ children }) => {
       <div className="admin-layout">
         <SideBar />
 
-        <main className="main">
+        <main className="main px-5">
           <div className="page-content p-2"> {children}</div>
         </main>
       </div>

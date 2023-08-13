@@ -94,11 +94,13 @@ export const SideBar = () => {
 
   return (
     <>
-      <Offcanvas show={canvasShow} onHide={handleClose} className="d-lg-none">
+      <Offcanvas show={canvasShow} onHide={handleClose} className="">
         <Offcanvas.Header closeButton className="border p-3 shadow">
           <Offcanvas.Title>
             <Link to="/profile" className="nav-link">
-              <CgProfile /> {user?.fName}
+              <Button onClick={handleClose} variant="">
+                <CgProfile /> {user?.fName?.toUpperCase()}
+              </Button>
             </Link>
           </Offcanvas.Title>
         </Offcanvas.Header>
@@ -109,6 +111,7 @@ export const SideBar = () => {
                 <li className="mt-2 sidebar-link " key={i}>
                   <Link to={`/` + btn.link} className="nav-link">
                     <Button
+                      className="fw-bolder fs-5"
                       variant=""
                       onClick={handleClose}
                       value={btn.name}
@@ -131,7 +134,7 @@ export const SideBar = () => {
           </Row>
         </Offcanvas.Body>
       </Offcanvas>
-      <div className="p-3  side-bar d-none d-lg-block ">
+      {/* <div className="p-3  side-bar d-none d-lg-block ">
         <nav>
           <ul className="list-unstyled side-nav">
             {buttons.map((btn, i) => (
@@ -162,7 +165,7 @@ export const SideBar = () => {
             </Button>
           </Link>
         </Row>
-      </div>
+      </div> */}
     </>
   );
 };

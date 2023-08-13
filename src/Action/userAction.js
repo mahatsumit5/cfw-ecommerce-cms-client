@@ -3,6 +3,7 @@ import {
   getNewAccessJWT,
   loginUser,
   postNewAdmin,
+  updateUser,
   verifyAccount,
 } from "../axiosHelper/userAxios";
 import { toast } from "react-toastify";
@@ -13,6 +14,13 @@ export const createUserAction = (userObj) => async (dispatch) => {
   toast.promise(pendingResp, { Pending: "Please Wait" });
   const { status, message } = await pendingResp;
   toast[status](message);
+};
+export const updateUserAction = (userObj) => async (dispatch) => {
+  const pendingResp = updateUser(userObj);
+  toast.promise(pendingResp, { Pending: "Please Wait" });
+  const { status, message } = await pendingResp;
+  toast[status](message);
+  dispatch(getAdminProfileAction());
 };
 export const loginUserAction = (userData) => async (dispatch) => {
   const pendingResp = loginUser(userData);

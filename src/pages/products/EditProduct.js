@@ -13,6 +13,7 @@ export const EditProducts = () => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({});
   const [img, setImg] = useState([]);
+  const [selectedImg, setSelectedImg] = useState([]);
   useEffect(() => {
     getSelectedproduct();
   }, []);
@@ -93,6 +94,9 @@ export const EditProducts = () => {
   ];
   const handleOnChange = (e) => {
     let { checked, name, value } = e.target;
+    if (name === "thumbnail" && selectedImg.includes(value)) {
+      return alert("Deleting image can't be set as thumbnail");
+    }
     if (name === "status") {
       value = checked ? "active" : "inactive";
     }
@@ -101,7 +105,6 @@ export const EditProducts = () => {
   const handleOnImageAttach = (e) => {
     const { files } = e.target;
     setImg(files);
-    console.log(files);
   };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -110,7 +113,11 @@ export const EditProducts = () => {
     }
 
     const formDt = new FormData();
+    //remove sku,skug,--v,creatdAt,updatedAt
+
     const { sku, slug, __v, createdAt, updatedAt, ...rest } = form;
+    // remove all the images in the which matches url in selectedImages
+    rest.images = rest.images.filter((url) => !selectedImg.includes(url));
     for (let key in rest) {
       formDt.append(key, rest[key]);
     }
@@ -120,12 +127,22 @@ export const EditProducts = () => {
         formDt.append("images", image);
       });
     }
-    //remove sku,skug,--v,creatdAt,updatedAt
 
     //append all the form data and the image together
     const isPosted = await dispatch(updateProductAction(formDt));
     console.log(formDt);
     isPosted && getSelectedproduct();
+  };
+  const handleOnSelect = (e) => {
+    const { value, checked } = e.target;
+    if (value === form.thumbnail) {
+      return alert(
+        "You can't delete the thumbnail, choose another thumbnail first"
+      );
+    }
+    checked
+      ? setSelectedImg([...selectedImg, value])
+      : setSelectedImg(selectedImg.filter((url) => url !== value));
   };
 
   return (
@@ -159,15 +176,34 @@ export const EditProducts = () => {
           {inputs.map((item, index) => (
             <CustomeInput key={index} {...item} onChange={handleOnChange} />
           ))}
-          <div className="py-5 ">
+          <div className="py-5 d-flex flex-wrap ">
             {form.images?.map((url) => (
-              <img
-                className="img-thumbnail"
-                key={url}
-                src={process.env.REACT_APP_ROOTSERVER + url?.slice(6)}
-                alt=""
-                width="150px"
-              />
+              <>
+                <div>
+                  <Form.Check
+                    value={url}
+                    type="checkbox"
+                    checked={selectedImg.includes(url)}
+                    onChange={handleOnSelect}
+                  />
+                  <Form.Check.Label>
+                    <img
+                      className="img-thumbnail"
+                      key={url}
+                      src={process.env.REACT_APP_ROOTSERVER + url?.slice(6)}
+                      alt=""
+                      width="150px"
+                    />
+                  </Form.Check.Label>
+                  <Form.Check
+                    name="thumbnail"
+                    value={url}
+                    type="radio"
+                    checked={url === form.thumbnail}
+                    onChange={handleOnChange}
+                  />
+                </div>
+              </>
             ))}
           </div>
           <Form.Group className="mb-3">
@@ -183,6 +219,13 @@ export const EditProducts = () => {
               Submit
             </Button>
           </div>
+          {selectedImg.length && (
+            <div className="d-grid newProduct mt-5">
+              <Button variant="danger" type="submit">
+                Delete
+              </Button>
+            </div>
+          )}
         </Form>
       </div>
     </AdminLayout>

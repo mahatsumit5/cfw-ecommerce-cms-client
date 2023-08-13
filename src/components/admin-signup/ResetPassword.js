@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-export const ResetPass = ({ email, handleOnResetPassword }) => {
+export const ResetPass = ({ email, handleOnResetPassword, setFormToShow }) => {
   const initialState = {
     email: "",
     password: "",
@@ -10,9 +10,19 @@ export const ResetPass = ({ email, handleOnResetPassword }) => {
   const [error, setError] = useState("");
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    if (name === "password") {
-      !/[0-9]/.test(value) && setError("one number is required");
+    setError("");
+    if (name === "confirmPassword") {
+      value !== form.password
+        ? setError("Password do not  match")
+        : setError("");
     }
+    if (name === "password") {
+      value.length < 8 && setError("Password must be at least 8 characters.");
+      !/[0-9]/.test(value) && setError("one number is required");
+      !/[A-Z]/.test(value) && setError("At least one Uppercase is required");
+      !/[a-z]/.test(value) && setError("At least one Lowercase is required");
+    }
+
     setform({
       ...form,
       [name]: value,
@@ -65,11 +75,22 @@ export const ResetPass = ({ email, handleOnResetPassword }) => {
             />
           </div>
 
-          <Button variant="dark" className="form-submit-btn" type="submit">
+          <Button
+            variant="dark"
+            className="form-submit-btn"
+            type="submit"
+            disabled={error}
+          >
             Change
           </Button>
-          <p>{error}</p>
+          <p className="text-danger">{error}</p>
         </Form>
+        <div className="text-end py-3">
+          Didn't receive OTP?
+          <a onClick={() => setFormToShow("otp")} href="#!">
+            Request again.
+          </a>
+        </div>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@
   width: 100%;
 }
 .admin-layout > .main {
-  background: rgb(204, 221, 235);
+  /* background: rgb(204, 221, 235); */
 }
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensedwght@700&display=swap");
 --root-var {
@@ -66,7 +66,7 @@ svg {
 .offcanvas {
   width: 230px !important;
 }
-.admin-layout .side-bar {
+/* .admin-layout .side-bar {
   width: 230px;
   position: fixed;
   left: 0;
@@ -74,10 +74,9 @@ svg {
   display: flex !important;
   flex-direction: column;
   justify-content: space-between;
-}
+} */
 .admin-layout .main {
-  margin-left: 230px;
-  width: calc(100vw - 230px);
+  /* margin-left: 230px; */
   min-height: 90vh;
 }
 
@@ -165,7 +164,10 @@ svg {
 .nav-link > svg {
   font-size: 2rem;
 }
-
+.profile {
+  height: 100%;
+  width: 100%;
+}
 @media (max-width: 991px) {
   .admin-layout .main {
     margin-left: 0 !important;

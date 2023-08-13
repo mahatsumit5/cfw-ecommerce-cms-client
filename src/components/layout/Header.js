@@ -13,37 +13,31 @@ export const Header = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userInfo);
   return (
-    <Row className="header shadow m-auto ">
-      <Navbar variant="" className="w-100">
-        <Link top="/" className="navbar-brand">
-          <Button
-            variant=""
-            onClick={() => dispatch(setCanvasShow(true))}
-            className="me-2 d-lg-none "
-          >
-            <FiMenu />
-          </Button>
+    <Navbar className="px-5  gap-5 d-flex header shadow justify-content-between w-100 ">
+      <div className="d-flex  ">
+        <Button
+          variant=""
+          onClick={() => dispatch(setCanvasShow(true))}
+          className="me-2  "
+        >
+          <FiMenu />
+        </Button>
+        <Link to="/" className="navbar-brand">
+          <h2> CFW</h2>
         </Link>
-        <h2> CFW</h2>
-        <Row className="w-100 flex-row   mx-auto">
-          <Row className="search  w-50 m-auto ">
-            <SearchBar />
-          </Row>
-          {user?._id && (
-            <div
-              className="mx-auto mt-3 d-flex flex-row gap-3"
-              style={{ width: "60px" }}
-            >
-              <Link to="/profile" className="nav-link">
-                <CgProfile className="text-2xl" />
-              </Link>
-              <Link to="/" className="nav-link">
-                <BiSolidLogIn />
-              </Link>
-            </div>
-          )}
-        </Row>
-      </Navbar>
-    </Row>
+      </div>
+
+      <div className=" flex-fill ms-5   rounded">
+        <SearchBar />
+      </div>
+
+      {user?._id && (
+        <div className="d-flex gap-2  p-2  rounded 	d-none d-xxl-block bg-dark text-light">
+          <Link to="/profile" className=" d-flex nav-link gap-2">
+            <CgProfile className="text-2xl" /> <h4>Profile</h4>
+          </Link>
+        </div>
+      )}
+    </Navbar>
   );
 };
