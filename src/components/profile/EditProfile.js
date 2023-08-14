@@ -84,6 +84,9 @@ export const EditProfile = () => {
     }
     dispatch(updateUserAction(formDt));
   };
+  const handleOndelete = (_id) => {
+    dispatch(updateUserAction({ value: _id }));
+  };
 
   return (
     <div className="mt-5  d-flex justify-content-center  ">
@@ -108,9 +111,20 @@ export const EditProfile = () => {
             )}
           </div>
           <div className="gap-2 ">
-            <Button className="mx-2">Upload New</Button>
-            <Button className="mx-2" variant="secondary">
-              {" "}
+            <CustomeInput
+              label="Select New  Profile"
+              name="profile"
+              type="file"
+              className="label"
+              onChange={handleOnselectImg}
+            />
+            <Button
+              className="mx-2"
+              variant="secondary"
+              onClick={() => {
+                handleOndelete(user._id);
+              }}
+            >
               Delete Avatar
             </Button>
           </div>
@@ -137,15 +151,7 @@ export const EditProfile = () => {
               onChange={handleOnChange}
             />
           </div>
-          <div className="   gap-4 mt-2">
-            <CustomeInput
-              label="Select New  Profile"
-              name="profile"
-              type="file"
-              className="label"
-              onChange={handleOnselectImg}
-            />
-          </div>
+
           <div>
             <Button type="submit">Save Changes</Button>
           </div>
