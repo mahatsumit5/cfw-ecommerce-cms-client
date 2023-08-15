@@ -10,6 +10,7 @@ import {
   updateProductAction,
 } from "../../Action/productAction";
 import { setDisplayTable } from "../../redux/displaySlice";
+import { getCataloguesAction } from "../../Action/catelogueAction";
 
 export const Products = () => {
   let btnName = "";
@@ -23,6 +24,7 @@ export const Products = () => {
   const { catalogue } = useSelector((store) => store.catagoryInfo);
 
   useEffect(() => {
+    dispatch(getCataloguesAction());
     dispatch(setDisplayTable(product));
     !product.length && dispatch(getproductAction());
   }, [dispatch, product]);
