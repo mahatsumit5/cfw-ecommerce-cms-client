@@ -13,12 +13,12 @@ export const CustomeTable = ({
   return (
     <>
       <Table striped responsive="lg" className="w-100" variant="light">
-        <thead className="light-text" key={column}>
+        <thead className="" key={column}>
           <tr>
             {column.map((item, index) => (
               <TableHeadItem item={item} index={index} key={index} />
             ))}
-            <th>ACTION</th>
+            <th className="text-secondary">ACTION</th>
           </tr>
         </thead>
         <tbody className="mt-2">
@@ -38,7 +38,11 @@ export const CustomeTable = ({
     </>
   );
 };
-const TableHeadItem = ({ item, index }) => <th key={index}>{item.heading}</th>;
+const TableHeadItem = ({ item, index }) => (
+  <th className="text-secondary" key={index}>
+    {item.heading}
+  </th>
+);
 const TableRow = ({
   i,
   item,

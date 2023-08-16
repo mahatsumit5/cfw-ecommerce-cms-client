@@ -38,7 +38,7 @@ export const SearchBar = () => {
       <Form.Control
         size="lg"
         type="text"
-        placeholder="Search your title"
+        placeholder="Search...."
         onChange={handleOnChange}
       />
     </div>

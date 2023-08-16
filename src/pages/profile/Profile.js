@@ -16,7 +16,7 @@ export const Profile = () => {
   };
   return (
     <AdminLayout title="Profile">
-      <Container fluid className=" p-2" style={{ minHeight: "100vh" }}>
+      <Container className=" p-2" style={{ minHeight: "100vh" }}>
         <div className="">
           <div
             className="bg-primary d-flex gap-3 p-5 justify-content-between "
