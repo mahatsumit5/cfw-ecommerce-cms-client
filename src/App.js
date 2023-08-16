@@ -23,6 +23,7 @@ import { getPaymentsAction } from "./Action/paymentAction";
 import { NewProduct } from "./components/products/NewProduct";
 import { getproductAction } from "./Action/productAction";
 import { EditProducts } from "./pages/products/EditProduct";
+import { EditProfile } from "./components/profile/EditProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ function App() {
             </PrivateRoute>
           }
         />
+
         <Route
           path="products"
           element={

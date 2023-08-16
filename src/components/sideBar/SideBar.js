@@ -111,7 +111,7 @@ export const SideBar = () => {
                 <li className="mt-2 sidebar-link " key={i}>
                   <Link to={`/` + btn.link} className="nav-link">
                     <Button
-                      className="fw-bolder fs-5"
+                      className="fw-normal fs-6"
                       variant=""
                       onClick={handleClose}
                       value={btn.name}

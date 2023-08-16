@@ -4,6 +4,7 @@ import { CustomeInput } from "../customeInput/CustomeInput";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineCheck } from "react-icons/ai";
 import { updateUserAction } from "../../Action/userAction";
+import { ProfileLayout } from "./ProfileLayout";
 
 export const EditProfile = () => {
   const dispatch = useDispatch();
@@ -89,8 +90,8 @@ export const EditProfile = () => {
   };
 
   return (
-    <div className="mt-5  d-flex justify-content-center  ">
-      <Container className="w-75 rounded p-4 shadow">
+    <div className=" d-flex justify-content-center w-100 ">
+      <Container className="w-100 ">
         <div className="d-flex gap-5 flex-wrap">
           <div
             className="bg-secondary image-box rounded"
