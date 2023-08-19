@@ -5,8 +5,12 @@
   min-height: 30vh;
   width: 100%;
 }
+.admin-layout {
+  display: flex;
+  overflow: hidden;
+}
 .admin-layout > .main {
-  /* background: rgb(204, 221, 235); */
+  background: rgb(204, 221, 235);
 }
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensedwght@700&display=swap");
 --root-var {
@@ -66,17 +70,15 @@ svg {
 .offcanvas {
   width: 230px !important;
 }
-/* .admin-layout .side-bar {
-  width: 230px;
-  position: fixed;
-  left: 0;
-  height: calc(100vh - 200px);
+.admin-layout .side-bar {
+  background-color: #ebe9f1;
+  height: calc(100vh - 90px);
+  backdrop-filter: blur(10px);
+}
+.sidebar-button {
   display: flex !important;
-  flex-direction: column;
-  justify-content: space-between;
-} */
+}
 .admin-layout .main {
-  /* margin-left: 230px; */
   min-height: 90vh;
 }
 
@@ -114,15 +116,15 @@ svg {
   margin-right: 5px;
 }
 /* header */
-.header {
-  background-color: #ecf0f03d !important;
-  position: sticky;
+.navbar {
+  background-color: #ffffff;
+  position: sticky !important;
   top: 0;
   height: 10vh;
   backdrop-filter: blur(10px);
 }
 .footer {
-  background-color: #c0beb8b5 !important;
+  background-color: #e1eeed;
   height: 10vh;
 
   width: 100vw;
@@ -147,6 +149,7 @@ svg {
 .sidebar-link {
   border: solid rgba(246, 229, 229, 0);
   transition: border-bottom 2s;
+  flex-direction: row;
 }
 .sidebar-link:hover {
   border-bottom: #6d7275 solid;
@@ -171,13 +174,3 @@ svg {
 /* .page-content {
   overflow-y: scroll;
 } */
-@media (max-width: 991px) {
-  .admin-layout .main {
-    margin-left: 0 !important;
-    width: 100vw;
-  }
-
-  .admin-layout .side-bar {
-    display: none !important;
-  }
-}

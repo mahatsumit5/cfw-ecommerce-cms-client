@@ -1,48 +1,56 @@
-import React from "react";
-import Container from "react-bootstrap/Container";
+import React, { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Row } from "react-bootstrap";
 import { FiMenu } from "react-icons/fi";
-import { CgProfile } from "react-icons/cg";
-import { BiSolidLogIn } from "react-icons/bi";
 import { setCanvasShow } from "../../systemSlice";
 import { SearchBar } from "../searchBar/SearchBar";
 import PersonIcon from "@mui/icons-material/Person";
 import NotificationImportantIcon from "@mui/icons-material/NotificationImportant";
 import LocalPostOfficeIcon from "@mui/icons-material/LocalPostOffice";
-import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-
+import { logoutUser } from "../../axiosHelper/userAxios";
+import { setUser } from "../../redux/userSlice";
 export const Header = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [navBar, setNavBar] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const { canvasShow } = useSelector((state) => state.system);
+  const navigate = useNavigate();
   const open = Boolean(anchorEl);
+  const dispatch = useDispatch();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const dispatch = useDispatch();
+  const handleOnSignOut = () => {
+    logoutUser(user._id);
+    //clear storages
+    localStorage.removeItem("refreshJWT");
+    sessionStorage.removeItem("accessJWT");
+    console.log("inside handle of click");
+    dispatch(setUser({}));
+    navigate("/");
+  };
   const { user } = useSelector((state) => state.userInfo);
   return (
-    <Navbar className="px-5 d-flex header shadow justify-content-between w-100 ">
+    <Navbar className="px-4 d-flex header shadow justify-content-between w-100 ">
       <div className="d-flex  ">
         <Button
           variant=""
-          onClick={() => dispatch(setCanvasShow(true))}
-          className="me-2  "
+          onClick={() => dispatch(setCanvasShow(!canvasShow))}
+          className=""
         >
           <FiMenu />
         </Button>
@@ -134,7 +142,7 @@ export const Header = () => {
                 </ListItemIcon>
                 Settings
               </MenuItem>
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={(handleClose, handleOnSignOut)}>
                 <ListItemIcon>
                   <Logout fontSize="small" />
                 </ListItemIcon>

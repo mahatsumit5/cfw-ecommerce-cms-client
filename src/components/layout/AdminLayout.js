@@ -11,10 +11,10 @@ export const AdminLayout = ({ children }) => {
     <>
       <Header />
 
-      <div className="admin-layout">
+      <div className="admin-layout d-flex">
         <SideBar />
 
-        <main className="main px-5">
+        <main className="main flex-grow-1  px-5">
           <div className="page-content p-2"> {children}</div>
         </main>
       </div>
