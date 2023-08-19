@@ -6,8 +6,8 @@
   width: 100%;
 }
 .admin-layout {
-  display: flex;
-  overflow: hidden;
+  min-height: calc(100vh - 25vh);
+  padding-left: 40px;
 }
 .admin-layout > .main {
   background: rgb(204, 221, 235);
@@ -70,13 +70,22 @@ svg {
 .offcanvas {
   width: 230px !important;
 }
-.admin-layout .side-bar {
-  background-color: #ebe9f1;
+.side-bar {
+  position: fixed;
+  left: 0;
+  z-index: 10;
+  background-color: #5b6dd7;
+  color: white;
   height: calc(100vh - 90px);
   backdrop-filter: blur(10px);
+  height: 100vh;
 }
-.sidebar-button {
-  display: flex !important;
+li > a > .hoverButton {
+  display: none;
+}
+
+li:hover > a > .hoverButton {
+  display: block;
 }
 .admin-layout .main {
   min-height: 90vh;
@@ -101,6 +110,10 @@ svg {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.hoverButton {
+  border: #12025b;
+}
+
 .fnb {
   font-size: 20px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
@@ -120,7 +133,7 @@ svg {
   background-color: #ffffff;
   position: sticky !important;
   top: 0;
-  height: 10vh;
+  height: 7vh;
   backdrop-filter: blur(10px);
 }
 .footer {

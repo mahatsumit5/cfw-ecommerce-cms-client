@@ -1,17 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
+import { FiMenu } from "react-icons/fi";
 
 import { FaUsers } from "react-icons/fa";
 import { BiSolidCategoryAlt } from "react-icons/bi";
-import { BsFillBox2Fill } from "react-icons/bs";
+import { BsFillBox2Fill, BsPersonFill, BsFillLockFill } from "react-icons/bs";
 import { LiaCreditCardSolid, LiaTruckSolid } from "react-icons/lia";
 import { FaMoneyBillAlt, FaUserSecret } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { setCanvasShow } from "../../systemSlice";
-import { setUser } from "../../redux/userSlice";
 import { Button, Row } from "react-bootstrap";
-import { logoutUser } from "../../axiosHelper/userAxios";
+import PersonIcon from "@mui/icons-material/Person";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { logoutUser } from "../../axiosHelper/userAxios";
 export const SideBar = () => {
   let btnName = "";
   const [button, setButton] = useState({
@@ -25,58 +26,59 @@ export const SideBar = () => {
   const buttons = [
     {
       name: "Dashboard",
-      icon: <BsFillBox2Fill color="#0000FF" />,
+      icon: <BsFillBox2Fill color="white" />,
       link: "dashboard",
     },
     {
       name: "Products",
-      icon: <BsFillBox2Fill color="#0000FF" />,
+      icon: <BsFillBox2Fill color="white" />,
       link: "products",
     },
     {
       name: "Customers",
-      icon: <FaUsers color="#0000FF" />,
+      icon: <FaUsers color="white" />,
       link: "customers",
     },
     {
       name: "Sales",
-      icon: <FaMoneyBillAlt color="#0000FF" />,
+      icon: <FaMoneyBillAlt color="white" />,
       link: "sales",
     },
 
     {
       name: "Catalogue",
-      icon: <BiSolidCategoryAlt color="#0000FF" />,
+      icon: <BiSolidCategoryAlt color="white" />,
       link: "catalogue",
     },
     {
       name: "Payment",
-      icon: <LiaCreditCardSolid color="#0000FF" />,
+      icon: <LiaCreditCardSolid color="white" />,
       link: "payment",
     },
     {
       name: "Orders",
-      icon: <LiaTruckSolid color="#0000FF" />,
+      icon: <LiaTruckSolid color="white" />,
       link: "orders",
     },
     {
       name: "Admin",
-      icon: <FaUserSecret color="#0000FF" />,
+      icon: <FaUserSecret color="white" />,
       link: "admin",
     },
+    {
+      name: "Profile",
+      icon: <BsPersonFill color="white" />,
+      link: "profile",
+    },
   ];
-  const handleClose = () => {
-    dispatch(setCanvasShow(false));
-  };
   const handleOnClick = (e) => {
     const { value } = e.target;
     setButton({
       btnName: value,
       isActive: true,
     });
-    handleClose();
+    dispatch(setCanvasShow(!canvasShow));
   };
-
   const handleOnSignOut = () => {
     logoutUser(user._id);
     //clear storages
@@ -130,45 +132,83 @@ export const SideBar = () => {
         </Offcanvas.Body>
       </Offcanvas> */}
       <motion.div
-        className="border side-bar "
+        className=" shadow  side-bar "
         animate={{
           width: canvasShow ? "230px" : "80px ",
-          transition: { duration: 0.5 },
+          transition: { duration: 0.4 },
         }}
       >
         <nav>
-          <ul className=" mt-3 list-unstyled side-nav">
+          <div className="px-3 mt-4 ">
+            <Button
+              variant=""
+              onClick={() => dispatch(setCanvasShow(!canvasShow))}
+            >
+              <FiMenu color="white" />
+            </Button>
+          </div>
+
+          <ul className=" mt-5 list-unstyled side-nav">
             {buttons.map((btn, i) => (
               <motion.li
-                whileHover={{ scale: 1.2 }}
+                whileHover={{ scale: 1.1 }}
                 onHoverStart={(e) => {}}
                 onHoverEnd={(e) => {}}
-                className=""
+                className=" d-flex"
                 key={i}
-                style={{ height: "70px" }}
+                style={{ height: "70px", position: "relative" }}
                 isActive={{}}
               >
-                <Link to={`/` + btn.link} className="nav-link ">
+                <Link
+                  to={`/` + btn.link}
+                  className=" nav-link  "
+                  style={{ width: "180px" }}
+                >
                   <Button
                     variant=""
-                    onDoubleClick={handleOnClick}
+                    onClick={handleOnClick}
                     value={btn.name}
                     active={
                       button.btnName === btn.name && button.isActive
                         ? true
                         : false
                     }
-                    className="sidebar-button"
+                    className="sidebar-button d-flex"
+                    style={{ border: "none" }}
                   >
                     {btn.icon}
-                    <p className="fs-6 fw-medium text-primary">
+                    <p className="fs-6 fw-medium text-light">
                       {canvasShow && btn.name}
                     </p>
                   </Button>
                 </Link>
+                {!canvasShow && (
+                  <Link to={`/` + btn.link} className=" nav-link  ">
+                    <Button
+                      variant=""
+                      style={{
+                        position: "absolute",
+                        left: "0px",
+                        background: " #5b6dd7",
+                        color: "white",
+                        border: "none",
+                      }}
+                      className="hoverButton fs-6 fw-medium "
+                    >
+                      {btn.name}
+                    </Button>
+                  </Link>
+                )}
               </motion.li>
             ))}
           </ul>
+          <Row className="logOut p-4 mt-5">
+            <Link to="/" className="nav-link" onClick={handleOnSignOut}>
+              <Button variant="" style={{ border: "none" }}>
+                <BsFillLockFill color="white" />
+              </Button>
+            </Link>
+          </Row>
         </nav>
       </motion.div>
     </>

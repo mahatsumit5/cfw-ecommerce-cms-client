@@ -3,22 +3,23 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { useSelector } from "react-redux";
 import { SideBar } from "../sideBar/SideBar";
+import { Row } from "react-bootstrap";
 
 export const AdminLayout = ({ children }) => {
   const { user } = useSelector((state) => state.userInfo);
 
   return (
-    <>
-      <Header />
-
-      <div className="admin-layout d-flex">
-        <SideBar />
-
-        <main className="main flex-grow-1  px-5">
-          <div className="page-content p-2"> {children}</div>
-        </main>
+    <div className="d-flex">
+      <SideBar />
+      <div className="">
+        <Header />
+        <div className="admin-layout d-flex  w-100">
+          <main className="main  px-5">
+            <div className="page-content p-2"> {children}</div>
+          </main>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </>
+    </div>
   );
 };

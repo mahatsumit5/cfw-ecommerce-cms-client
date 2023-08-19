@@ -45,15 +45,8 @@ export const Header = () => {
   };
   const { user } = useSelector((state) => state.userInfo);
   return (
-    <Navbar className="px-4 d-flex header shadow justify-content-between w-100 ">
-      <div className="d-flex  ">
-        <Button
-          variant=""
-          onClick={() => dispatch(setCanvasShow(!canvasShow))}
-          className=""
-        >
-          <FiMenu />
-        </Button>
+    <Navbar className="px-5 d-flex header shadow justify-content-between  ">
+      <div className="d-flex px-5 ">
         <Link to="/" className="navbar-brand">
           <h2> CFW</h2>
         </Link>
@@ -122,7 +115,7 @@ export const Header = () => {
               anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
               <MenuItem onClick={handleClose}>
-                <Link to="/profile" className="nav-link">
+                <Link to="/profile" className="nav-link d-flex">
                   <Avatar /> Profile
                 </Link>
               </MenuItem>
