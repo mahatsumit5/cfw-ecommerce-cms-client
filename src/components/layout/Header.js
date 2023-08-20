@@ -20,130 +20,55 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { logoutUser } from "../../axiosHelper/userAxios";
 import { setUser } from "../../redux/userSlice";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { DesktopMenu } from "../menu/DesktopMenu";
+import { MobileMenu } from "../menu/MobileMenu";
 export const Header = () => {
-  const [navBar, setNavBar] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const { canvasShow } = useSelector((state) => state.system);
-  const navigate = useNavigate();
   const open = Boolean(anchorEl);
-  const dispatch = useDispatch();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleOnSignOut = () => {
-    logoutUser(user._id);
-    //clear storages
-    localStorage.removeItem("refreshJWT");
-    sessionStorage.removeItem("accessJWT");
-    console.log("inside handle of click");
-    dispatch(setUser({}));
-    navigate("/");
-  };
+
   const { user } = useSelector((state) => state.userInfo);
   return (
-    <Navbar className="px-5 d-flex header shadow justify-content-between  ">
-      <div className="d-flex px-5 ">
+    <Navbar className="px-5 mt-2 d-flex header shadow justify-content-between  ">
+      <div className="d-flex w-100 flex-fill  px-5 ">
         <Link to="/" className="navbar-brand">
           <h2> CFW</h2>
         </Link>
-        <div className=" flex-fill ms-5   rounded">
+        <div className=" ms-5 w-50  ">
           <SearchBar />
         </div>
       </div>
 
       {user?._id && (
-        <div className="d-flex gap-3  p-2  rounded">
-          <Link to="" className=" d-flex nav-link gap-2">
-            <IconButton>
-              {" "}
-              <LocalPostOfficeIcon color="primary" />
-            </IconButton>
-          </Link>
-          <Link to="" className=" d-flex nav-link gap-2">
-            <IconButton>
-              <NotificationImportantIcon color="primary" />
-            </IconButton>
-          </Link>
-          <Link className=" d-flex nav-link gap-2">
+        <>
+          <div className="d-sm-none d-block">
             <IconButton
-              onClick={handleClick}
-              size="small"
-              sx={{ ml: 2 }}
-              aria-controls={open ? "account-menu" : undefined}
-              aria-haspopup="true"
+              aria-label="more"
+              id="long-button"
+              aria-controls={open ? "long-menu" : undefined}
               aria-expanded={open ? "true" : undefined}
+              aria-haspopup="true"
+              onClick={handleClick}
             >
-              <PersonIcon color="primary" />
+              <MoreVertIcon />
             </IconButton>
-            <Menu
+            <MobileMenu
               anchorEl={anchorEl}
-              id="account-menu"
+              handleClose={handleClose}
               open={open}
-              onClose={handleClose}
-              onClick={handleClose}
-              PaperProps={{
-                elevation: 0,
-                sx: {
-                  overflow: "visible",
-                  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                  mt: 1.5,
-                  "& .MuiAvatar-root": {
-                    width: 32,
-                    height: 32,
-                    ml: -0.5,
-                    mr: 1,
-                  },
-                  "&:before": {
-                    content: '""',
-                    display: "block",
-                    position: "absolute",
-                    top: 0,
-                    right: 14,
-                    width: 10,
-                    height: 10,
-                    bgcolor: "background.paper",
-                    transform: "translateY(-50%) rotate(45deg)",
-                    zIndex: 0,
-                  },
-                },
-              }}
-              transformOrigin={{ horizontal: "right", vertical: "top" }}
-              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-            >
-              <MenuItem onClick={handleClose}>
-                <Link to="/profile" className="nav-link d-flex">
-                  <Avatar /> Profile
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <Avatar /> My account
-              </MenuItem>
-              <Divider />
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <PersonAdd fontSize="small" />
-                </ListItemIcon>
-                Add another account
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <Settings fontSize="small" />
-                </ListItemIcon>
-                Settings
-              </MenuItem>
-              <MenuItem onClick={(handleClose, handleOnSignOut)}>
-                <ListItemIcon>
-                  <Logout fontSize="small" />
-                </ListItemIcon>
-                Logout
-              </MenuItem>
-            </Menu>{" "}
-          </Link>
-        </div>
+              handleClick={handleClick}
+            />
+          </div>
+          <div className=" d-none d-sm-flex gap-3  p-2  rounded">
+            <DesktopMenu />
+          </div>
+        </>
       )}
     </Navbar>
   );

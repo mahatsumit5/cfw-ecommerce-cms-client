@@ -76,9 +76,8 @@ svg {
   z-index: 10;
   background-color: #5b6dd7;
   color: white;
-  height: calc(100vh - 90px);
   backdrop-filter: blur(10px);
-  height: 100vh;
+  height: 98vh;
 }
 li > a > .hoverButton {
   display: none;
@@ -90,7 +89,9 @@ li:hover > a > .hoverButton {
 .admin-layout .main {
   min-height: 90vh;
 }
-
+.btn {
+  border: none;
+}
 .side-nav li {
   font-weight: 500;
   margin-left: 1rem;

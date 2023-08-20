@@ -134,7 +134,7 @@ export const SideBar = () => {
       <motion.div
         className=" shadow  side-bar "
         animate={{
-          width: canvasShow ? "230px" : "80px ",
+          width: canvasShow ? "180px" : "80px ",
           transition: { duration: 0.4 },
         }}
       >
@@ -143,6 +143,7 @@ export const SideBar = () => {
             <Button
               variant=""
               onClick={() => dispatch(setCanvasShow(!canvasShow))}
+              style={{ border: "none" }}
             >
               <FiMenu color="white" />
             </Button>
@@ -177,9 +178,13 @@ export const SideBar = () => {
                     style={{ border: "none" }}
                   >
                     {btn.icon}
-                    <p className="fs-6 fw-medium text-light">
+                    <motion.p
+                      className="fs-6 fw-medium text-light"
+                      initial={{ x: -10 }}
+                      animate={{ x: 0, transition: { duration: 0.4 } }}
+                    >
                       {canvasShow && btn.name}
-                    </p>
+                    </motion.p>
                   </Button>
                 </Link>
                 {!canvasShow && (
@@ -202,7 +207,7 @@ export const SideBar = () => {
               </motion.li>
             ))}
           </ul>
-          <Row className="logOut p-4 mt-5">
+          <Row className="logOut p-4 ">
             <Link to="/" className="nav-link" onClick={handleOnSignOut}>
               <Button variant="" style={{ border: "none" }}>
                 <BsFillLockFill color="white" />
