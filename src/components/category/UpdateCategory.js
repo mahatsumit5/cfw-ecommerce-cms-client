@@ -5,23 +5,18 @@ import { updateCatagoryAction } from "../../Action/catelogueAction";
 import { CustomModal } from "../customModal/customModal";
 import { setModalShow } from "../../systemSlice";
 import { getCategories } from "../../axiosHelper/categoryAxios";
-
+const initialState = {
+  title: "",
+};
 export const UpdateCatagoryForm = ({ _id }) => {
-  const initialState = {
-    tiltle: "",
-  };
   const dispatch = useDispatch();
   const [form, setForm] = useState(initialState);
   const getCat = async () => {
-    const { result } = await dispatch(getCategories({ _id }));
-    console.log(result);
+    const { result } = await getCategories(_id);
     result?._id && setForm(result);
   };
   useEffect(() => {
-    console.log("first");
-    async () => {
-      await getCat();
-    };
+    getCat();
   }, [_id]);
 
   const handleOnUpdate = (e) => {
