@@ -1,7 +1,7 @@
 import axios from "axios";
 const rootApi = process.env.REACT_APP_ROOTAPI;
 const adminApi = rootApi + "/admin";
-
+const clientApi = process.env.REACT_APP_CLIENT_API;
 const getAccessJWt = () => {
   return sessionStorage.getItem("accessJWT");
 };
@@ -66,6 +66,14 @@ export const getAllAdmins = () => {
   const obj = {
     method: "get",
     url: adminApi + "/get-admins",
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+export const getAllUsers = () => {
+  const obj = {
+    method: "get",
+    url: clientApi,
     isPrivate: true,
   };
   return axiosProcessor(obj);

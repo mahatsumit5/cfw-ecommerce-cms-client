@@ -11,8 +11,7 @@ export const EditProfile = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.userInfo);
   const object = {
-    _id: user._id,
-    email: user.email,
+    ID: user._id,
   };
   const [form, setForm] = useState({});
   const [img, setImg] = useState({});

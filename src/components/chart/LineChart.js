@@ -34,22 +34,25 @@ export const options = {
   },
 };
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Dataset 1",
-      data: [],
-      borderColor: "rgb(255, 99, 132)",
-      backgroundColor: `rgba(${Math.ceil(Math.random() * 255)}, ${Math.ceil(
-        Math.random() * 255
-      )}, ${Math.ceil(Math.random() * 255)}, 1)`,
-    },
-  ],
-};
-
-export const LineChart = () => {
+export const LineChart = ({ users }) => {
+  const labels = users?.map((user) => user.fName);
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "list of users",
+        data: users?.map((user) => {
+          const date = new Date(user.createdAt);
+          const month = date.toLocaleString("default", { month: "2-digit" });
+          console.log(month);
+          return month;
+        }),
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: `rgba(${Math.ceil(Math.random() * 255)}, ${Math.ceil(
+          Math.random() * 255
+        )}, ${Math.ceil(Math.random() * 255)}, 1)`,
+      },
+    ],
+  };
   return <Line options={options} data={data} />;
 };
