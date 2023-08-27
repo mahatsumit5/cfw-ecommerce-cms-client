@@ -64,7 +64,7 @@ export const Products = () => {
     { heading: "STATUS", value: "status" },
     { heading: "CODE", value: "sku" },
     { heading: "THUMBNAIL", value: "thumbnail" },
-    { heading: " $ PRICE", value: "price" },
+    { heading: "$PRICE", value: "price" },
     { heading: "STOCK", value: "qty" },
   ];
 
@@ -110,8 +110,8 @@ export const Products = () => {
             All Products
           </Button>
         </div>
-
-        {/* <div className="mt-2 text-body-secondary d-flex gap-5 justify-content-between">
+        {/* 
+        <div className="mt-2 text-body-secondary d-flex gap-5 justify-content-between">
           <div>
             <Form.Control placeholder="Search a product" />
           </div>

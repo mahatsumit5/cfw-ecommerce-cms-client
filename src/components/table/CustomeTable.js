@@ -18,7 +18,9 @@ export const CustomeTable = ({
             {column.map((item, index) => (
               <TableHeadItem item={item} index={index} key={index} />
             ))}
-            <th className="text-secondary">ACTION</th>
+            {(handleOnEdit || handleOnDelete) && (
+              <th className="text-secondary">ACTION</th>
+            )}
           </tr>
         </thead>
         <tbody className="mt-2">
@@ -86,15 +88,19 @@ const TableRow = ({
         </>
       );
     })}
-    <td className="d-flex gap-1 w-100" style={{ height: "100%" }}>
-      <Button variant="danger" onClick={() => handleOndelete(item._id)}>
-        <AiFillDelete />
-      </Button>
-      {handleOnEdit && (
-        <Button variant="primary" onClick={() => handleOnEdit(item._id)}>
-          <AiFillEdit />
-        </Button>
-      )}
-    </td>
+    {(handleOnEdit || handleOndelete) && (
+      <td className="d-flex gap-1 w-100" style={{ height: "100%" }}>
+        {handleOndelete && (
+          <Button variant="danger" onClick={() => handleOndelete(item._id)}>
+            <AiFillDelete />
+          </Button>
+        )}
+        {handleOnEdit && (
+          <Button variant="primary" onClick={() => handleOnEdit(item._id)}>
+            <AiFillEdit />
+          </Button>
+        )}
+      </td>
+    )}
   </tr>
 );

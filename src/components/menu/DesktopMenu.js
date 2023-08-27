@@ -14,11 +14,11 @@ import Logout from "@mui/icons-material/Logout";
 import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../../axiosHelper/userAxios";
 import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../redux/userSlice";
 export const DesktopMenu = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.userInfo);
-
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClose = () => {
@@ -29,10 +29,8 @@ export const DesktopMenu = () => {
   };
   const handleOnSignOut = () => {
     logoutUser(user._id);
-    //clear storages
     localStorage.removeItem("refreshJWT");
     sessionStorage.removeItem("accessJWT");
-    console.log("inside handle of click");
     dispatch(setUser({}));
     navigate("/");
   };
@@ -78,15 +76,14 @@ export const DesktopMenu = () => {
           <Avatar /> Profile
         </Link>
       </MenuItem>
+
       <MenuItem onClick={handleClose}>
-        <Avatar /> My account
-      </MenuItem>
-      <Divider />
-      <MenuItem onClick={handleClose}>
-        <ListItemIcon>
-          <PersonAdd fontSize="small" />
-        </ListItemIcon>
-        Add another account
+        <Link className="nav-link d-flex" to="/new-admin">
+          <ListItemIcon>
+            <PersonAdd fontSize="small" />
+          </ListItemIcon>
+          Add another account
+        </Link>
       </MenuItem>
       <MenuItem onClick={handleClose}>
         <ListItemIcon>

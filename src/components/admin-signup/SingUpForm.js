@@ -97,7 +97,7 @@ export const SingUpForm = () => {
           <div className="border rounded  p-1 ">
             <Button variant="" className="fnb">
               <FcGoogle className="icon" />
-              Sing up with Google
+              Sign up with Google
             </Button>
           </div>
         </div>
@@ -136,7 +136,6 @@ export const SingUpForm = () => {
       <div className="mt-5 d-flex gap-2">
         <p>Already have an account?</p>
         <Link to="/" className="nav-link link">
-          {" "}
           Sign in
         </Link>
       </div>

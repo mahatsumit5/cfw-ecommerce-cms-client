@@ -68,7 +68,7 @@ export const MobileMenu = ({ anchorEl, open, handleClose, handleClick }) => {
               aria-expanded={open ? "true" : undefined}
             >
               <PersonIcon color="primary" />
-            </IconButton>{" "}
+            </IconButton>
             <p>Profile</p>
           </Link>
         </MenuItem>

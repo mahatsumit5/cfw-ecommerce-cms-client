@@ -16,7 +16,7 @@ export const Profile = () => {
   };
   return (
     <AdminLayout title="Profile">
-      <Container className=" p-2" style={{}}>
+      <Container className="p-1" style={{}}>
         <div className="">
           <div
             className="bg-primary d-flex gap-3 p-5 justify-content-between "
@@ -67,7 +67,7 @@ export const Profile = () => {
             </li>
           </ul>
         </div>
-        <div className="  justify-content-start gap-5 m-auto p-5">
+        <div className="  justify-content-start gap-5 m-auto ">
           <ProfileLayout>{components[display]}</ProfileLayout>
         </div>
       </Container>

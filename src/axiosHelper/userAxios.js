@@ -62,10 +62,20 @@ export const postNewAdmin = (data) => {
   };
   return axiosProcessor(obj);
 };
+export const getAllAdmins = () => {
+  const obj = {
+    method: "get",
+    url: adminApi + "/get-admins",
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
 export const updateUser = (data) => {
+  const { oldPassword, newPassword } = data;
+  console.log(oldPassword, newPassword);
   const obj = {
     method: "put",
-    url: adminApi,
+    url: oldPassword && newPassword ? adminApi + "/change-password" : adminApi,
     obj: data,
     isPrivate: true,
   };

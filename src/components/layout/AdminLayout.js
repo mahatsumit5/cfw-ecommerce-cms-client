@@ -3,9 +3,8 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { useSelector } from "react-redux";
 import { SideBar } from "../sideBar/SideBar";
-import { Row } from "react-bootstrap";
 
-export const AdminLayout = ({ children }) => {
+export const AdminLayout = ({ title, children }) => {
   const { user } = useSelector((state) => state.userInfo);
 
   return (
@@ -15,6 +14,8 @@ export const AdminLayout = ({ children }) => {
         <Header />
         <div className="admin-layout d-flex  w-100">
           <main className="main  px-5">
+            <p className="text-secondary">{title}</p>
+            <hr></hr>
             <div className="page-content p-2"> {children}</div>
           </main>
         </div>
