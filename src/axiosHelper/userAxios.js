@@ -1,7 +1,7 @@
 import axios from "axios";
 const rootApi = process.env.REACT_APP_ROOTAPI;
 const adminApi = rootApi + "/admin";
-
+const clientApi = process.env.REACT_APP_CLIENT_API;
 const getAccessJWt = () => {
   return sessionStorage.getItem("accessJWT");
 };
@@ -62,10 +62,28 @@ export const postNewAdmin = (data) => {
   };
   return axiosProcessor(obj);
 };
+export const getAllAdmins = () => {
+  const obj = {
+    method: "get",
+    url: adminApi + "/get-admins",
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
+export const getAllUsers = () => {
+  const obj = {
+    method: "get",
+    url: clientApi,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
 export const updateUser = (data) => {
+  const { oldPassword, newPassword } = data;
+  console.log(oldPassword, newPassword);
   const obj = {
     method: "put",
-    url: adminApi,
+    url: oldPassword && newPassword ? adminApi + "/change-password" : adminApi,
     obj: data,
     isPrivate: true,
   };

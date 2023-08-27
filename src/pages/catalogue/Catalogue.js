@@ -50,7 +50,7 @@ export const Catalogue = () => {
   };
 
   const column = [
-    { heading: "ID", value: "_id" },
+    // { heading: "ID", value: "_id" },
     { heading: "STATUS", value: "status" },
     { heading: "TITLE", value: "title" },
     { heading: "slug", value: "slug" },
@@ -61,19 +61,19 @@ export const Catalogue = () => {
         {addDisplay ? <NewCategoryForm /> : <></>}
       </CustomModal>
 
-      <div className="w-100 mt-5 p-3 d-flex rounded justify-content-between shadow ">
+      <div className="w-100 mt-2 p-3 d-flex rounded justify-content-between shadow ">
         <span>
-          {" "}
           <h3> Catalogue </h3>
           <p>{catalogue?.length} catalogue found</p>
         </span>
-
-        <Button variant="dark" onClick={handleOnClick}>
-          Add new catalogue
-        </Button>
+        <div>
+          <Button variant="primary" onClick={handleOnClick}>
+            Add new catalogue
+          </Button>
+        </div>
       </div>
 
-      <div className=" d-flex justify-content-between  shadow rounded p-3 mt-3 w-100 flex-column">
+      <div className="shadow   mt-3 ">
         {editDisplay && <UpdateCatagoryForm _id={selectedCat} />}
         <CustomeTable
           handleOnDelete={handleOnDelete}

@@ -14,7 +14,7 @@ import { Payment } from "./pages/payment/Payment";
 import { Orders } from "./pages/orders/Orders";
 import { Admin } from "./pages/admin/Admin";
 import { SingUpForm } from "./components/admin-signup/SingUpForm";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getCataloguesAction } from "./Action/catelogueAction";
 import { PrivateRoute } from "./components/private/PrivateRoute";
@@ -26,6 +26,7 @@ import { EditProducts } from "./pages/products/EditProduct";
 
 function App() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getCataloguesAction());
     dispatch(getPaymentsAction());

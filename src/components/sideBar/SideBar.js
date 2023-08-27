@@ -9,7 +9,6 @@ import { FaMoneyBillAlt, FaUserSecret } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { setCanvasShow } from "../../systemSlice";
 import { Button, Row } from "react-bootstrap";
-import PersonIcon from "@mui/icons-material/Person";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { logoutUser } from "../../axiosHelper/userAxios";
@@ -209,8 +208,19 @@ export const SideBar = () => {
           </ul>
           <Row className="logOut p-4 ">
             <Link to="/" className="nav-link" onClick={handleOnSignOut}>
-              <Button variant="" style={{ border: "none" }}>
-                <BsFillLockFill color="white" />
+              <Button
+                variant=""
+                style={{ border: "none" }}
+                className="sidebar-button d-flex"
+              >
+                <BsFillLockFill color="white" />{" "}
+                <motion.p
+                  className="fs-6 fw-medium text-light"
+                  initial={{ x: -10 }}
+                  animate={{ x: 0, transition: { duration: 0.4 } }}
+                >
+                  {canvasShow && "logout"}
+                </motion.p>
               </Button>
             </Link>
           </Row>

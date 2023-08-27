@@ -21,6 +21,10 @@ export const updateUserAction = (userObj) => async (dispatch) => {
   const { status, message } = await pendingResp;
   toast[status](message);
   dispatch(getAdminProfileAction());
+
+  if (status === "success") {
+    return true;
+  }
 };
 export const loginUserAction = (userData) => async (dispatch) => {
   const pendingResp = loginUser(userData);
