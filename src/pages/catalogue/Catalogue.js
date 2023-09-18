@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { NewCategoryForm } from "../../components/category/NewCategoryForm";
 import { CustomModal } from "../../components/customModal/customModal";
 import { useEffect, useState } from "react";
-import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 
 import {
   deleteCatagoryAction,

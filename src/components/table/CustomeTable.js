@@ -10,12 +10,13 @@ export const CustomeTable = ({
   handleOnEdit,
 }) => {
   const { displayTable } = useSelector((store) => store.displayTableData);
+
   return (
     <>
       <Table striped responsive="lg" className="w-100" variant="light">
         <thead className="" key={column}>
           <tr>
-            {column.map((item, index) => (
+            {column?.map((item, index) => (
               <TableHeadItem item={item} index={index} key={index} />
             ))}
             {(handleOnEdit || handleOnDelete) && (

@@ -23,11 +23,13 @@ import { getPaymentsAction } from "./Action/paymentAction";
 import { NewProduct } from "./components/products/NewProduct";
 import { getproductAction } from "./Action/productAction";
 import { EditProducts } from "./pages/products/EditProduct";
+import { getOrderAction } from "./Action/orderAction";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getOrderAction());
     dispatch(getCataloguesAction());
     dispatch(getPaymentsAction());
     dispatch(getproductAction());

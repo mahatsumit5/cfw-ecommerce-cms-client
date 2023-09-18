@@ -43,7 +43,7 @@ export const LineChart = ({ users }) => {
         label: "list of users",
         data: users?.map((user) => {
           const date = new Date(user.createdAt);
-          const month = date.toLocaleString("default", { month: "2-digit" });
+          const month = date.toLocaleString("default", { month: "numeric" });
           console.log(month);
           return month;
         }),

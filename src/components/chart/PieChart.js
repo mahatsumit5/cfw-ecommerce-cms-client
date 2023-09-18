@@ -40,7 +40,7 @@ export function PieChart() {
     });
     setDatatoShow(itemCounts);
   }, [catalogue, product]);
-  const newData = Object.entries(datatoShow);
+  const newData = Object.entries(datatoShow); //changes object to array
   const data = {
     labels: newData.map((item) => item[0]),
     datasets: [

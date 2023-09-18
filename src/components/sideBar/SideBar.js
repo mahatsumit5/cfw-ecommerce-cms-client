@@ -12,6 +12,7 @@ import { Button, Row } from "react-bootstrap";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { logoutUser } from "../../axiosHelper/userAxios";
+import { setUser } from "../../redux/userSlice";
 export const SideBar = () => {
   let btnName = "";
   const [button, setButton] = useState({

@@ -52,7 +52,7 @@ export const SearchBar = () => {
           <TextField
             {...params}
             fullWidth
-            variant="standard"
+            variant="outlined"
             type="text"
             placeholder="Search.."
             onChange={handleOnChange}
