@@ -132,7 +132,7 @@ export const SideBar = () => {
         </Offcanvas.Body>
       </Offcanvas> */}
       <motion.div
-        className=" shadow  side-bar "
+        className="side-bar "
         animate={{
           width: canvasShow ? "180px" : "80px ",
           transition: { duration: 0.4 },
@@ -207,7 +207,7 @@ export const SideBar = () => {
               </motion.li>
             ))}
           </ul>
-          <Row className="logOut p-4 ">
+          <Row className="px-4 logout">
             <Link to="/" className="nav-link" onClick={handleOnSignOut}>
               <Button
                 variant=""

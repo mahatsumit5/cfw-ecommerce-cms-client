@@ -3,24 +3,43 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { useSelector } from "react-redux";
 import { SideBar } from "../sideBar/SideBar";
-
+import { Box } from "@mui/material";
+import { motion } from "framer-motion";
 export const AdminLayout = ({ title, children }) => {
   const { user } = useSelector((state) => state.userInfo);
+  const { canvasShow } = useSelector((state) => state.system);
 
   return (
-    <div className="d-flex">
-      <SideBar />
-      <div className="">
+    <div maxWidth="xl" sx={{ display: "block" }}>
+      <motion.div
+        animate={{
+          width: canvasShow ? "180px" : "80px ",
+          transition: { duration: 0.4 },
+        }}
+      >
+        {" "}
+        <Box
+          sx={{
+            display: {
+              sm: "block",
+              xs: canvasShow ? "block" : "none",
+              md: "block",
+            },
+          }}
+        >
+          <SideBar />
+        </Box>
+      </motion.div>
+
+      <Box className="admin-layout" sx={{ marginLeft: { xs: 0, sm: "80px" } }}>
         <Header />
-        <div className="admin-layout d-flex  w-100">
-          <main className="main  px-5">
-            <p className="text-secondary">{title}</p>
-            <hr></hr>
-            <div className="page-content p-2"> {children}</div>
-          </main>
-        </div>
+        <main className="main p-2 ">
+          <p className="text-secondary">{title}</p>
+
+          <div className="page-content "> {children}</div>
+        </main>
         <Footer />
-      </div>
+      </Box>
     </div>
   );
 };

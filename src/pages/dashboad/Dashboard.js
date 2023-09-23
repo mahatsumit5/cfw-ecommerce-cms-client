@@ -44,13 +44,13 @@ export const Dashboard = () => {
   }, []);
   return (
     <AdminLayout title="Dashboard">
-      <div className="d-flex justify-content-center gap-3">
+      <div className="d-flex justify-content-center gap-3 flex-wrap">
         {data?.map((info, index) => (
           <BasicCard info={info} key={index} users={users} />
         ))}
       </div>
       <div
-        className="d-flex justify-content-around p-2 shadow  mt-5 rounded gap-5 "
+        className="d-flex justify-content-around p-2 shadow  mt-5 rounded gap-5  flex-wrap"
         style={{ height: "500px" }}
       >
         <BarGraph />

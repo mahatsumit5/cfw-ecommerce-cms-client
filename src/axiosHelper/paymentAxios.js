@@ -1,7 +1,6 @@
-import { axiosProcessor } from "./userAxios";
+import { axiosProcessor, rootApi } from "./userAxios";
 
-const rootApi = process.env.REACT_APP_ROOTAPI;
-const paymentApi = rootApi + "/payment";
+const paymentApi = rootApi + "/api/v1/payment";
 
 export const postPayment = (paymentObj) => {
   const obj = {

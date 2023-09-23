@@ -1,9 +1,7 @@
-import { axiosProcessor } from "./userAxios";
+import { axiosProcessor, rootApi } from "./userAxios";
 
-const rootApi = process.env.REACT_APP_ROOTAPI;
-const orderApi = rootApi + "/order";
+const orderApi = rootApi + "/api/v1/order";
 export const getOrders = (_id) => {
-  console.log(_id);
   const obj = {
     method: "get",
     url: _id ? orderApi + "/" + _id : orderApi,

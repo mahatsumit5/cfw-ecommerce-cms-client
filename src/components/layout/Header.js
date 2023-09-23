@@ -23,7 +23,11 @@ import { setUser } from "../../redux/userSlice";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { DesktopMenu } from "../menu/DesktopMenu";
 import { MobileMenu } from "../menu/MobileMenu";
+import { Box } from "@mui/material";
 export const Header = () => {
+  const { canvasShow } = useSelector((state) => state.system);
+
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -35,19 +39,26 @@ export const Header = () => {
 
   const { user } = useSelector((state) => state.userInfo);
   return (
-    <Navbar className="px-5 mt-2 d-flex header shadow justify-content-between  ">
-      <div className="d-flex w-100 flex-fill  px-5 ">
-        <Link to="/" className="navbar-brand">
-          <h2> CFW</h2>
-        </Link>
-        <div className=" ms-5 w-50  ">
-          <SearchBar />
-        </div>
-      </div>
+    <Navbar className="px-2 d-flex w-100 header shadow justify-content-between  ">
+      <Box sx={{ display: { xs: "block", sm: "none" } }}>
+        <Button
+          variant=""
+          onClick={() => dispatch(setCanvasShow(!canvasShow))}
+          style={{ border: "none" }}
+        >
+          <FiMenu color="#111a49" />
+        </Button>
+      </Box>
+      <Link to="/" className="navbar-brand">
+        <h2> CFW</h2>
+      </Link>
+      <Box sx={{ display: "flex" }}>
+        <SearchBar />
+      </Box>
 
       {user?._id && (
         <>
-          <div className="d-sm-none d-block">
+          <Box sx={{ display: { xs: "block", sm: "none" } }}>
             <IconButton
               aria-label="more"
               id="long-button"
@@ -64,10 +75,10 @@ export const Header = () => {
               open={open}
               handleClick={handleClick}
             />
-          </div>
-          <div className=" d-none d-sm-flex gap-3  p-2  rounded">
+          </Box>
+          <Box sx={{ display: { xs: "none", sm: "flex", md: "flex" } }}>
             <DesktopMenu />
-          </div>
+          </Box>
         </>
       )}
     </Navbar>

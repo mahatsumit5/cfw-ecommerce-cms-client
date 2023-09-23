@@ -1,6 +1,7 @@
 import axios from "axios";
-const rootApi = process.env.REACT_APP_ROOTAPI;
-const adminApi = rootApi + "/admin";
+export const rootApi =
+  process.env.NODE_ENV === "development" ? "http://localhost:8000" : "";
+const adminApi = rootApi + "/api/v1/admin";
 const clientApi = process.env.REACT_APP_CLIENT_API;
 const getAccessJWt = () => {
   return sessionStorage.getItem("accessJWT");

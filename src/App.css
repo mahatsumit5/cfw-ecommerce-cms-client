@@ -6,12 +6,10 @@
   width: 100%;
 }
 .admin-layout {
-  min-height: calc(100vh - 25vh);
-  padding-left: 40px;
+  min-height: 100vh;
+  /* width: calc(100vw - 65px); */
 }
-.admin-layout > .main {
-  background: rgb(204, 221, 235);
-}
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensedwght@700&display=swap");
 --root-var {
   --primaryColor: ##0c120c;
@@ -67,18 +65,17 @@ svg {
   width: 50px;
 }
 
-.offcanvas {
-  width: 230px !important;
-}
 .side-bar {
   position: fixed;
   left: 0;
   z-index: 10;
-  background-color: #5b6dd7;
+  background-color: #111a49;
   color: white;
   backdrop-filter: blur(10px);
-  height: 98vh;
+  height: 100evh;
+  padding-bottom: 10px;
 }
+
 li > a > .hoverButton {
   display: none;
 }
@@ -132,17 +129,15 @@ li:hover > a > .hoverButton {
 /* header */
 .navbar {
   background-color: #ffffff;
-  position: sticky !important;
+  position: sticky;
   top: 0;
-  height: 7vh;
+  height: 9vh;
   backdrop-filter: blur(10px);
 }
 .footer {
   background-color: #e1eeed;
   height: 10vh;
-
-  width: 100vw;
-
+  width: 100%;
   backdrop-filter: blur(20px);
 }
 .sign {
@@ -160,15 +155,14 @@ li:hover > a > .hoverButton {
   color: rgb(1, 12, 16);
   font-size: 1.5rem;
 }
-.sidebar-link {
+/* .sidebar-link {
   border: solid rgba(246, 229, 229, 0);
   transition: border-bottom 2s;
   flex-direction: row;
 }
 .sidebar-link:hover {
-  border-bottom: #6d7275 solid;
   animation: hover 3s linear 1;
-}
+} */
 .light-text {
   color: #c20114 !important;
 }
@@ -185,6 +179,3 @@ li:hover > a > .hoverButton {
   height: 100%;
   width: 100%;
 }
-/* .page-content {
-  overflow-y: scroll;
-} */

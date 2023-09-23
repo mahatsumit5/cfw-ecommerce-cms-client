@@ -1,7 +1,6 @@
-import { axiosProcessor } from "./userAxios";
+import { axiosProcessor, rootApi } from "./userAxios";
 
-const rootApi = process.env.REACT_APP_ROOTAPI;
-const productApi = rootApi + "/product";
+const productApi = rootApi + "/api/v1/product";
 
 export const postProduct = (productObj) => {
   const obj = {

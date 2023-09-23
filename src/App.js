@@ -15,7 +15,7 @@ import { Orders } from "./pages/orders/Orders";
 import { Admin } from "./pages/admin/Admin";
 import { SingUpForm } from "./components/admin-signup/SingUpForm";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCataloguesAction } from "./Action/catelogueAction";
 import { PrivateRoute } from "./components/private/PrivateRoute";
 import { ResetPassPage } from "./pages/reset-password/resetPass";
@@ -27,13 +27,13 @@ import { getOrderAction } from "./Action/orderAction";
 
 function App() {
   const dispatch = useDispatch();
-
+  const { user } = useSelector((state) => state.userInfo);
   useEffect(() => {
     dispatch(getOrderAction());
     dispatch(getCataloguesAction());
     dispatch(getPaymentsAction());
     dispatch(getproductAction());
-  }, [dispatch]);
+  }, [dispatch, user]);
   return (
     <div className="">
       <Routes>
