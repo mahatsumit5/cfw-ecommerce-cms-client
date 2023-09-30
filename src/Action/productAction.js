@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import {
+  deleteImageFromServer,
   deleteProduct,
   getProducts,
   postProduct,
@@ -10,10 +11,17 @@ import { setProducts } from "../redux/productSlice";
 export const postProductAction = (obj) => async (dispatch) => {
   const pendingResp = postProduct(obj);
   toast.promise(pendingResp, { pending: "Please wait" });
-  const { status, message } = await pendingResp;
+  const { status, message, imagesToDelete } = await pendingResp;
   toast[status](message);
   dispatch(getproductAction());
-  if (status === "success") return true;
+  if (status === "success") {
+    if (imagesToDelete.length) {
+      imagesToDelete.forEach((element) => {
+        deleteImageFromServer({ fileName: element });
+      });
+    }
+    return true;
+  }
 };
 export const getproductAction = () => async (dispatch) => {
   const { status, message, result } = await getProducts();

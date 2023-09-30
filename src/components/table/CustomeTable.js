@@ -9,6 +9,7 @@ export const CustomeTable = ({
   handleOnDelete,
   handleOnEdit,
 }) => {
+  console.log(process.env.AWS_BUCKET_LINK);
   const { displayTable } = useSelector((store) => store.displayTableData);
 
   return (
@@ -74,13 +75,12 @@ const TableRow = ({
             )}
             {colItem.value === "thumbnail" ? (
               <>
-                <img
-                  src={
-                    process.env.REACT_APP_ROOTSERVER + item.thumbnail?.slice(6)
-                  }
+                <img src={item.thumbnail} alt="img" width="150px" />
+                {/* <img
+                  src={process.env.AWS_BUCKET_LINK + "/" + item.thumbnail}
                   alt="img"
                   width="150px"
-                />
+                /> */}
               </>
             ) : (
               <>{item[`${colItem.value}`]}</>

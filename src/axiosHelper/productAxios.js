@@ -36,3 +36,12 @@ export const updateProduct = (data) => {
   };
   return axiosProcessor(obj);
 };
+export const deleteImageFromServer = (img) => {
+  const obj = {
+    method: "post",
+    url: productApi + "/deleteFileFromServer",
+    obj: img,
+    isPrivate: true,
+  };
+  return axiosProcessor(obj);
+};
