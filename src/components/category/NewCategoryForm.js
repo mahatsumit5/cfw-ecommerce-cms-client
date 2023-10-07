@@ -1,16 +1,23 @@
-import React, { useRef } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import React, { useRef, useState } from "react";
+import { Button, Col, Form, FormControl, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { postCatalogueAction } from "../../Action/catelogueAction";
 import { CustomModal } from "../customModal/customModal";
 
 export const NewCategoryForm = () => {
+  const [img, setImg] = useState({});
+  const [title, setTitle] = useState("");
   const dispatch = useDispatch();
-  const nameRef = useRef();
   const handleOnADDCat = (e) => {
     e.preventDefault();
-    const { value } = nameRef.current;
-    value && dispatch(postCatalogueAction({ title: value }));
+    const formDt = new FormData();
+    formDt.append("image", img);
+    formDt.append("title", title);
+    dispatch(postCatalogueAction(formDt));
+  };
+  const handleOnselectImg = (e) => {
+    const { files } = e.target;
+    setImg(files[0]);
   };
 
   return (
@@ -22,8 +29,24 @@ export const NewCategoryForm = () => {
       >
         <Row>
           <Col>
-            <Form.Control type="text" placeholder="Title" ref={nameRef} />
+            <Form.Control
+              type="text"
+              placeholder="Title"
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+            />
           </Col>
+          <Col>
+            <FormControl
+              className="mt-2"
+              type="file"
+              name="profile"
+              onChange={handleOnselectImg}
+            />
+          </Col>
+        </Row>
+        <Row>
           <Col className="d-grid">
             <Button variant="dark" type="submit">
               Add

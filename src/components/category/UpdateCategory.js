@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Form, FormControl, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { updateCatagoryAction } from "../../Action/catelogueAction";
 import { CustomModal } from "../customModal/customModal";
@@ -10,6 +10,11 @@ const initialState = {
 };
 export const UpdateCatagoryForm = ({ _id }) => {
   const dispatch = useDispatch();
+  const [img, setImg] = useState({});
+  const handleOnselectImg = (e) => {
+    const { files } = e.target;
+    setImg(files[0]);
+  };
   const [form, setForm] = useState(initialState);
   const getCat = async () => {
     const { result } = await getCategories(_id);
@@ -21,11 +26,17 @@ export const UpdateCatagoryForm = ({ _id }) => {
 
   const handleOnUpdate = (e) => {
     e.preventDefault();
+    const formDt = new FormData();
     const obj = {
       value: form._id,
       title: form.title,
     };
-    dispatch(updateCatagoryAction(obj));
+    for (const key in obj) {
+      formDt.append(key, obj[key]);
+    }
+    formDt.append("image", img);
+
+    dispatch(updateCatagoryAction(formDt));
     dispatch(setModalShow(false));
   };
 
@@ -48,6 +59,14 @@ export const UpdateCatagoryForm = ({ _id }) => {
                 name="title"
                 value={form.title}
                 onChange={handleOnChange}
+              />
+            </Col>
+            <Col>
+              <FormControl
+                className="mt-2"
+                type="file"
+                name="profile"
+                onChange={handleOnselectImg}
               />
             </Col>
             <Col className="d-grid">
