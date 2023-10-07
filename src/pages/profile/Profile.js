@@ -24,7 +24,7 @@ export const Profile = () => {
           >
             <div className="profile-pic">
               <img
-                src={process.env.REACT_APP_ROOTSERVER + user.profile?.slice(6)}
+                src={user.profile}
                 alt="img"
                 style={{ height: "100%", width: "100%", borderRadius: "50%" }}
               />

@@ -12,6 +12,7 @@ export const EditProfile = () => {
   const { user } = useSelector((store) => store.userInfo);
   const object = {
     ID: user._id,
+    profile: user.profile,
   };
   const [form, setForm] = useState({});
   const [img, setImg] = useState({});
@@ -130,11 +131,7 @@ export const EditProfile = () => {
             className="bg-secondary image-box rounded"
             style={{ height: "250px", width: "250px", position: "relative" }}
           >
-            <img
-              src={process.env.REACT_APP_ROOTSERVER + user.profile?.slice(6)}
-              alt="avatar"
-              className="profile"
-            />
+            <img src={user.profile} alt="avatar" className="profile" />
             {user.isVerified && (
               <span
                 className="bg-primary text-light rounded"

@@ -31,7 +31,6 @@ export const getproductAction = () => async (dispatch) => {
   } else return false;
 };
 export const deleteProductAction = (_id) => async (dispatch) => {
-  console.log(_id);
   const pendingResp = deleteProduct(_id);
   toast.promise(pendingResp, { pending: "Please wait" });
 
@@ -42,7 +41,14 @@ export const updateProductAction = (obj) => async (dispatch) => {
   const pendingResp = updateProduct(obj);
   toast.promise(pendingResp, { pending: "Please wait" });
 
-  const { status, message } = await pendingResp;
+  const { status, message, imagesToDelete } = await pendingResp;
   dispatch(getproductAction());
-  if (status === "success") return true;
+  if (status === "success") {
+    if (imagesToDelete.length) {
+      imagesToDelete.forEach((element) => {
+        deleteImageFromServer({ fileName: element });
+      });
+    }
+    return true;
+  }
 };

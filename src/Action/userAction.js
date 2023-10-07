@@ -8,6 +8,7 @@ import {
 } from "../axiosHelper/userAxios";
 import { toast } from "react-toastify";
 import { setUser } from "../redux/userSlice";
+import { deleteImageFromServer } from "../axiosHelper/productAxios";
 
 export const createUserAction = (userObj) => async (dispatch) => {
   const pendingResp = postNewAdmin(userObj);
@@ -18,11 +19,14 @@ export const createUserAction = (userObj) => async (dispatch) => {
 export const updateUserAction = (userObj) => async (dispatch) => {
   const pendingResp = updateUser(userObj);
   toast.promise(pendingResp, { Pending: "Please Wait" });
-  const { status, message } = await pendingResp;
+  const { status, message, imageToDelete } = await pendingResp;
   toast[status](message);
   dispatch(getAdminProfileAction());
 
   if (status === "success") {
+    if (imageToDelete) {
+      deleteImageFromServer({ fileName: imageToDelete });
+    }
     return true;
   }
 };

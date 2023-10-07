@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 import { getProducts } from "../../axiosHelper/productAxios";
 import { updateProductAction } from "../../Action/productAction";
 export const EditProducts = () => {
-  const navigate = useNavigate();
   const { _id } = useParams();
   const dispatch = useDispatch();
   const [form, setForm] = useState({});
@@ -130,7 +129,6 @@ export const EditProducts = () => {
 
     //append all the form data and the image together
     const isPosted = await dispatch(updateProductAction(formDt));
-    console.log(formDt);
     isPosted && getSelectedproduct();
   };
   const handleOnSelect = (e) => {
@@ -190,7 +188,7 @@ export const EditProducts = () => {
                     <img
                       className="img-thumbnail"
                       key={url}
-                      src={process.env.REACT_APP_ROOTSERVER + url?.slice(6)}
+                      src={url}
                       alt=""
                       width="150px"
                     />

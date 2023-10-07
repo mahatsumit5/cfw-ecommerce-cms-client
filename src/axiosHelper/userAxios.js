@@ -83,7 +83,6 @@ export const getAllUsers = () => {
 };
 export const updateUser = (data) => {
   const { oldPassword, newPassword } = data;
-  console.log(oldPassword, newPassword);
   const obj = {
     method: "put",
     url: oldPassword && newPassword ? adminApi + "/change-password" : adminApi,
