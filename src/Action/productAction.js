@@ -15,7 +15,7 @@ export const postProductAction = (obj) => async (dispatch) => {
   toast[status](message);
   dispatch(getproductAction());
   if (status === "success") {
-    if (imagesToDelete.length) {
+    if (imagesToDelete?.length) {
       imagesToDelete.forEach((element) => {
         deleteImageFromServer({ fileName: element });
       });
@@ -44,7 +44,7 @@ export const updateProductAction = (obj) => async (dispatch) => {
   const { status, message, imagesToDelete } = await pendingResp;
   dispatch(getproductAction());
   if (status === "success") {
-    if (imagesToDelete.length) {
+    if (imagesToDelete?.length) {
       imagesToDelete.forEach((element) => {
         deleteImageFromServer({ fileName: element });
       });

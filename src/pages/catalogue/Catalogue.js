@@ -53,12 +53,11 @@ export const Catalogue = () => {
     { heading: "STATUS", value: "status" },
     { heading: "TITLE", value: "title" },
     { heading: "slug", value: "slug" },
+    { heading: "Thumbnail", value: "image" },
   ];
   return (
     <AdminLayout title="Catalogue">
-      <CustomModal title={"add new catalogue"}>
-        {addDisplay ? <NewCategoryForm /> : <></>}
-      </CustomModal>
+      {addDisplay && <NewCategoryForm />}
 
       <div className="w-100 mt-2 p-3 d-flex rounded justify-content-between shadow ">
         <span>

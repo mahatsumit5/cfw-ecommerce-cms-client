@@ -31,6 +31,12 @@ export const EditProducts = () => {
       value: form.title,
     },
     {
+      name: "color",
+      label: "color",
+      type: "color",
+      value: form.color,
+    },
+    {
       name: "slug",
       label: "Slug",
       type: "text",

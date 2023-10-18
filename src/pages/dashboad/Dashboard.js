@@ -21,12 +21,7 @@ export const Dashboard = () => {
       percent: "3%",
       days: "20day",
     },
-    {
-      p: "Expenses",
-      number: 52525,
-      percent: "3%",
-      days: "20day",
-    },
+
     {
       p: "Users",
       number: 52525,
@@ -50,12 +45,18 @@ export const Dashboard = () => {
         ))}
       </div>
       <div
-        className="d-flex justify-content-around p-2 shadow  mt-5 rounded gap-5  flex-wrap"
-        style={{ height: "500px" }}
+        className="d-flex justify-content-center p-2 shadow flex-direction-cloumn mt-5 rounded gap-5  flex-wrap "
+        style={{ height: "auto" }}
       >
-        <BarGraph />
-
-        <PieChart users={users} />
+        <div style={{ height: "auto", width: "100vw" }}>
+          <BarGraph />
+        </div>
+        <div
+          className="d-flex justify-content-center"
+          style={{ height: "400px", width: "100%" }}
+        >
+          <PieChart users={users} />
+        </div>
       </div>
     </AdminLayout>
   );

@@ -9,7 +9,6 @@ export const CustomeTable = ({
   handleOnDelete,
   handleOnEdit,
 }) => {
-  console.log(process.env.AWS_BUCKET_LINK);
   const { displayTable } = useSelector((store) => store.displayTableData);
 
   return (
@@ -73,14 +72,13 @@ const TableRow = ({
             ) : (
               <></>
             )}
-            {colItem.value === "thumbnail" ? (
+            {colItem.value === "thumbnail" || colItem.value === "image" ? (
               <>
-                <img src={item.thumbnail} alt="img" width="150px" />
-                {/* <img
-                  src={process.env.AWS_BUCKET_LINK + "/" + item.thumbnail}
+                <img
+                  src={item.thumbnail || item.image}
                   alt="img"
                   width="150px"
-                /> */}
+                />
               </>
             ) : (
               <>{item[`${colItem.value}`]}</>

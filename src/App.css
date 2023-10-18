@@ -1,12 +1,9 @@
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities; */
-.main {
-  min-height: 30vh;
-  width: 100%;
-}
+
 .admin-layout {
-  min-height: 100vh;
+  height: auto;
   /* width: calc(100vw - 65px); */
 }
 
@@ -72,7 +69,7 @@ svg {
   background-color: #111a49;
   color: white;
   backdrop-filter: blur(10px);
-  height: 100evh;
+  height: 100vh;
   padding-bottom: 10px;
 }
 

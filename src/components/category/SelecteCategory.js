@@ -7,9 +7,9 @@ export const SelectedCategory = (props) => {
 
   return (
     <>
-      <Form.Group>
+      <Form.Group className="flex-grow-1">
         <Form.Select {...props}>
-          <option value="">...Select...</option>
+          <option value="">Select Catagory</option>
 
           {catalogue.map(({ _id, title }) => (
             <option key={_id} value={_id} selected={_id === props._id}>
