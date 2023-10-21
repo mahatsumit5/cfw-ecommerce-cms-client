@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { AdminLayout } from "../layout/AdminLayout";
+import { AdminLayout } from "../../components/layout/AdminLayout";
 import { Button, ButtonGroup, Form } from "react-bootstrap";
-import { CustomeInput } from "../customeInput/CustomeInput";
+import { CustomeInput } from "../../components/customeInput/CustomeInput";
 import { postProductAction } from "../../Action/productAction";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { SelectedCategory } from "../category/SelecteCategory";
-import NewProductForm from "./NewProductForm";
-import { NewCategoryForm } from "../category/NewCategoryForm";
-import { CustomModal } from "../customModal/customModal";
+import { SelectedCategory } from "../../components/category/SelecteCategory";
+import NewProductForm from "../../components/products/NewProductForm";
+import { NewCategoryForm } from "../../components/category/NewCategoryForm";
+import { CustomModal } from "../../components/customModal/customModal";
 
 export const NewProduct = () => {
   return (

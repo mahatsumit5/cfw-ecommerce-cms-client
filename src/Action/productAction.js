@@ -51,4 +51,5 @@ export const updateProductAction = (obj) => async (dispatch) => {
     }
     return true;
   }
+  return false;
 };

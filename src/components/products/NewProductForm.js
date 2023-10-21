@@ -61,9 +61,6 @@ const NewProductForm = () => {
     const isPosted = await dispatch(postProductAction(formDt));
     isPosted && navigate("/products");
   };
-  // useEffect(() => {
-  //   setForm({ ...form, color: color, size: size });
-  // }, [color, size]);
 
   return (
     <Form

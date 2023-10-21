@@ -20,7 +20,7 @@ import { getCataloguesAction } from "./Action/catelogueAction";
 import { PrivateRoute } from "./components/private/PrivateRoute";
 import { ResetPassPage } from "./pages/reset-password/resetPass";
 import { getPaymentsAction } from "./Action/paymentAction";
-import { NewProduct } from "./components/products/NewProduct";
+import { NewProduct } from "./pages/products/NewProduct";
 import { getproductAction } from "./Action/productAction";
 import { EditProducts } from "./pages/products/EditProduct";
 import { getOrderAction } from "./Action/orderAction";
