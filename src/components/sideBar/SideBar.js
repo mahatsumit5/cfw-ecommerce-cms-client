@@ -158,7 +158,6 @@ export const SideBar = () => {
                 className=" d-flex"
                 key={i}
                 style={{ height: "70px", position: "relative" }}
-                isActive={{}}
               >
                 <Link
                   to={`/` + btn.link}

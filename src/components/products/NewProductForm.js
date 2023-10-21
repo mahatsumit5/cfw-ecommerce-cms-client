@@ -12,12 +12,21 @@ const NewProductForm = () => {
   const [form, setForm] = useState({ status: "inactive" });
   const [img, setImg] = useState([]);
   const [color, setColor] = useState([]);
-  const [tempColor, setTempColor] = useState("");
-
+  const [tempColor, setTempColor] = useState("#fafafa");
+  const [size, setSize] = useState([]);
   //   handle input change
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
+  };
+
+  const handleSizeSelect = (e) => {
+    const { name, value, checked } = e.target;
+    if (!checked) {
+      setSize(size.filter((s) => s !== value));
+      return;
+    }
+    setSize([...size, value]);
   };
 
   //  function to attach image
@@ -40,22 +49,31 @@ const NewProductForm = () => {
         formDt.append("images", image);
       });
     }
+
+    color.forEach((color) => {
+      formDt.append("color", color);
+    });
+    size.forEach((size) => {
+      formDt.append("size", size);
+    });
     //append all the form data and the image together
 
     const isPosted = await dispatch(postProductAction(formDt));
     isPosted && navigate("/products");
   };
-  useEffect(() => {
-    setForm({ ...form, color: color });
-  }, [color]);
+  // useEffect(() => {
+  //   setForm({ ...form, color: color, size: size });
+  // }, [color, size]);
+
   return (
     <Form
       action="/"
       method="post"
       encType="multipart/form-data"
       onSubmit={handleOnSubmit}
-      className="w-75 rounded shadow-lg p-3 mb-3"
+      className="w-100 rounded shadow-lg p-3 mb-3"
     >
+      <h1 className="text-center p-3 ">Add new product </h1>
       {/* catagory */}
       <Form.Group className="mb-3 d-flex gap-2 justify-content-between">
         <SelectedCategory onChange={handleOnChange} name="parentCat" required />
@@ -78,7 +96,6 @@ const NewProductForm = () => {
             name="color"
             defaultValue="#fa23f3"
             onChange={(e) => {
-              console.log("Color", e.target.value);
               setTempColor(e.target.value);
             }}
           />
@@ -90,6 +107,9 @@ const NewProductForm = () => {
             className="mt-3 "
             variant="dark"
             onClick={() => {
+              if (color.includes(tempColor)) {
+                return window.alert("Color already added.");
+              }
               setColor([...color, tempColor]);
             }}
           >
@@ -98,9 +118,9 @@ const NewProductForm = () => {
         </div>
       </Form.Group>
       <div className="mt-2 d-flex gap-2  flex-wrap mb-2">
-        {color.map((c, i) => (
+        {color.map((c, index) => (
           <div
-            key={i}
+            key={index}
             className="border rounded-circle "
             style={{
               height: 40,
@@ -211,20 +231,32 @@ const NewProductForm = () => {
 
       {/* size and images */}
       <Form.Group className="mb-3 d-flex gap-2">
-        <Form.Select>
-          <option>Select Available Size</option>
-          <option>xl </option>
-          <option>sm</option>
-          <option>lg</option>
-          <option>xs</option>
-        </Form.Select>
-        <Form.Control
-          type="file"
-          name="img"
-          multiple="multiple"
-          onChange={handleOnImageAttach}
-          required={true}
-        />
+        <div className="d-flex flex-column flex-grow-1">
+          <Form.Label>Select all the available size</Form.Label>
+          <div className="d-flex gap-3 flex-wrap">
+            {["xs", "sm", "md", "lg", "xl", "xxl"].map((size) => (
+              <div key={size}>
+                <Form.Check
+                  type="checkbox"
+                  id={size}
+                  name="size"
+                  value={size}
+                  onChange={handleSizeSelect}
+                />
+                <Form.Check.Label>{size}</Form.Check.Label>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div>
+          <Form.Control
+            type="file"
+            name="img"
+            multiple="multiple"
+            onChange={handleOnImageAttach}
+            required={true}
+          />
+        </div>
       </Form.Group>
 
       {/* description */}

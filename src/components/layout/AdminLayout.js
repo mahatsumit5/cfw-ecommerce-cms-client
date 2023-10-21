@@ -10,7 +10,7 @@ export const AdminLayout = ({ title, children }) => {
   const { canvasShow } = useSelector((state) => state.system);
 
   return (
-    <div maxWidth="xl" sx={{ display: "block" }}>
+    <div>
       <motion.div
         animate={{
           width: canvasShow ? "180px" : "80px ",

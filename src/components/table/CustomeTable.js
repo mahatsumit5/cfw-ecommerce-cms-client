@@ -28,7 +28,7 @@ export const CustomeTable = ({
           {displayTable.map((item, i) => (
             <TableRow
               key={i}
-              i={i}
+              index={i}
               item={item}
               column={column}
               handleToggleChange={handleToggleChange}
@@ -47,18 +47,18 @@ const TableHeadItem = ({ item, index }) => (
   </th>
 );
 const TableRow = ({
-  i,
+  index,
   item,
   column,
   handleToggleChange,
   handleOndelete,
   handleOnEdit,
 }) => (
-  <tr className="" key={item?._id}>
-    {column.map((colItem, i) => {
+  <tr key={index}>
+    {column.map((colItem, index) => {
       return (
         <>
-          <td className="" key={i}>
+          <td className="" key={index}>
             {colItem.value === "status" ? (
               <span className="d-flex">
                 <Form.Check
@@ -77,7 +77,7 @@ const TableRow = ({
                 <img
                   src={item.thumbnail || item.image}
                   alt="img"
-                  width="150px"
+                  width="80px"
                 />
               </>
             ) : (
@@ -88,18 +88,20 @@ const TableRow = ({
       );
     })}
     {(handleOnEdit || handleOndelete) && (
-      <td className="d-flex gap-1 w-100" style={{ height: "100%" }}>
-        {handleOndelete && (
-          <Button variant="danger" onClick={() => handleOndelete(item._id)}>
-            <AiFillDelete />
-          </Button>
-        )}
-        {handleOnEdit && (
-          <Button variant="primary" onClick={() => handleOnEdit(item._id)}>
-            <AiFillEdit />
-          </Button>
-        )}
-      </td>
+      <div>
+        <td className="d-flex gap-1 w-100">
+          {handleOndelete && (
+            <Button variant="danger" onClick={() => handleOndelete(item._id)}>
+              <AiFillDelete />
+            </Button>
+          )}
+          {handleOnEdit && (
+            <Button variant="primary" onClick={() => handleOnEdit(item._id)}>
+              <AiFillEdit />
+            </Button>
+          )}
+        </td>
+      </div>
     )}
   </tr>
 );

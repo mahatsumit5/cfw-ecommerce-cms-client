@@ -12,9 +12,7 @@ const initialState = {
 };
 export const SignInFormComponent = () => {
   const location = useLocation();
-  // console.log(location);
   const pathTo = location?.state?.from?.location?.pathname || "/dashboard";
-  // console.log(pathTo);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.userInfo);

@@ -113,6 +113,7 @@ export const Products = () => {
       </div>
       {product?.length ? (
         <CustomeTable
+          key={product}
           column={column}
           handleOnDelete={handleOnDelete}
           handleOnEdit={handleOnEdit}
