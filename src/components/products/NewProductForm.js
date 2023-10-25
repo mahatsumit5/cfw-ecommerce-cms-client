@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { SelectedCategory } from "../category/SelecteCategory";
 import { setModalShow } from "../../systemSlice";
+import { toast } from "react-toastify";
 
 const NewProductForm = () => {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ const NewProductForm = () => {
     e.preventDefault();
     //set all data in form Data
     const formDt = new FormData();
-    for (const key in form) {
+    for (let key in form) {
       formDt.append(key, form[key]);
     }
     //check if there is any image
@@ -105,7 +106,7 @@ const NewProductForm = () => {
             variant="dark"
             onClick={() => {
               if (color.includes(tempColor)) {
-                return window.alert("Color already added.");
+                return toast.info("Color already added.");
               }
               setColor([...color, tempColor]);
             }}
@@ -116,7 +117,7 @@ const NewProductForm = () => {
       </Form.Group>
       <div className="mt-2 d-flex gap-2  flex-wrap mb-2">
         {color.map((c, index) => (
-          <div
+          <a
             key={index}
             className="border rounded-circle "
             style={{

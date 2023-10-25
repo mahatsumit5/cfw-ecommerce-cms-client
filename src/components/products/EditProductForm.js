@@ -6,6 +6,7 @@ import { Button, Form } from "react-bootstrap";
 import { SelectedCategory } from "../category/SelecteCategory";
 import { useNavigate, useParams } from "react-router-dom";
 import { setModalShow } from "../../systemSlice";
+import { toast } from "react-toastify";
 
 const EditProductForm = () => {
   const { _id } = useParams();
@@ -14,22 +15,20 @@ const EditProductForm = () => {
   const [form, setForm] = useState({});
   const [img, setImg] = useState([]);
   const [selectedImg, setSelectedImg] = useState([]);
-  const [color, setColor] = useState([]);
+
   const [tempColor, setTempColor] = useState("");
-  const [size, setSize] = useState([]);
 
   useEffect(() => {
     const getSelectedproduct = async () => {
       const { result } = await getProducts(_id);
       result?._id && setForm(result);
-      setColor(result.color);
-      setSize(result.size);
     };
     getSelectedproduct();
-  }, []);
+  }, [_id]);
 
   const handleOnChange = (e) => {
     let { checked, name, value } = e.target;
+    // if (name === "color") return;
     if (name === "thumbnail" && selectedImg.includes(value)) {
       return alert("Deleting image can't be set as thumbnail");
     }
@@ -44,10 +43,11 @@ const EditProductForm = () => {
   };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+
     const formDt = new FormData();
     //remove sku,skug,--v,creatdAt,updatedAt
 
-    const { sku, slug, __v, createdAt, updatedAt, color, size, ...rest } = form;
+    const { sku, slug, __v, createdAt, updatedAt, ...rest } = form;
     // remove all the images in the which matches url in selectedImages
     rest.images = rest.images.filter((url) => !selectedImg.includes(url));
     for (let key in rest) {
@@ -60,14 +60,6 @@ const EditProductForm = () => {
         formDt.append("images", image);
       });
     }
-
-    // append color as well
-    color.forEach((color) => {
-      formDt.append("color", color);
-    });
-    size.forEach((size) => {
-      formDt.append("size", size);
-    });
 
     const isSucess = await dispatch(updateProductAction(formDt));
     isSucess && navigate(-1);
@@ -138,10 +130,11 @@ const EditProductForm = () => {
             className="mt-3 "
             variant="dark"
             onClick={() => {
-              if (color.includes(tempColor)) {
-                return window.alert("Color already added.");
+              if (form.color.includes(tempColor)) {
+                return toast.info("Color already added.");
               }
-              setColor([...color, tempColor]);
+              let color2 = [...form.color, tempColor];
+              setForm({ ...form, color: color2 });
             }}
           >
             Add
@@ -150,8 +143,8 @@ const EditProductForm = () => {
       </Form.Group>
 
       <div className="mt-2 d-flex gap-2  flex-wrap mb-2">
-        {color.map((c, index) => (
-          <div
+        {form.color?.map((c, index) => (
+          <a
             key={index}
             className="border rounded-circle "
             style={{
@@ -160,7 +153,8 @@ const EditProductForm = () => {
               backgroundColor: `${c}`,
             }}
             onClick={() => {
-              setColor(color.filter((item) => item !== c));
+              let color2 = form.color.filter((item) => item !== c);
+              setForm({ ...form, color: color2 });
             }}
           />
         ))}

@@ -8,28 +8,7 @@ import { getAllUsers } from "../../axiosHelper/userAxios";
 
 export const Dashboard = () => {
   const [users, setUsers] = useState();
-  const data = [
-    {
-      p: "New orders",
-      number: 52525,
-      percent: "3%",
-      days: "20day",
-    },
-    {
-      p: "Total Income",
-      number: 292920,
-      percent: "3%",
-      days: "20day",
-    },
 
-    {
-      p: "Users",
-      number: 52525,
-      percent: "3%",
-      days: "20day",
-      chart: <LineChart users={users} />,
-    },
-  ];
   const getListOfUsers = async () => {
     const { users } = await getAllUsers();
     setUsers(users);
@@ -40,20 +19,24 @@ export const Dashboard = () => {
   return (
     <AdminLayout title="Dashboard">
       <div className="d-flex justify-content-center gap-3 flex-wrap">
-        {data?.map((info, index) => (
-          <BasicCard info={info} key={index} users={users} />
-        ))}
+        <BasicCard />
       </div>
+
       <div
-        className="d-flex justify-content-center p-2 shadow flex-direction-cloumn mt-5 rounded gap-5  flex-wrap "
-        style={{ height: "auto" }}
+        className="d-flex justify-content-center flex-row flex-wrap   mt-5 "
+        style={{ overflow: "auto" }}
       >
-        <div style={{ height: "auto", width: "100vw" }}>
+        {/* bar graph */}
+        <div
+          className=" p-5 d-flex justify-content-center"
+          style={{ height: "400px" }}
+        >
           <BarGraph />
         </div>
+        {/* pie chart */}
         <div
-          className="d-flex justify-content-center"
-          style={{ height: "400px", width: "100%" }}
+          className=" mt-5 d-flex justify-content-center"
+          style={{ height: "400px" }}
         >
           <PieChart users={users} />
         </div>

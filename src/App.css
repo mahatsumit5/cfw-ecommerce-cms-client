@@ -68,9 +68,7 @@ svg {
   z-index: 10;
   background-color: #111a49;
   color: white;
-  backdrop-filter: blur(10px);
   height: 100vh;
-  padding-bottom: 10px;
 }
 
 li > a > .hoverButton {

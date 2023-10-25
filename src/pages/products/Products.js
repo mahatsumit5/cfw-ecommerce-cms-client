@@ -12,6 +12,7 @@ import {
 import { setDisplayTable } from "../../redux/displaySlice";
 import { getCataloguesAction } from "../../Action/catelogueAction";
 import ReactSwiper from "../../components/swiper/ReactSwiper";
+import MuiDataGrid from "../../components/table/MuiDataGrid";
 
 export const Products = () => {
   let btnName = "";
@@ -73,15 +74,15 @@ export const Products = () => {
     <AdminLayout title="Products">
       <div className="w-100 mt-2 p-3  rounded  shadow ">
         <div className=" d-flex justify-content-between flex-wrap">
-          <h3 className="font-monospace">List of Products </h3>
+          <div className="d-grid">
+            <Link to="/new-product">
+              <Button variant="primary">Add New Product</Button>
+            </Link>
+          </div>
           <p className="text-secondary">{product?.length} products found</p>
         </div>
-        <div className="d-grid">
-          <Link to="/new-product">
-            <Button variant="primary">Add Products</Button>
-          </Link>
-        </div>
-        <div className="mt-2 text-body-secondary d-flex gap-3 flex-wrap">
+
+        {/* <div className="mt-2 text-body-secondary d-flex gap-3 flex-wrap">
           {catalogue.map((item, i) => (
             <Button
               key={i}
@@ -109,16 +110,12 @@ export const Products = () => {
           >
             All Products
           </Button>
-        </div>
+        </div> */}
       </div>
       {product?.length ? (
-        <CustomeTable
-          key={product}
-          column={column}
-          handleOnDelete={handleOnDelete}
-          handleOnEdit={handleOnEdit}
-          handleToggleChange={handleToggleChange}
-        />
+        <div className="d-flex  mt-5 " style={{ overflow: "auto" }}>
+          <MuiDataGrid />
+        </div>
       ) : (
         <h1 className="" style={{ color: "red" }}>
           No Products Available

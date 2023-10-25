@@ -12,32 +12,7 @@ const columns = [
     width: 100,
     editable: false,
   },
-  // {
-  //   field: "lName",
-  //   headerName: "Last name",
-  //   width: 100,
-  //   editable: true,
-  // },
-  // {
-  //   field: "phone",
-  //   headerName: "Phone",
-  //   type: "number",
-  //   width: 100,
-  //   editable: true,
-  // },
-  // {
-  //   field: "email",
-  //   headerName: "Email",
-  //   width: 200,
-  //   editable: true,
-  // },
-  // {
-  //   field: "address",
-  //   headerName: "Address",
-  //   type: "string",
-  //   width: 300,
-  //   editable: true,
-  // },
+
   {
     field: "totalAmount",
     headerName: "Amount",
